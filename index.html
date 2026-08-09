@@ -35,8 +35,7 @@
     }
 
     button,
-    input,
-    select {
+    input {
       font: inherit;
     }
 
@@ -505,6 +504,67 @@
       line-height: 1.65;
     }
 
+    .statement-wrap {
+      margin: 20px 0;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .statement {
+      width: 100%;
+      min-width: 330px;
+      border-collapse: collapse;
+      background: rgba(255,255,255,.94);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(30,45,37,.05);
+    }
+
+    .statement th {
+      text-align: left;
+      background: #203028;
+      color: white;
+      padding: 12px 13px;
+      font-size: 13px;
+    }
+
+    .statement th:not(:first-child),
+    .statement td:not(:first-child) {
+      text-align: right;
+    }
+
+    .statement td {
+      padding: 11px 13px;
+      border-bottom: 1px solid #eceeea;
+      color: #435048;
+      font-size: 14px;
+    }
+
+    .statement tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .statement .subtotal td {
+      font-weight: 800;
+      color: #27372f;
+      border-top: 1px solid #ccd4cf;
+    }
+
+    .statement .total td {
+      font-weight: 900;
+      color: #17241d;
+      border-top: 2px solid #66756c;
+    }
+
+    .statement .indent {
+      padding-left: 27px;
+    }
+
+    .line-highlight td {
+      background: #f0f7f2;
+      font-weight: 800;
+    }
+
     .related {
       margin-top: 35px;
     }
@@ -662,7 +722,7 @@
 
       <button class="series-button" onclick="openArticle('fcfGuide')">
         4. Free cash flow: the deeper view
-        <span>Intermediate · 12 min</span>
+        <span>Intermediate · 14 min</span>
       </button>
 
       <button class="series-button" onclick="openArticle('dcfGuide')">
@@ -672,17 +732,13 @@
     </div>
 
     <div class="section-title">Recommended articles</div>
-
     <div class="article-list" id="featuredArticles"></div>
 
   </main>
 
   <main id="articlesSection" class="hidden">
-
     <div class="section-title">Article library</div>
-
     <div class="article-list" id="articleList"></div>
-
   </main>
 
   <main id="seriesSection" class="hidden">
@@ -692,40 +748,37 @@
     <div class="series">
       <h2>Reading a Business</h2>
       <p>
-        Follow the financial statements from revenue all the way to free cash flow.
+        Follow one fictional business from revenue all the way to free cash flow.
       </p>
 
       <button class="series-button" onclick="openArticle('incomeStatementGuide')">
         Income statement
-        <span>Revenue, margins and operating profit</span>
+        <span>Revenue, margins, EBITDA and profit</span>
       </button>
 
       <button class="series-button" onclick="openArticle('balanceSheetGuide')">
         Balance sheet
-        <span>Assets, liabilities and equity</span>
+        <span>Assets, debt, equity and working capital</span>
       </button>
 
       <button class="series-button" onclick="openArticle('cashFlowStatementGuide')">
         Cash flow statement
-        <span>Where the actual cash went</span>
+        <span>Where the actual money went</span>
       </button>
 
       <button class="series-button" onclick="openArticle('workingCapitalGuide')">
         Working capital
-        <span>Why growth can consume cash</span>
+        <span>See the exact balance-sheet accounts</span>
       </button>
 
       <button class="series-button" onclick="openArticle('fcfGuide')">
         Free cash flow
-        <span>Turning operating performance into cash</span>
+        <span>Turn Northstar's earnings into FCF</span>
       </button>
     </div>
 
     <div class="series">
       <h2>Buying a Business</h2>
-      <p>
-        Learn to think like a buyer rather than simply reading the seller's numbers.
-      </p>
 
       <button class="series-button" onclick="openArticle('buyerChecklist')">
         What buyers actually look for
@@ -750,9 +803,6 @@
 
     <div class="series">
       <h2>Deep DCF</h2>
-      <p>
-        Go from free cash flow to discount rates, terminal value and sensitivity analysis.
-      </p>
 
       <button class="series-button" onclick="openArticle('fcfGuide')">
         Free cash flow
@@ -782,16 +832,11 @@
     <div class="section-title">Valuation tools</div>
 
     <div class="calculator">
-
       <h2>EBITDA Multiple</h2>
-
-      <p>
-        Estimate enterprise value and then convert it to equity value.
-      </p>
 
       <div class="calc-field">
         <label>Normalized EBITDA</label>
-        <input id="ebitda" type="number" placeholder="1200000">
+        <input id="ebitda" type="number" placeholder="850000">
       </div>
 
       <div class="calc-field">
@@ -801,36 +846,28 @@
 
       <div class="calc-field">
         <label>Debt</label>
-        <input id="debt" type="number" placeholder="500000">
+        <input id="debt" type="number" placeholder="800000">
       </div>
 
       <div class="calc-field">
         <label>Excess cash</label>
-        <input id="cash" type="number" placeholder="200000">
+        <input id="cash" type="number" placeholder="350000">
       </div>
 
-      <button class="calc-button" onclick="calculateMultiple()">
-        Calculate
-      </button>
+      <button class="calc-button" onclick="calculateMultiple()">Calculate</button>
 
       <div class="result" id="multipleResult">
         <div class="result-value" id="multipleValue"></div>
         <div class="result-sub" id="multipleSub"></div>
       </div>
-
     </div>
 
     <div class="calculator">
-
       <h2>Free Cash Flow</h2>
-
-      <p>
-        Calculate approximate unlevered free cash flow.
-      </p>
 
       <div class="calc-field">
         <label>EBIT</label>
-        <input id="fcfEbit" type="number" placeholder="1000000">
+        <input id="fcfEbit" type="number" placeholder="700000">
       </div>
 
       <div class="calc-field">
@@ -845,36 +882,28 @@
 
       <div class="calc-field">
         <label>Capital expenditures</label>
-        <input id="fcfCapex" type="number" placeholder="200000">
+        <input id="fcfCapex" type="number" placeholder="250000">
       </div>
 
       <div class="calc-field">
         <label>Increase in net working capital</label>
-        <input id="fcfNwc" type="number" placeholder="50000">
+        <input id="fcfNwc" type="number" placeholder="100000">
       </div>
 
-      <button class="calc-button" onclick="calculateFCF()">
-        Calculate FCF
-      </button>
+      <button class="calc-button" onclick="calculateFCF()">Calculate FCF</button>
 
       <div class="result" id="fcfResult">
         <div class="result-value" id="fcfValue"></div>
         <div class="result-sub" id="fcfSub"></div>
       </div>
-
     </div>
 
     <div class="calculator">
-
       <h2>5-Year DCF</h2>
-
-      <p>
-        Forecast growing FCF and calculate a perpetual-growth terminal value.
-      </p>
 
       <div class="calc-field">
         <label>Current annual FCF</label>
-        <input id="dcfFcf" type="number" placeholder="800000">
+        <input id="dcfFcf" type="number" placeholder="325000">
       </div>
 
       <div class="calc-field">
@@ -892,30 +921,24 @@
         <input id="dcfTerminal" type="number" step="0.1" placeholder="2.5">
       </div>
 
-      <button class="calc-button" onclick="calculateDCF()">
-        Calculate DCF
-      </button>
+      <button class="calc-button" onclick="calculateDCF()">Calculate DCF</button>
 
       <div class="result" id="dcfResult">
         <div class="result-value" id="dcfValue"></div>
         <div class="result-sub" id="dcfSub"></div>
       </div>
-
     </div>
 
   </main>
 
   <div class="footer">
-    Educational information only. Business valuation requires judgment and
-    can vary materially based on assumptions, taxes, capital structure,
-    transaction terms and company-specific facts.
+    Educational information only. The fictional company examples are simplified
+    for learning purposes.
   </div>
 
 </div>
 
-
 <div class="overlay" id="overlay">
-
   <article class="article-page">
 
     <div class="top-actions">
@@ -924,19 +947,13 @@
     </div>
 
     <div class="article-kicker" id="articleMeta"></div>
-
     <h2 id="articleTitle"></h2>
-
     <div class="article-intro" id="articleIntro"></div>
-
     <div class="article-content" id="articleContent"></div>
-
     <div class="related" id="relatedArticles"></div>
 
   </article>
-
 </div>
-
 
 <script>
 
@@ -950,81 +967,27 @@ valueMeaning: {
   level: "Beginner",
   time: "7 min",
   intro:
-    "Business value is not simply the amount of assets on the balance sheet or last year's profit. At its core, value reflects the economic benefits a buyer expects to receive in the future.",
+    "Business value reflects the economic benefits a buyer expects to receive in the future and the risk surrounding those benefits.",
   content: `
     <h3>The basic idea</h3>
-
     <p>
-      Imagine you are offered two businesses for the same price.
-      Both earned $1 million last year. One is expected to earn roughly
-      $1 million every year for the foreseeable future. The other is likely
-      to lose its largest customer next year and fall to $400,000 of earnings.
+      A buyer does not receive last year's profit. The buyer receives whatever
+      cash the business generates after closing.
     </p>
-
-    <p>
-      Historical earnings may be identical, but a rational buyer would not
-      view the two companies as equally valuable.
-    </p>
-
-    <div class="insight">
-      The value of a business ultimately depends on the future economic benefits
-      expected by the buyer — and the risk surrounding those benefits.
-    </div>
-
-    <h3>Three common approaches</h3>
-
-    <p>
-      Valuation professionals generally think in terms of three broad approaches:
-      the income approach, the market approach and the asset approach.
-    </p>
-
-    <h4>Income approach</h4>
-
-    <p>
-      The income approach values future economic benefits. A discounted cash flow,
-      or DCF, is the classic example. You forecast future cash flows and convert them
-      into today's dollars.
-    </p>
-
-    <h4>Market approach</h4>
-
-    <p>
-      The market approach asks what comparable businesses have sold for.
-      EBITDA multiples are one common expression of this approach.
-    </p>
-
-    <h4>Asset approach</h4>
-
-    <p>
-      The asset approach examines the economic value of the company's assets
-      less its liabilities. It is especially relevant where asset values are
-      more important than ongoing earnings.
-    </p>
-
-    <h3>Why future cash matters</h3>
-
-    <p>
-      A buyer does not receive last year's earnings. Those belong to the seller.
-      The buyer receives whatever cash the business generates after closing.
-      That is why valuation repeatedly comes back to expected future cash flow.
-    </p>
-
-    <div class="valuation-box">
-      <strong>How this affects what you would pay:</strong><br><br>
-      Higher expected cash flow tends to increase value. Greater uncertainty,
-      concentration, owner dependence or other risk tends to reduce value.
-    </div>
-
-    <h3>The simplest valuation mental model</h3>
 
     <div class="formula">
       Business Value ≈ Expected Future Cash Flow adjusted for Risk
     </div>
 
-    <p>
-      Multiples, discount rates and DCF models are different ways of turning
-      that basic economic idea into a number.
-    </p>
+    <h3>Three common approaches</h3>
+
+    <p><strong>Income approach:</strong> value future cash flows.</p>
+    <p><strong>Market approach:</strong> compare prices or multiples paid for similar businesses.</p>
+    <p><strong>Asset approach:</strong> value assets less liabilities.</p>
+
+    <div class="valuation-box">
+      Higher expected cash flow tends to increase value. Greater risk tends to reduce it.
+    </div>
   `,
   related: ["enterpriseEquity","ebitdaGuide","fcfGuide","dcfGuide"]
 },
@@ -1035,79 +998,27 @@ enterpriseEquity: {
   level: "Beginner",
   time: "8 min",
   intro:
-    "One of the most important distinctions in business valuation is the difference between the value of the operating business and the value belonging to shareholders.",
+    "Enterprise value measures the operating business. Equity value is the value attributable to shareholders after debt and cash adjustments.",
   content: `
-    <h3>Enterprise value</h3>
-
-    <p>
-      Enterprise value, or EV, attempts to measure the value of the operating
-      business regardless of how the business is financed.
-    </p>
-
-    <p>
-      Think of it as the value of the operating engine before deciding how the
-      purchase will be financed between debt and equity.
-    </p>
-
-    <h3>Equity value</h3>
-
-    <p>
-      Equity value is what remains for shareholders after considering debt and
-      other financing claims, subject to the specific transaction structure.
-    </p>
-
     <div class="formula">
       Equity Value ≈ Enterprise Value − Debt + Excess Cash
     </div>
 
+    <h3>Northstar example</h3>
+
     <div class="example">
-      Enterprise value = $6,000,000<br>
-      Debt = $500,000<br>
-      Excess cash = $200,000<br><br>
-      Estimated equity value = $5,700,000
+      Enterprise value: $4,250,000<br>
+      Debt: $800,000<br>
+      Excess cash: $350,000<br><br>
+      <strong>Indicative equity value: $3,800,000</strong>
     </div>
 
-    <h3>Why EBITDA multiples usually give enterprise value</h3>
-
     <p>
-      EBITDA is calculated before interest expense. Because interest depends
-      on financing choices, EBITDA is generally paired with a value measure
-      that is also independent of financing structure.
+      EBITDA multiples usually produce enterprise value because EBITDA is calculated
+      before interest and therefore before financing structure.
     </p>
-
-    <p>
-      Therefore, when someone says a business is worth "5 times EBITDA," they
-      usually mean an enterprise value equal to roughly five times normalized EBITDA.
-    </p>
-
-    <h3>Why cash is added</h3>
-
-    <p>
-      If the operating business is worth $6 million and the company also holds
-      $500,000 of truly excess cash that is not needed to operate the company,
-      that cash may represent additional value available to shareholders.
-    </p>
-
-    <h3>Why debt is subtracted</h3>
-
-    <p>
-      Debt represents a claim that must generally be satisfied before all of the
-      enterprise value belongs to shareholders.
-    </p>
-
-    <div class="warning">
-      Real transactions can be more complicated. Debt-like items, working-capital
-      adjustments, leases, earn-outs and other negotiated items may also affect
-      the final amount received by the seller.
-    </div>
-
-    <div class="valuation-box">
-      <strong>How this affects what you would pay:</strong><br><br>
-      Always ask whether a quoted price is enterprise value or equity value.
-      Confusing the two can produce a very large misunderstanding of the purchase price.
-    </div>
   `,
-  related: ["ebitdaGuide","workingCapitalGuide","dcfGuide"]
+  related: ["ebitdaGuide","balanceSheetGuide","workingCapitalGuide"]
 },
 
 ebitdaGuide: {
@@ -1116,177 +1027,353 @@ ebitdaGuide: {
   level: "Beginner",
   time: "10 min",
   intro:
-    "EBITDA is one of the most common measures used in private-company valuation, but understanding what it excludes is just as important as understanding what it includes.",
+    "EBITDA is a useful operating-profit measure, but it is not the same as cash flow.",
   content: `
-    <h3>What EBITDA means</h3>
-
     <div class="formula">
-      EBITDA = Earnings Before Interest, Taxes, Depreciation and Amortization
+      EBITDA = EBIT + Depreciation + Amortization
     </div>
 
-    <p>
-      EBITDA attempts to measure operating profitability before financing costs,
-      taxes and certain non-cash accounting charges.
-    </p>
+    <h3>Northstar example</h3>
 
-    <h3>Why buyers use EBITDA</h3>
-
-    <p>
-      Different companies may have different debt levels, tax circumstances and
-      depreciation policies. EBITDA removes several of those differences and makes
-      operating performance easier to compare.
-    </p>
-
-    <h3>How multiples work</h3>
+    <div class="statement-wrap">
+      <table class="statement">
+        <tr><th>Selected Income Statement</th><th>Amount</th></tr>
+        <tr><td>Revenue</td><td>$5,000,000</td></tr>
+        <tr><td>Gross profit</td><td>$2,250,000</td></tr>
+        <tr class="line-highlight"><td>EBITDA</td><td>$850,000</td></tr>
+        <tr><td>D&A</td><td>($150,000)</td></tr>
+        <tr class="subtotal"><td>EBIT</td><td>$700,000</td></tr>
+      </table>
+    </div>
 
     <div class="formula">
-      Enterprise Value ≈ Normalized EBITDA × Valuation Multiple
+      Enterprise Value ≈ Normalized EBITDA × Multiple
     </div>
 
     <div class="example">
-      Normalized EBITDA = $1.2 million<br>
-      Multiple = 5.0×<br><br>
-      Enterprise value = $6 million
+      $850,000 × 5.0 = $4,250,000 enterprise value
     </div>
 
-    <h3>The multiple is not random</h3>
+    <h3>Why EBITDA can mislead</h3>
 
     <p>
-      A valuation multiple reflects many things at once: expected growth,
-      risk, cash-flow quality, customer concentration, management strength,
-      capital requirements and market demand.
-    </p>
-
-    <p>
-      A company with recurring revenue, diversified customers and low capital
-      requirements may receive a higher multiple than a company with identical
-      EBITDA but materially more risk.
-    </p>
-
-    <h3>The major limitation</h3>
-
-    <p>
-      EBITDA ignores capital expenditures and working-capital investment.
-      Both use real cash.
-    </p>
-
-    <div class="example">
-      Company A EBITDA = $1,000,000<br>
-      Maintenance CapEx = $400,000<br><br>
-
-      Company B EBITDA = $1,000,000<br>
-      Maintenance CapEx = $50,000
-    </div>
-
-    <p>
-      Company B converts much more of its EBITDA into cash even though the EBITDA
-      number itself is identical.
+      Northstar still spends cash on equipment and needs more working capital.
+      EBITDA ignores both.
     </p>
 
     <div class="insight">
-      EBITDA is a useful shorthand for operating earnings. Free cash flow is closer
-      to the cash economics ultimately available to capital providers.
-    </div>
-
-    <div class="valuation-box">
-      <strong>How this affects what you would pay:</strong><br><br>
-      Do not compare businesses solely by EBITDA. Ask how much of that EBITDA
-      actually converts into sustainable free cash flow.
+      Northstar's $850,000 EBITDA becomes only about $325,000 of simplified
+      unlevered free cash flow.
     </div>
   `,
-  related: ["fcfGuide","maintenanceCapex","qualityEarnings","enterpriseEquity"]
+  related: ["incomeStatementGuide","fcfGuide","maintenanceCapex","enterpriseEquity"]
+},
+
+incomeStatementGuide: {
+  title: "How to read an income statement like a buyer",
+  topic: "Financial Statements",
+  level: "Beginner",
+  time: "14 min",
+  intro:
+    "An income statement shows how revenue becomes profit. Follow Northstar Industrial Services Ltd. from $5 million of sales to $450,000 of net income.",
+  content: `
+    <h3>Northstar Industrial Services Ltd.</h3>
+
+    <div class="statement-wrap">
+      <table class="statement">
+        <tr><th>Income Statement</th><th>2026</th></tr>
+        <tr><td>Revenue</td><td>$5,000,000</td></tr>
+        <tr><td>Cost of goods sold</td><td>($2,750,000)</td></tr>
+        <tr class="subtotal"><td>Gross Profit</td><td>$2,250,000</td></tr>
+        <tr><td class="indent">Wages & salaries</td><td>($850,000)</td></tr>
+        <tr><td class="indent">Rent</td><td>($180,000)</td></tr>
+        <tr><td class="indent">Insurance</td><td>($90,000)</td></tr>
+        <tr><td class="indent">Marketing</td><td>($80,000)</td></tr>
+        <tr><td class="indent">Other operating expenses</td><td>($200,000)</td></tr>
+        <tr class="line-highlight"><td>EBITDA</td><td>$850,000</td></tr>
+        <tr><td>Depreciation & amortization</td><td>($150,000)</td></tr>
+        <tr class="subtotal"><td>EBIT / Operating Income</td><td>$700,000</td></tr>
+        <tr><td>Interest expense</td><td>($100,000)</td></tr>
+        <tr><td>Income before tax</td><td>$600,000</td></tr>
+        <tr><td>Income tax expense</td><td>($150,000)</td></tr>
+        <tr class="total"><td>Net Income</td><td>$450,000</td></tr>
+      </table>
+    </div>
+
+    <h3>Gross profit</h3>
+
+    <div class="formula">
+      Gross Profit = Revenue − Cost of Goods Sold
+    </div>
+
+    <div class="example">
+      $5,000,000 − $2,750,000 = $2,250,000
+    </div>
+
+    <div class="formula">
+      Gross Margin = $2,250,000 ÷ $5,000,000 = 45%
+    </div>
+
+    <h3>EBITDA</h3>
+
+    <p>
+      Northstar produces $850,000 of EBITDA, which equals a 17% EBITDA margin.
+    </p>
+
+    <div class="formula">
+      $850,000 ÷ $5,000,000 = 17%
+    </div>
+
+    <p>
+      At a 5× EBITDA multiple, Northstar might initially indicate a
+      $4.25 million enterprise value.
+    </p>
+
+    <div class="valuation-box">
+      The income statement gives you earning power. The next question is how much
+      of those earnings become cash.
+    </div>
+  `,
+  related: ["ebitdaGuide","cashFlowStatementGuide","fcfGuide","qualityEarnings"]
+},
+
+balanceSheetGuide: {
+  title: "How to read a balance sheet like a buyer",
+  topic: "Financial Statements",
+  level: "Beginner",
+  time: "14 min",
+  intro:
+    "The balance sheet shows Northstar's assets, liabilities, debt, equity and operating capital at one point in time.",
+  content: `
+    <div class="statement-wrap">
+      <table class="statement">
+        <tr><th>Assets</th><th>2026</th></tr>
+        <tr><td>Cash</td><td>$350,000</td></tr>
+        <tr><td>Accounts receivable</td><td>$800,000</td></tr>
+        <tr><td>Inventory</td><td>$450,000</td></tr>
+        <tr><td>Prepaid expenses</td><td>$50,000</td></tr>
+        <tr class="subtotal"><td>Total Current Assets</td><td>$1,650,000</td></tr>
+        <tr><td>Property & equipment, net</td><td>$1,200,000</td></tr>
+        <tr class="total"><td>Total Assets</td><td>$2,850,000</td></tr>
+      </table>
+    </div>
+
+    <div class="statement-wrap">
+      <table class="statement">
+        <tr><th>Liabilities & Equity</th><th>2026</th></tr>
+        <tr><td>Accounts payable</td><td>$400,000</td></tr>
+        <tr><td>Accrued expenses</td><td>$150,000</td></tr>
+        <tr><td>Current portion of debt</td><td>$100,000</td></tr>
+        <tr class="subtotal"><td>Total Current Liabilities</td><td>$650,000</td></tr>
+        <tr><td>Long-term debt</td><td>$700,000</td></tr>
+        <tr class="subtotal"><td>Total Liabilities</td><td>$1,350,000</td></tr>
+        <tr><td>Share capital</td><td>$100,000</td></tr>
+        <tr><td>Retained earnings</td><td>$1,400,000</td></tr>
+        <tr class="subtotal"><td>Total Equity</td><td>$1,500,000</td></tr>
+        <tr class="total"><td>Total Liabilities + Equity</td><td>$2,850,000</td></tr>
+      </table>
+    </div>
+
+    <div class="formula">
+      Assets = Liabilities + Equity
+    </div>
+
+    <div class="example">
+      $2,850,000 = $1,350,000 + $1,500,000
+    </div>
+
+    <h3>Debt and valuation</h3>
+
+    <p>
+      Northstar has $800,000 of interest-bearing debt.
+    </p>
+
+    <div class="example">
+      Enterprise value: $4,250,000<br>
+      Less debt: ($800,000)<br>
+      Add excess cash: $350,000<br><br>
+      <strong>Indicative equity value: $3,800,000</strong>
+    </div>
+
+    <h3>Book equity is not market value</h3>
+
+    <p>
+      Accounting equity is $1.5 million, but the business may be worth much more
+      because a buyer values future earning power.
+    </p>
+  `,
+  related: ["workingCapitalGuide","enterpriseEquity","cashFlowStatementGuide"]
+},
+
+cashFlowStatementGuide: {
+  title: "The cash flow statement: where the money actually went",
+  topic: "Financial Statements",
+  level: "Beginner",
+  time: "15 min",
+  intro:
+    "Northstar earned $450,000 of accounting profit, but its cash balance increased by only $50,000.",
+  content: `
+    <div class="statement-wrap">
+      <table class="statement">
+        <tr><th>Cash Flow Statement</th><th>2026</th></tr>
+        <tr class="line-highlight"><td>Net income</td><td>$450,000</td></tr>
+        <tr><td>Add: depreciation & amortization</td><td>$150,000</td></tr>
+        <tr><td>Increase in accounts receivable</td><td>($100,000)</td></tr>
+        <tr><td>Increase in inventory</td><td>($50,000)</td></tr>
+        <tr><td>Increase in accounts payable</td><td>$30,000</td></tr>
+        <tr><td>Increase in accrued expenses</td><td>$20,000</td></tr>
+        <tr class="subtotal"><td>Cash From Operating Activities</td><td>$500,000</td></tr>
+        <tr><td>Capital expenditures</td><td>($250,000)</td></tr>
+        <tr class="subtotal"><td>Cash From Investing Activities</td><td>($250,000)</td></tr>
+        <tr><td>Debt repayment</td><td>($100,000)</td></tr>
+        <tr><td>Dividends to shareholders</td><td>($100,000)</td></tr>
+        <tr class="subtotal"><td>Cash From Financing Activities</td><td>($200,000)</td></tr>
+        <tr class="total"><td>Net Increase in Cash</td><td>$50,000</td></tr>
+      </table>
+    </div>
+
+    <h3>Why profit differs from cash</h3>
+
+    <p>
+      Depreciation is added back because it is non-cash, but growing receivables
+      and inventory use cash.
+    </p>
+
+    <div class="example">
+      Net income: $450,000<br>
+      + D&A: $150,000<br>
+      − receivable increase: $100,000<br>
+      − inventory increase: $50,000<br>
+      + payable increase: $30,000<br>
+      + accrued expenses increase: $20,000<br><br>
+      <strong>Operating cash flow = $500,000</strong>
+    </div>
+
+    <p>
+      Northstar then spends $250,000 on capital expenditures, repays debt,
+      and distributes dividends.
+    </p>
+
+    <div class="insight">
+      Net income asks whether the business was profitable. The cash flow statement
+      asks where the actual money went.
+    </div>
+  `,
+  related: ["fcfGuide","workingCapitalGuide","maintenanceCapex","incomeStatementGuide"]
+},
+
+workingCapitalGuide: {
+  title: "Working capital: see it directly on the balance sheet",
+  topic: "Deal Mechanics",
+  level: "Intermediate",
+  time: "13 min",
+  intro:
+    "Working capital becomes easier to understand when you can see exactly which operating accounts create the cash requirement.",
+  content: `
+    <div class="statement-wrap">
+      <table class="statement">
+        <tr><th>Operating Account</th><th>Amount</th></tr>
+        <tr><td>Accounts receivable</td><td>$800,000</td></tr>
+        <tr><td>Inventory</td><td>$450,000</td></tr>
+        <tr><td>Accounts payable</td><td>($400,000)</td></tr>
+        <tr><td>Accrued operating expenses</td><td>($150,000)</td></tr>
+        <tr class="total"><td>Operating Net Working Capital</td><td>$700,000</td></tr>
+      </table>
+    </div>
+
+    <div class="formula">
+      NWC = Receivables + Inventory − Payables − Accrued Operating Liabilities
+    </div>
+
+    <div class="example">
+      $800,000 + $450,000 − $400,000 − $150,000 = $700,000
+    </div>
+
+    <h3>Compare two years</h3>
+
+    <div class="statement-wrap">
+      <table class="statement">
+        <tr><th></th><th>2025</th><th>2026</th></tr>
+        <tr><td>Receivables</td><td>$700,000</td><td>$800,000</td></tr>
+        <tr><td>Inventory</td><td>$400,000</td><td>$450,000</td></tr>
+        <tr><td>Payables</td><td>($370,000)</td><td>($400,000)</td></tr>
+        <tr><td>Accrued expenses</td><td>($130,000)</td><td>($150,000)</td></tr>
+        <tr class="total"><td>Net Working Capital</td><td>$600,000</td><td>$700,000</td></tr>
+      </table>
+    </div>
+
+    <div class="formula">
+      Increase in NWC = $100,000
+    </div>
+
+    <p>
+      That $100,000 increase is a use of cash and therefore reduces free cash flow.
+    </p>
+
+    <h3>Why buyers negotiate a working-capital peg</h3>
+
+    <p>
+      A buyer generally wants enough operating capital left in the company
+      to run normally immediately after closing.
+    </p>
+  `,
+  related: ["balanceSheetGuide","fcfGuide","buyerChecklist","dueDiligenceGuide"]
 },
 
 fcfGuide: {
-  title: "Free cash flow: the deeper view",
+  title: "Free cash flow: from Northstar's statements to valuation",
   topic: "Cash Flow",
   level: "Intermediate",
-  time: "12 min",
+  time: "14 min",
   intro:
-    "Free cash flow helps bridge the gap between accounting profit and the economic cash a business generates after funding the investments required to keep operating.",
+    "Free cash flow measures how much cash Northstar produces after taxes, reinvestment and working-capital requirements.",
   content: `
-    <h3>Why free cash flow matters</h3>
-
-    <p>
-      Ultimately, the economic value of a business comes from its ability to
-      generate cash for investors. Accounting earnings are important, but cash
-      cannot be distributed, reinvested or used to repay debt unless it actually exists.
-    </p>
-
-    <h3>Unlevered free cash flow</h3>
-
     <div class="formula">
       Unlevered FCF =
-      NOPAT
-      + Depreciation & Amortization
-      − Capital Expenditures
-      − Increase in Net Working Capital
+      NOPAT + D&A − CapEx − Increase in Net Working Capital
     </div>
 
-    <h3>Step 1: EBIT becomes NOPAT</h3>
+    <h3>Start with EBIT</h3>
 
     <p>
-      EBIT represents operating profit before interest and taxes.
-      To estimate after-tax operating profit, apply an appropriate tax rate.
+      Northstar's income statement shows EBIT of $700,000.
     </p>
 
-    <div class="formula">
-      NOPAT = EBIT × (1 − Tax Rate)
+    <div class="statement-wrap">
+      <table class="statement">
+        <tr><th>FCF Calculation</th><th>Amount</th></tr>
+        <tr><td>EBIT</td><td>$700,000</td></tr>
+        <tr><td>Less assumed operating tax @ 25%</td><td>($175,000)</td></tr>
+        <tr class="subtotal"><td>NOPAT</td><td>$525,000</td></tr>
+        <tr><td>Add D&A</td><td>$150,000</td></tr>
+        <tr><td>Less CapEx</td><td>($250,000)</td></tr>
+        <tr><td>Less increase in NWC</td><td>($100,000)</td></tr>
+        <tr class="total"><td>Unlevered Free Cash Flow</td><td>$325,000</td></tr>
+      </table>
     </div>
 
-    <h3>Step 2: add back D&A</h3>
+    <h3>What happened to the $850,000 of EBITDA?</h3>
 
     <p>
-      Depreciation and amortization reduce accounting earnings but are not
-      themselves current-period cash expenditures. Therefore they are added back.
-    </p>
-
-    <h3>Step 3: subtract CapEx</h3>
-
-    <p>
-      Equipment, vehicles, buildings and systems eventually require replacement
-      or investment. These purchases use actual cash.
-    </p>
-
-    <h3>Step 4: account for working capital</h3>
-
-    <p>
-      Increasing receivables and inventory can absorb cash.
-      Increasing accounts payable can temporarily provide cash.
-    </p>
-
-    <div class="example">
-      EBIT = $1,000,000<br>
-      Tax rate = 25%<br>
-      NOPAT = $750,000<br>
-      D&A = $150,000<br>
-      CapEx = $200,000<br>
-      Increase in NWC = $50,000<br><br>
-
-      Free cash flow = $650,000
-    </div>
-
-    <h3>FCF conversion</h3>
-
-    <p>
-      Buyers often care about how efficiently accounting earnings convert to cash.
-      A business with strong EBITDA but persistently weak cash generation deserves
-      additional investigation.
+      Northstar reported $850,000 of EBITDA, but taxes, equipment spending
+      and working-capital investment consume substantial cash.
     </p>
 
     <div class="insight">
-      Strong free cash flow often gives a buyer greater confidence that reported
-      profitability translates into real economic value.
+      $850,000 EBITDA → $700,000 EBIT → $525,000 NOPAT → $325,000 unlevered FCF
     </div>
 
+    <p>
+      This is why buyers should not assume EBITDA equals cash available to owners.
+    </p>
+
     <div class="valuation-box">
-      <strong>How this affects valuation:</strong><br><br>
-      DCF valuation directly values expected future free cash flow.
-      Even when using EBITDA multiples, buyers often examine FCF to determine
-      whether the EBITDA multiple is justified.
+      A DCF values future free cash flow directly. Even when using an EBITDA
+      multiple, a buyer should examine FCF conversion to determine whether the
+      multiple is justified.
     </div>
   `,
-  related: ["maintenanceCapex","workingCapitalGuide","dcfGuide","cashFlowStatementGuide"]
+  related: ["incomeStatementGuide","maintenanceCapex","workingCapitalGuide","dcfGuide"]
 },
 
 maintenanceCapex: {
@@ -1295,139 +1382,25 @@ maintenanceCapex: {
   level: "Intermediate",
   time: "9 min",
   intro:
-    "Not all capital expenditures mean the same thing. Distinguishing spending required to maintain existing earnings from spending intended to create future growth can dramatically change your view of a business.",
+    "Maintenance CapEx is spending required to preserve existing earning capacity. Growth CapEx is intended to create additional future earnings.",
   content: `
-    <h3>Maintenance CapEx</h3>
-
     <p>
-      Maintenance capital expenditure is the spending required to maintain
-      the company's existing operating capacity and earning power.
-    </p>
-
-    <p>
-      Examples can include replacing worn-out vehicles, machinery, servers,
-      production equipment or building systems.
-    </p>
-
-    <h3>Growth CapEx</h3>
-
-    <p>
-      Growth CapEx is investment intended to expand capacity or create additional
-      future earnings.
-    </p>
-
-    <p>
-      Examples include opening a new facility, adding a new production line or
-      investing in technology to support a major expansion.
-    </p>
-
-    <h3>Why the distinction matters</h3>
-
-    <p>
-      A business that must spend $400,000 every year simply to maintain its current
-      EBITDA has different economics from a company where the same spending is optional
-      growth investment.
+      Northstar spent $250,000 on capital expenditures this year.
+      A buyer should determine how much was required merely to maintain existing
+      equipment and how much was optional investment for future growth.
     </p>
 
     <div class="example">
-      EBITDA = $1,000,000<br><br>
-
-      Business A maintenance CapEx = $400,000<br>
-      Business B maintenance CapEx = $50,000
+      If $200,000 was maintenance CapEx and $50,000 was growth CapEx,
+      the business requires significant recurring reinvestment even before expansion.
     </div>
-
-    <p>
-      All else equal, Business B retains much more economic cash from each dollar of EBITDA.
-    </p>
-
-    <h3>Why depreciation does not solve the problem</h3>
-
-    <p>
-      Accounting depreciation is based on historical accounting conventions.
-      Actual future replacement spending may be higher or lower than depreciation expense.
-    </p>
 
     <div class="valuation-box">
-      <strong>How this affects what you would pay:</strong><br><br>
-      High recurring maintenance CapEx reduces free cash flow and may justify a
-      lower valuation even when reported EBITDA is strong.
+      Businesses with lower recurring maintenance CapEx generally convert more EBITDA
+      into free cash flow, all else equal.
     </div>
   `,
-  related: ["fcfGuide","ebitdaGuide","dcfGuide"]
-},
-
-workingCapitalGuide: {
-  title: "Working capital: why growth can consume cash",
-  topic: "Deal Mechanics",
-  level: "Intermediate",
-  time: "11 min",
-  intro:
-    "A growing business can report rising profit while simultaneously requiring more and more cash. Working capital is often the reason.",
-  content: `
-    <h3>Operating working capital</h3>
-
-    <div class="formula">
-      Operating NWC ≈
-      Accounts Receivable
-      + Inventory
-      − Accounts Payable
-      − Other Operating Current Liabilities
-    </div>
-
-    <p>
-      If customers take time to pay, the business effectively finances those
-      receivables until cash is collected.
-    </p>
-
-    <p>
-      Inventory similarly requires cash before the inventory is eventually sold.
-    </p>
-
-    <h3>Example</h3>
-
-    <div class="example">
-      Receivables increase = $150,000<br>
-      Inventory increases = $100,000<br>
-      Payables increase = $50,000<br><br>
-
-      Net working capital increases by $200,000.
-    </div>
-
-    <p>
-      That $200,000 generally reduces free cash flow during the period.
-    </p>
-
-    <h3>Why rapid growth can create a problem</h3>
-
-    <p>
-      If a company grows very quickly but must build inventory and wait months
-      for customers to pay, it may require substantial additional cash even while
-      the income statement looks excellent.
-    </p>
-
-    <h3>Working capital in an acquisition</h3>
-
-    <p>
-      Buyers often expect a business to be delivered with a normal level of
-      working capital. Otherwise, the buyer may have to inject additional cash
-      immediately after closing simply to operate the company.
-    </p>
-
-    <h3>The working-capital peg</h3>
-
-    <p>
-      Transactions commonly establish a target level of normalized working capital.
-      Actual working capital delivered at closing is compared with the target,
-      potentially creating a purchase-price adjustment.
-    </p>
-
-    <div class="valuation-box">
-      <strong>How this affects valuation:</strong><br><br>
-      A business requiring substantial incremental working capital to grow may
-      generate less free cash flow than its earnings suggest.
-    </div>
-  `,
-  related: ["fcfGuide","balanceSheetGuide","buyerChecklist"]
+  related: ["fcfGuide","ebitdaGuide","cashFlowStatementGuide"]
 },
 
 dcfGuide: {
@@ -1436,95 +1409,40 @@ dcfGuide: {
   level: "Intermediate",
   time: "15 min",
   intro:
-    "A discounted cash flow valuation estimates today's value of the cash a business is expected to generate in the future.",
+    "A DCF estimates today's value of future free cash flows.",
   content: `
-    <h3>The core concept</h3>
-
-    <p>
-      A dollar received today is worth more than a dollar received years from now.
-      Future cash flows must therefore be discounted back to present value.
-    </p>
-
     <div class="formula">
-      Present Value =
-      Future Cash Flow ÷ (1 + Discount Rate)^Year
+      Present Value = Future Cash Flow ÷ (1 + Discount Rate)^Year
     </div>
 
-    <h3>Step 1: forecast operating performance</h3>
+    <h3>Use Northstar's $325,000 current FCF</h3>
 
     <p>
-      A DCF normally begins with forecasts for revenue, margins, taxes,
-      capital expenditures and working capital.
+      A DCF could forecast how Northstar's FCF grows over the next five years,
+      discount each year back to today, and then add a terminal value.
     </p>
 
-    <h3>Step 2: calculate free cash flow</h3>
+    <h3>Forecast</h3>
 
     <p>
-      Those operating forecasts are converted into free cash flow.
+      Forecast revenue, margins, taxes, CapEx and working capital rather than
+      simply assuming EBITDA growth automatically becomes cash flow.
     </p>
 
-    <div class="formula">
-      FCF =
-      NOPAT
-      + D&A
-      − CapEx
-      − Increase in Working Capital
-    </div>
-
-    <h3>Step 3: choose the discount rate</h3>
-
-    <p>
-      The discount rate represents both the time value of money and risk.
-      Riskier cash flows generally require a higher discount rate.
-    </p>
-
-    <h3>Step 4: discount each year's cash flow</h3>
-
-    <div class="example">
-      Year 1 FCF = $1,000,000<br>
-      Discount rate = 10%<br><br>
-
-      Present value ≈ $909,091
-    </div>
-
-    <h3>Step 5: calculate terminal value</h3>
-
-    <p>
-      Businesses generally continue beyond a five-year forecast.
-      Terminal value estimates the value of all cash flows occurring after the explicit period.
-    </p>
+    <h3>Terminal value</h3>
 
     <div class="formula">
       Terminal Value =
       Next Year's FCF ÷
-      (Discount Rate − Long-Term Growth Rate)
-    </div>
-
-    <h3>Step 6: calculate enterprise value</h3>
-
-    <p>
-      Add the present value of the explicit forecast cash flows to the present
-      value of the terminal value.
-    </p>
-
-    <h3>Step 7: convert EV to equity value</h3>
-
-    <div class="formula">
-      Equity Value ≈ Enterprise Value − Debt + Excess Cash
+      (Discount Rate − Terminal Growth Rate)
     </div>
 
     <div class="warning">
-      DCF models can create a false sense of precision. Their output is highly dependent
-      on assumptions about growth, margins, CapEx, working capital, terminal growth and discount rates.
-    </div>
-
-    <div class="valuation-box">
-      <strong>How this affects what you would pay:</strong><br><br>
-      DCF is useful because it forces you to explicitly state what you believe
-      about the future rather than hiding those assumptions inside a multiple.
+      DCFs are highly sensitive to assumptions. A precise-looking number does not
+      mean the assumptions are precise.
     </div>
   `,
-  related: ["waccGuide","terminalValueGuide","dcfSensitivity","fcfGuide"]
+  related: ["fcfGuide","waccGuide","terminalValueGuide","dcfSensitivity"]
 },
 
 waccGuide: {
@@ -1533,111 +1451,39 @@ waccGuide: {
   level: "Advanced",
   time: "12 min",
   intro:
-    "The discount rate is one of the most powerful assumptions in a DCF because it translates future risky cash flows into today's value.",
+    "The discount rate represents the required return for the risk involved in receiving future cash flows.",
   content: `
-    <h3>The intuition</h3>
-
-    <p>
-      If an investment is extremely safe, investors may accept a relatively
-      low return. If an investment is risky, they generally demand a higher return.
-    </p>
-
     <div class="formula">
       Greater Risk → Higher Required Return → Lower Present Value
     </div>
 
-    <h3>Weighted average cost of capital</h3>
-
     <p>
-      WACC attempts to measure the blended required return of the company's debt
-      and equity capital providers.
+      A private business with customer concentration, owner dependence and volatile
+      margins would typically warrant more risk consideration than a diversified,
+      recurring-revenue company.
     </p>
-
-    <div class="formula">
-      WACC =
-      Equity Weight × Cost of Equity
-      +
-      Debt Weight × After-Tax Cost of Debt
-    </div>
-
-    <h3>Why private companies are harder</h3>
-
-    <p>
-      A public company has observable share prices and broader market data.
-      A private company may have customer concentration, key-person dependence,
-      small-company risk or illiquidity that require judgment.
-    </p>
-
-    <h3>Discount rate and valuation</h3>
-
-    <p>
-      Because future cash flows are divided by the discount factor,
-      even relatively small changes in the discount rate can materially affect value.
-    </p>
-
-    <div class="example">
-      A stream of stable cash flows discounted at 9% will produce a higher
-      present value than the identical stream discounted at 15%.
-    </div>
-
-    <div class="valuation-box">
-      <strong>How this affects what you would pay:</strong><br><br>
-      When a business is riskier, you should generally require either a lower
-      purchase price or stronger expected future returns.
-    </div>
   `,
   related: ["dcfGuide","dcfSensitivity","businessQuality"]
 },
 
 terminalValueGuide: {
-  title: "Terminal value: where a DCF can become dangerous",
+  title: "Terminal value",
   topic: "Valuation",
   level: "Advanced",
   time: "10 min",
   intro:
-    "Terminal value represents the value of cash flows occurring after the explicit forecast period. In many DCFs, it makes up most of the total valuation.",
+    "Terminal value estimates the value of cash flows occurring after the explicit forecast period.",
   content: `
-    <h3>Why terminal value exists</h3>
-
-    <p>
-      A five-year DCF does not assume the business disappears after year five.
-      Instead, terminal value estimates all economic value after that point.
-    </p>
-
-    <h3>Perpetual-growth method</h3>
-
     <div class="formula">
       Terminal Value =
       Next Year's FCF ÷
       (Discount Rate − Terminal Growth Rate)
     </div>
 
-    <div class="example">
-      Year 6 FCF = $1,200,000<br>
-      Discount rate = 10%<br>
-      Terminal growth = 2.5%<br><br>
-
-      Terminal value ≈ $16,000,000
-    </div>
-
-    <h3>Exit-multiple method</h3>
-
     <p>
-      Another approach estimates what the business might sell for at the end
-      of the forecast period by applying a market multiple to EBITDA or another metric.
+      Terminal value can represent a large share of total DCF value,
+      so small assumption changes can materially affect valuation.
     </p>
-
-    <h3>Why it deserves scrutiny</h3>
-
-    <p>
-      Small changes in terminal growth or discount rate can create very large
-      changes in terminal value because the denominator is the difference between them.
-    </p>
-
-    <div class="warning">
-      If terminal value represents 80% of your DCF, your valuation is heavily
-      dependent on assumptions about a future that is inherently difficult to forecast.
-    </div>
   `,
   related: ["dcfGuide","waccGuide","dcfSensitivity"]
 },
@@ -1648,217 +1494,19 @@ dcfSensitivity: {
   level: "Advanced",
   time: "9 min",
   intro:
-    "A DCF should not be treated as one precise answer. Sensitivity analysis shows how valuation changes when key assumptions change.",
+    "Sensitivity analysis shows how valuation changes when assumptions change.",
   content: `
-    <h3>Why sensitivity analysis matters</h3>
-
-    <p>
-      Your growth rate, margins, discount rate and terminal value are estimates.
-      A good model asks what happens if those estimates are wrong.
-    </p>
-
-    <h3>Discount-rate sensitivity</h3>
-
-    <p>
-      Calculate valuation under several discount rates rather than relying on one.
-    </p>
-
     <div class="example">
-      Example sensitivity range:<br><br>
-      10% discount rate → $8.0M value<br>
-      12% discount rate → $6.9M value<br>
-      14% discount rate → $6.0M value
+      10% discount rate → higher value<br>
+      12% discount rate → lower value<br>
+      14% discount rate → lower still
     </div>
 
-    <h3>Terminal-growth sensitivity</h3>
-
     <p>
-      Repeat the process using several plausible terminal growth assumptions.
+      A good DCF should be viewed as a valuation range, not a single magical answer.
     </p>
-
-    <h3>Create a range, not a fantasy of precision</h3>
-
-    <p>
-      If plausible assumptions produce values between $6 million and $8 million,
-      the useful conclusion may be that value lies somewhere within that range,
-      rather than pretending $7,137,244 is objectively correct.
-    </p>
-
-    <div class="insight">
-      Good valuation work often focuses more on understanding the range and its
-      drivers than producing an impressively precise single number.
-    </div>
   `,
   related: ["dcfGuide","waccGuide","terminalValueGuide"]
-},
-
-incomeStatementGuide: {
-  title: "How to read an income statement like a buyer",
-  topic: "Financial Statements",
-  level: "Beginner",
-  time: "11 min",
-  intro:
-    "An income statement tells you how revenue became profit during a period, but the most important information often comes from trends and relationships between the lines.",
-  content: `
-    <h3>Revenue</h3>
-
-    <p>
-      Start with sales. Ask how quickly revenue is growing, where it comes from,
-      whether it repeats, and whether the company depends heavily on a few customers.
-    </p>
-
-    <h3>Gross profit</h3>
-
-    <div class="formula">
-      Gross Profit = Revenue − Cost of Goods Sold
-    </div>
-
-    <p>
-      Gross profit measures the amount remaining after direct costs.
-      Gross margin allows comparison across periods and companies.
-    </p>
-
-    <div class="formula">
-      Gross Margin = Gross Profit ÷ Revenue
-    </div>
-
-    <h3>Operating expenses</h3>
-
-    <p>
-      Payroll, rent, insurance, sales costs, marketing, professional fees
-      and administrative expenses typically appear below gross profit.
-    </p>
-
-    <h3>Operating profit</h3>
-
-    <p>
-      Operating profit helps show what the core operations produce before financing
-      choices and certain non-operating items.
-    </p>
-
-    <h3>Trend matters more than one year</h3>
-
-    <p>
-      Compare several years. Is revenue rising? Are margins stable? Are payroll
-      costs growing faster than revenue? Is profit volatile?
-    </p>
-
-    <div class="valuation-box">
-      <strong>How this relates to valuation:</strong><br><br>
-      Buyers often value normalized future earning power, not a single historical
-      year. Trends help determine whether current earnings are sustainable.
-    </div>
-  `,
-  related: ["qualityEarnings","ebitdaGuide","cashFlowStatementGuide"]
-},
-
-balanceSheetGuide: {
-  title: "How to read a balance sheet like a buyer",
-  topic: "Financial Statements",
-  level: "Beginner",
-  time: "10 min",
-  intro:
-    "The balance sheet shows what a company owns and owes at one point in time. It can reveal financial risk that does not appear clearly on the income statement.",
-  content: `
-    <div class="formula">
-      Assets = Liabilities + Equity
-    </div>
-
-    <h3>Current assets</h3>
-
-    <p>
-      Cash, receivables and inventory are especially important in acquisition analysis.
-    </p>
-
-    <h3>Accounts receivable</h3>
-
-    <p>
-      Receivables are only valuable if customers actually pay.
-      Buyers often examine the aging report to identify old or doubtful balances.
-    </p>
-
-    <h3>Inventory</h3>
-
-    <p>
-      Inventory can appear valuable on paper while including obsolete, damaged or
-      slow-moving items.
-    </p>
-
-    <h3>Debt</h3>
-
-    <p>
-      Debt affects the conversion from enterprise value to equity value and can
-      materially affect transaction economics.
-    </p>
-
-    <h3>Shareholders' equity</h3>
-
-    <p>
-      Book equity is an accounting residual. It is not automatically the market
-      value of the company.
-    </p>
-
-    <div class="example">
-      A company may have $1.3 million of accounting equity yet be worth $6 million
-      because its future earning power is worth far more than the net book value of its assets.
-    </div>
-
-    <div class="valuation-box">
-      <strong>How this relates to valuation:</strong><br><br>
-      The balance sheet helps identify debt, excess cash, working-capital needs,
-      asset quality and hidden risks that affect the final amount a buyer should pay.
-    </div>
-  `,
-  related: ["workingCapitalGuide","enterpriseEquity","cashFlowStatementGuide"]
-},
-
-cashFlowStatementGuide: {
-  title: "The cash flow statement: where the money actually went",
-  topic: "Financial Statements",
-  level: "Beginner",
-  time: "10 min",
-  intro:
-    "A company can report excellent accounting profit while producing weak cash flow. The cash flow statement helps explain why.",
-  content: `
-    <h3>Operating activities</h3>
-
-    <p>
-      This section generally begins with accounting profit and adjusts for
-      non-cash items and working-capital changes.
-    </p>
-
-    <h3>Investing activities</h3>
-
-    <p>
-      Capital expenditures and purchases or sales of long-term assets often appear here.
-    </p>
-
-    <h3>Financing activities</h3>
-
-    <p>
-      Borrowing, debt repayment, dividends and equity transactions appear here.
-    </p>
-
-    <h3>Why profit and cash differ</h3>
-
-    <div class="example">
-      Net income = $700,000<br>
-      Inventory growth = $200,000 cash use<br>
-      Receivables growth = $150,000 cash use<br>
-      Equipment purchases = $250,000 cash use
-    </div>
-
-    <p>
-      A profitable year can therefore produce much less cash than the income statement suggests.
-    </p>
-
-    <div class="valuation-box">
-      <strong>How this relates to valuation:</strong><br><br>
-      Buyers want confidence that reported earnings convert into cash.
-      Persistent differences between earnings and cash generation deserve investigation.
-    </div>
-  `,
-  related: ["fcfGuide","workingCapitalGuide","maintenanceCapex"]
 },
 
 buyerChecklist: {
@@ -1867,62 +1515,23 @@ buyerChecklist: {
   level: "Beginner",
   time: "13 min",
   intro:
-    "A buyer is not merely checking whether the seller made money last year. The real question is whether those earnings will survive the transfer of ownership.",
+    "A buyer wants confidence that earnings, cash flow and customer relationships will survive the transfer of ownership.",
   content: `
-    <h3>1. Sustainable earnings</h3>
-
-    <p>
-      Buyers often normalize historical results and determine what level of
-      earnings is realistically repeatable.
-    </p>
-
-    <h3>2. Revenue quality</h3>
-
-    <p>
-      Recurring, contractual and diversified revenue is generally more attractive
-      than unpredictable project-based revenue.
-    </p>
-
-    <h3>3. Customer concentration</h3>
-
-    <p>
-      Losing a customer representing 40% of sales could radically change the value
-      of the company overnight.
-    </p>
-
-    <h3>4. Owner dependence</h3>
-
-    <p>
-      If customers only buy because of the seller's personal relationships,
-      a buyer may question whether revenue will transfer.
-    </p>
-
-    <h3>5. Management depth</h3>
-
-    <p>
-      Strong managers make a business more transferable and reduce key-person risk.
-    </p>
-
-    <h3>6. Capital requirements</h3>
-
-    <p>
-      Buyers examine CapEx and working capital because both consume cash.
-    </p>
-
-    <h3>7. Legal and operational risk</h3>
-
-    <p>
-      Contracts, leases, employees, intellectual property, litigation, suppliers
-      and regulatory matters can all materially affect value.
-    </p>
+    <ul>
+      <li>Sustainable earnings</li>
+      <li>Recurring revenue</li>
+      <li>Customer concentration</li>
+      <li>Owner dependence</li>
+      <li>Management depth</li>
+      <li>Maintenance CapEx</li>
+      <li>Working-capital requirements</li>
+      <li>Debt</li>
+      <li>Legal and operational risk</li>
+    </ul>
 
     <div class="insight">
-      The buyer is constantly asking: "How likely is this cash flow to continue
-      after the seller is gone?"
-    </div>
-
-    <div class="valuation-box">
-      Higher predictability and lower transfer risk can justify a higher valuation multiple.
+      The buyer is constantly asking: how likely is this cash flow to continue
+      after the seller is gone?
     </div>
   `,
   related: ["businessQuality","customerConcentration","ownerDependence","dueDiligenceGuide"]
@@ -1934,142 +1543,58 @@ qualityEarnings: {
   level: "Intermediate",
   time: "12 min",
   intro:
-    "Reported earnings are not always the same as sustainable economic earnings. Buyers often adjust historical results to estimate what the business would earn under normal ownership.",
+    "Buyers adjust reported earnings to determine sustainable earnings under normal ownership.",
   content: `
-    <h3>What normalization means</h3>
-
-    <p>
-      Normalization removes unusual, non-recurring or owner-specific items to
-      estimate sustainable operating earnings.
-    </p>
-
-    <h3>Typical add-backs</h3>
-
-    <p>
-      Examples can include legitimate one-time legal expenses, unusual settlements,
-      or owner-specific personal costs that will not continue.
-    </p>
-
-    <h3>Owner compensation</h3>
-
-    <p>
-      Owner compensation requires care. If the seller performs an essential management
-      role, the buyer must still account for the cost of replacing that work.
-    </p>
-
     <div class="example">
-      Reported EBITDA = $800,000<br>
-      One-time legal expense = +$100,000<br>
-      Excess owner compensation above market = +$150,000<br><br>
-
-      Normalized EBITDA = $1,050,000
+      Reported EBITDA: $800,000<br>
+      One-time legal expense: +$100,000<br>
+      Excess owner compensation above market: +$150,000<br><br>
+      <strong>Normalized EBITDA: $1,050,000</strong>
     </div>
-
-    <h3>Why aggressive add-backs are dangerous</h3>
 
     <p>
-      Sellers have an incentive to characterize costs as non-recurring.
-      Buyers should ask whether each adjustment is supported by actual evidence.
+      Add-backs should be supported. If a supposedly one-time expense keeps recurring,
+      it may not deserve an adjustment.
     </p>
-
-    <div class="warning">
-      If a supposedly "one-time" cost appears every year under a different description,
-      it may not be one-time at all.
-    </div>
-
-    <div class="valuation-box">
-      <strong>How this affects valuation:</strong><br><br>
-      If a business trades at 5× EBITDA, every legitimate $100,000 normalization
-      adjustment could theoretically affect indicated enterprise value by about $500,000.
-    </div>
   `,
   related: ["ebitdaGuide","buyerChecklist","dueDiligenceGuide"]
 },
 
 customerConcentration: {
-  title: "Customer concentration: one of the biggest hidden valuation risks",
+  title: "Customer concentration",
   topic: "Business Quality",
   level: "Intermediate",
   time: "9 min",
   intro:
-    "A company can look highly profitable while depending on a single customer whose departure could permanently impair earnings.",
+    "A highly profitable company can still be risky if a small number of customers generate most of its revenue.",
   content: `
-    <h3>What concentration means</h3>
-
-    <p>
-      Customer concentration measures how much revenue or profit depends on a
-      relatively small number of customers.
-    </p>
-
     <div class="example">
-      Total revenue = $10 million<br>
-      Largest customer = $4 million<br><br>
-
-      Largest customer concentration = 40%
+      Revenue: $5,000,000<br>
+      Largest customer: $2,000,000<br><br>
+      Concentration = 40%
     </div>
-
-    <h3>Why buyers care</h3>
 
     <p>
-      If that customer leaves, the business may immediately lose a major portion
-      of revenue while many fixed expenses remain.
+      Losing that customer could materially reduce revenue while fixed costs remain.
     </p>
-
-    <h3>Questions to ask</h3>
-
-    <ul>
-      <li>How long has the customer relationship existed?</li>
-      <li>Is there a contract?</li>
-      <li>Can the contract terminate on change of control?</li>
-      <li>How easy is it for the customer to switch suppliers?</li>
-      <li>Does the owner personally control the relationship?</li>
-    </ul>
-
-    <div class="valuation-box">
-      High customer concentration generally increases risk and can reduce the
-      multiple a buyer is willing to pay.
-    </div>
   `,
   related: ["businessQuality","ownerDependence","buyerChecklist"]
 },
 
 ownerDependence: {
-  title: "Owner dependence: are you buying a business or buying a job?",
+  title: "Owner dependence",
   topic: "Business Quality",
   level: "Intermediate",
   time: "9 min",
   intro:
-    "A highly profitable company may be difficult to transfer if the owner personally controls sales, operations, employees and customer relationships.",
+    "If the owner controls every key relationship and decision, the business may be difficult to transfer.",
   content: `
-    <h3>The transferability problem</h3>
-
-    <p>
-      A buyer wants the business to keep operating after the seller leaves.
-      If all important knowledge and relationships live inside the owner's head,
-      transfer risk increases.
-    </p>
-
-    <h3>Common signs</h3>
-
     <ul>
-      <li>Owner approves every material decision</li>
-      <li>Major customers only deal with owner</li>
+      <li>Owner handles major customers</li>
       <li>No second-level management</li>
       <li>Processes are undocumented</li>
-      <li>Owner performs critical technical work</li>
+      <li>Owner performs essential technical work</li>
     </ul>
-
-    <h3>How sellers improve this</h3>
-
-    <p>
-      Building management depth, documenting processes, transferring relationships
-      and delegating authority can make the company much more transferable.
-    </p>
-
-    <div class="valuation-box">
-      Lower owner dependence can increase buyer confidence and potentially support
-      a higher valuation multiple.
-    </div>
   `,
   related: ["businessQuality","buyerChecklist","customerConcentration"]
 },
@@ -2080,54 +1605,21 @@ businessQuality: {
   level: "Intermediate",
   time: "11 min",
   intro:
-    "Two businesses with identical EBITDA can have very different values because buyers care about the durability, growth and risk of those earnings.",
+    "Two businesses with equal EBITDA can have very different values.",
   content: `
-    <h3>Recurring revenue</h3>
-
-    <p>
-      Revenue that repeats automatically or contractually is easier to forecast.
-    </p>
-
-    <h3>Diversification</h3>
-
-    <p>
-      A broad customer base reduces the damage caused by losing any one customer.
-    </p>
-
-    <h3>Pricing power</h3>
-
-    <p>
-      Companies that can increase prices without losing customers may be better
-      able to protect margins during inflation or cost increases.
-    </p>
-
-    <h3>Low capital intensity</h3>
-
-    <p>
-      Businesses requiring less maintenance CapEx may convert more earnings into cash.
-    </p>
-
-    <h3>Management depth</h3>
-
-    <p>
-      A business that operates independently of the seller is easier to transfer.
-    </p>
-
-    <h3>Growth</h3>
-
-    <p>
-      Higher sustainable growth increases future cash flows, provided the company
-      can achieve that growth without destroying returns on invested capital.
-    </p>
+    <ul>
+      <li>Recurring revenue</li>
+      <li>Diversified customers</li>
+      <li>Pricing power</li>
+      <li>Strong management</li>
+      <li>Low maintenance CapEx</li>
+      <li>Strong cash conversion</li>
+      <li>Sustainable growth</li>
+    </ul>
 
     <div class="insight">
-      A valuation multiple is partly a compressed summary of expected growth,
+      A valuation multiple is partly a compressed expression of growth,
       risk and cash-flow quality.
-    </div>
-
-    <div class="valuation-box">
-      Better businesses can command higher multiples because buyers are willing
-      to pay more today for cash flows they consider durable and attractive.
     </div>
   `,
   related: ["customerConcentration","ownerDependence","fcfGuide","waccGuide"]
@@ -2139,79 +1631,49 @@ dueDiligenceGuide: {
   level: "Intermediate",
   time: "14 min",
   intro:
-    "Due diligence is the process of determining whether the business actually matches the financial, legal and operational story presented by the seller.",
+    "Due diligence tests whether the company actually matches the seller's financial, legal and operational story.",
   content: `
-    <h3>Financial diligence</h3>
-
+    <h3>Financial</h3>
     <ul>
-      <li>Historical financial statements</li>
+      <li>Financial statements</li>
       <li>Tax returns</li>
       <li>Bank statements</li>
       <li>Receivable aging</li>
       <li>Inventory records</li>
       <li>Debt</li>
       <li>CapEx history</li>
-      <li>Quality-of-earnings adjustments</li>
+      <li>Quality of earnings</li>
     </ul>
 
-    <h3>Commercial diligence</h3>
-
+    <h3>Commercial</h3>
     <ul>
-      <li>Customer concentration</li>
-      <li>Customer retention</li>
+      <li>Customers</li>
+      <li>Retention</li>
       <li>Pricing</li>
       <li>Competitors</li>
-      <li>Market growth</li>
     </ul>
 
-    <h3>Operational diligence</h3>
-
+    <h3>Operational</h3>
     <ul>
-      <li>Management depth</li>
-      <li>Employee retention</li>
-      <li>Supplier concentration</li>
-      <li>Equipment condition</li>
-      <li>Systems and processes</li>
+      <li>Management</li>
+      <li>Employees</li>
+      <li>Equipment</li>
+      <li>Suppliers</li>
     </ul>
-
-    <h3>Legal diligence</h3>
-
-    <p>
-      Buyers commonly review material contracts, leases, intellectual property,
-      employment matters, litigation and regulatory compliance.
-    </p>
-
-    <h3>What diligence can change</h3>
-
-    <p>
-      Findings may alter price, deal structure, representations, indemnities,
-      closing conditions or even whether the buyer proceeds.
-    </p>
-
-    <div class="valuation-box">
-      Due diligence converts an assumed valuation into a tested valuation.
-      A business initially appearing worth $6 million may be worth materially less
-      if diligence reveals unsustainable earnings or previously unidentified risk.
-    </div>
   `,
   related: ["qualityEarnings","buyerChecklist","workingCapitalGuide","customerConcentration"]
 }
 
 };
 
-
 function renderArticleCards() {
-
   const list = document.getElementById("articleList");
   const featured = document.getElementById("featuredArticles");
 
   list.innerHTML = "";
   featured.innerHTML = "";
 
-  const ids = Object.keys(articles);
-
-  ids.forEach((id, index) => {
-
+  Object.keys(articles).forEach(id => {
     const a = articles[id];
 
     const html = `
@@ -2233,9 +1695,7 @@ function renderArticleCards() {
         </div>
 
         <h3>${a.title}</h3>
-
         <p>${a.intro}</p>
-
         <div class="read-time">${a.time} read</div>
       </div>
     `;
@@ -2243,68 +1703,46 @@ function renderArticleCards() {
     list.insertAdjacentHTML("beforeend", html);
 
     if ([
-      "valueMeaning",
-      "ebitdaGuide",
+      "incomeStatementGuide",
+      "balanceSheetGuide",
+      "cashFlowStatementGuide",
       "fcfGuide",
-      "buyerChecklist",
-      "workingCapitalGuide",
-      "dcfGuide"
+      "ebitdaGuide",
+      "buyerChecklist"
     ].includes(id)) {
       featured.insertAdjacentHTML("beforeend", html);
     }
-
   });
 }
 
-
 function openArticle(id) {
-
   const article = articles[id];
-
   if (!article) return;
 
   const overlay = document.getElementById("overlay");
-
   const current = overlay.dataset.current;
 
-  if (
-    overlay.style.display === "block" &&
-    current &&
-    current !== id
-  ) {
+  if (overlay.style.display === "block" && current && current !== id) {
     articleHistory.push(current);
   }
 
   overlay.dataset.current = id;
 
   document.getElementById("articleMeta").textContent =
-    article.topic +
-    " · " +
-    article.level +
-    " · " +
-    article.time;
+    article.topic + " · " + article.level + " · " + article.time;
 
-  document.getElementById("articleTitle").textContent =
-    article.title;
-
-  document.getElementById("articleIntro").textContent =
-    article.intro;
-
-  document.getElementById("articleContent").innerHTML =
-    article.content;
+  document.getElementById("articleTitle").textContent = article.title;
+  document.getElementById("articleIntro").textContent = article.intro;
+  document.getElementById("articleContent").innerHTML = article.content;
 
   renderRelated(article.related || []);
 
   overlay.style.display = "block";
-
   document.body.style.overflow = "hidden";
-
   overlay.scrollTop = 0;
 }
 
-
 function renderRelated(ids) {
-
   const box = document.getElementById("relatedArticles");
 
   if (!ids.length) {
@@ -2315,9 +1753,7 @@ function renderRelated(ids) {
   let html = "<h3>Continue learning</h3>";
 
   ids.forEach(id => {
-
     const a = articles[id];
-
     if (!a) return;
 
     html += `
@@ -2326,91 +1762,57 @@ function renderRelated(ids) {
         <span>${a.level} · ${a.time}</span>
       </button>
     `;
-
   });
 
   box.innerHTML = html;
 }
 
-
 function goArticleBack() {
-
   if (articleHistory.length) {
-
     const id = articleHistory.pop();
-
     const article = articles[id];
-
     if (!article) return;
 
     const overlay = document.getElementById("overlay");
-
     overlay.dataset.current = id;
 
     document.getElementById("articleMeta").textContent =
-      article.topic +
-      " · " +
-      article.level +
-      " · " +
-      article.time;
+      article.topic + " · " + article.level + " · " + article.time;
 
-    document.getElementById("articleTitle").textContent =
-      article.title;
-
-    document.getElementById("articleIntro").textContent =
-      article.intro;
-
-    document.getElementById("articleContent").innerHTML =
-      article.content;
+    document.getElementById("articleTitle").textContent = article.title;
+    document.getElementById("articleIntro").textContent = article.intro;
+    document.getElementById("articleContent").innerHTML = article.content;
 
     renderRelated(article.related || []);
-
     overlay.scrollTop = 0;
-
   } else {
-
     closeArticle();
-
   }
 }
 
-
 function closeArticle() {
-
   document.getElementById("overlay").style.display = "none";
-
   document.body.style.overflow = "";
-
   articleHistory.length = 0;
-
 }
 
-
 function showSection(section, button) {
-
   document.getElementById("homeSection").classList.add("hidden");
   document.getElementById("articlesSection").classList.add("hidden");
   document.getElementById("seriesSection").classList.add("hidden");
   document.getElementById("calculatorsSection").classList.add("hidden");
 
-  document.getElementById(section + "Section")
-    .classList.remove("hidden");
+  document.getElementById(section + "Section").classList.remove("hidden");
 
   document.querySelectorAll(".nav button")
     .forEach(btn => btn.classList.remove("active"));
 
   button.classList.add("active");
 
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
-
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-
 function filterTopic(topic) {
-
   document.getElementById("articlesSection").classList.remove("hidden");
   document.getElementById("homeSection").classList.add("hidden");
   document.getElementById("seriesSection").classList.add("hidden");
@@ -2419,41 +1821,26 @@ function filterTopic(topic) {
   document.querySelectorAll(".nav button")
     .forEach(btn => btn.classList.remove("active"));
 
-  document.querySelectorAll(".nav button")[1]
-    .classList.add("active");
+  document.querySelectorAll(".nav button")[1].classList.add("active");
 
-  document
-    .querySelectorAll("#articleList .searchableArticle")
+  document.querySelectorAll("#articleList .searchableArticle")
     .forEach(card => {
-
       if (card.dataset.topic === topic) {
         card.classList.remove("hidden");
       } else {
         card.classList.add("hidden");
       }
-
     });
 
   document.getElementById("search").value = "";
-
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
-
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-
 function searchArticles() {
-
-  const q =
-    document.getElementById("search")
-      .value
-      .toLowerCase()
-      .trim();
+  const q = document.getElementById("search")
+    .value.toLowerCase().trim();
 
   if (q) {
-
     document.getElementById("homeSection").classList.add("hidden");
     document.getElementById("articlesSection").classList.remove("hidden");
     document.getElementById("seriesSection").classList.add("hidden");
@@ -2462,15 +1849,11 @@ function searchArticles() {
     document.querySelectorAll(".nav button")
       .forEach(btn => btn.classList.remove("active"));
 
-    document.querySelectorAll(".nav button")[1]
-      .classList.add("active");
-
+    document.querySelectorAll(".nav button")[1].classList.add("active");
   }
 
-  document
-    .querySelectorAll("#articleList .searchableArticle")
+  document.querySelectorAll("#articleList .searchableArticle")
     .forEach(card => {
-
       const text = card.dataset.search;
 
       if (!q || text.includes(q)) {
@@ -2478,126 +1861,67 @@ function searchArticles() {
       } else {
         card.classList.add("hidden");
       }
-
     });
-
 }
-
 
 function money(value) {
-
-  return "$" +
-    Math.round(value)
-      .toLocaleString("en-CA");
-
+  return "$" + Math.round(value).toLocaleString("en-CA");
 }
-
 
 function calculateMultiple() {
+  const ebitda = Number(document.getElementById("ebitda").value) || 0;
+  const multiple = Number(document.getElementById("multiple").value) || 0;
+  const debt = Number(document.getElementById("debt").value) || 0;
+  const cash = Number(document.getElementById("cash").value) || 0;
 
-  const ebitda =
-    Number(document.getElementById("ebitda").value) || 0;
+  const enterpriseValue = ebitda * multiple;
+  const equityValue = enterpriseValue - debt + cash;
 
-  const multiple =
-    Number(document.getElementById("multiple").value) || 0;
+  document.getElementById("multipleResult").style.display = "block";
+  document.getElementById("multipleValue").textContent = money(equityValue);
 
-  const debt =
-    Number(document.getElementById("debt").value) || 0;
-
-  const cash =
-    Number(document.getElementById("cash").value) || 0;
-
-  const enterpriseValue =
-    ebitda * multiple;
-
-  const equityValue =
-    enterpriseValue - debt + cash;
-
-  document.getElementById("multipleResult")
-    .style.display = "block";
-
-  document.getElementById("multipleValue")
-    .textContent = money(equityValue);
-
-  document.getElementById("multipleSub")
-    .innerHTML =
-      "Enterprise value: " + money(enterpriseValue) +
-      "<br>− Debt: " + money(debt) +
-      "<br>+ Excess cash: " + money(cash) +
-      "<br><br><strong>Estimated equity value</strong>";
-
+  document.getElementById("multipleSub").innerHTML =
+    "Enterprise value: " + money(enterpriseValue) +
+    "<br>− Debt: " + money(debt) +
+    "<br>+ Excess cash: " + money(cash) +
+    "<br><br><strong>Estimated equity value</strong>";
 }
-
 
 function calculateFCF() {
+  const ebit = Number(document.getElementById("fcfEbit").value) || 0;
+  const tax = (Number(document.getElementById("fcfTax").value) || 0) / 100;
+  const da = Number(document.getElementById("fcfDa").value) || 0;
+  const capex = Number(document.getElementById("fcfCapex").value) || 0;
+  const nwc = Number(document.getElementById("fcfNwc").value) || 0;
 
-  const ebit =
-    Number(document.getElementById("fcfEbit").value) || 0;
+  const nopat = ebit * (1 - tax);
+  const fcf = nopat + da - capex - nwc;
 
-  const tax =
-    (Number(document.getElementById("fcfTax").value) || 0) / 100;
+  document.getElementById("fcfResult").style.display = "block";
+  document.getElementById("fcfValue").textContent = money(fcf);
 
-  const da =
-    Number(document.getElementById("fcfDa").value) || 0;
-
-  const capex =
-    Number(document.getElementById("fcfCapex").value) || 0;
-
-  const nwc =
-    Number(document.getElementById("fcfNwc").value) || 0;
-
-  const nopat =
-    ebit * (1 - tax);
-
-  const fcf =
-    nopat + da - capex - nwc;
-
-  document.getElementById("fcfResult")
-    .style.display = "block";
-
-  document.getElementById("fcfValue")
-    .textContent = money(fcf);
-
-  document.getElementById("fcfSub")
-    .innerHTML =
-      "NOPAT: " + money(nopat) +
-      "<br>+ D&A: " + money(da) +
-      "<br>− CapEx: " + money(capex) +
-      "<br>− Increase in working capital: " + money(nwc);
-
+  document.getElementById("fcfSub").innerHTML =
+    "NOPAT: " + money(nopat) +
+    "<br>+ D&A: " + money(da) +
+    "<br>− CapEx: " + money(capex) +
+    "<br>− Increase in working capital: " + money(nwc);
 }
 
-
 function calculateDCF() {
-
-  const start =
-    Number(document.getElementById("dcfFcf").value) || 0;
-
-  const growth =
-    (Number(document.getElementById("dcfGrowth").value) || 0) / 100;
-
-  const rate =
-    (Number(document.getElementById("dcfRate").value) || 0) / 100;
-
+  const start = Number(document.getElementById("dcfFcf").value) || 0;
+  const growth = (Number(document.getElementById("dcfGrowth").value) || 0) / 100;
+  const rate = (Number(document.getElementById("dcfRate").value) || 0) / 100;
   const terminalGrowth =
     (Number(document.getElementById("dcfTerminal").value) || 0) / 100;
 
-  const result =
-    document.getElementById("dcfResult");
-
+  const result = document.getElementById("dcfResult");
   result.style.display = "block";
 
   if (rate <= terminalGrowth) {
-
-    document.getElementById("dcfValue")
-      .textContent = "Check assumptions";
-
-    document.getElementById("dcfSub")
-      .textContent =
-        "Discount rate must be greater than terminal growth.";
-
+    document.getElementById("dcfValue").textContent = "Check assumptions";
+    document.getElementById("dcfSub").textContent =
+      "Discount rate must be greater than terminal growth.";
     return;
-
   }
 
   let fcf = start;
@@ -2605,55 +1929,32 @@ function calculateDCF() {
   let detail = "";
 
   for (let year = 1; year <= 5; year++) {
-
     fcf *= (1 + growth);
 
-    const pv =
-      fcf /
-      Math.pow(1 + rate, year);
-
+    const pv = fcf / Math.pow(1 + rate, year);
     pvForecast += pv;
 
     detail +=
-      "Year " +
-      year +
-      " FCF: " +
-      money(fcf) +
-      " · PV: " +
-      money(pv) +
+      "Year " + year +
+      " FCF: " + money(fcf) +
+      " · PV: " + money(pv) +
       "<br>";
-
   }
 
-  const nextYear =
-    fcf * (1 + terminalGrowth);
+  const nextYear = fcf * (1 + terminalGrowth);
+  const terminal = nextYear / (rate - terminalGrowth);
+  const pvTerminal = terminal / Math.pow(1 + rate, 5);
+  const enterpriseValue = pvForecast + pvTerminal;
 
-  const terminal =
-    nextYear /
-    (rate - terminalGrowth);
+  document.getElementById("dcfValue").textContent =
+    money(enterpriseValue);
 
-  const pvTerminal =
-    terminal /
-    Math.pow(1 + rate, 5);
-
-  const enterpriseValue =
-    pvForecast + pvTerminal;
-
-  document.getElementById("dcfValue")
-    .textContent =
-      money(enterpriseValue);
-
-  document.getElementById("dcfSub")
-    .innerHTML =
-      detail +
-      "<br>Terminal value: " +
-      money(terminal) +
-      "<br>PV terminal value: " +
-      money(pvTerminal) +
-      "<br><br><strong>Estimated enterprise value</strong>";
-
+  document.getElementById("dcfSub").innerHTML =
+    detail +
+    "<br>Terminal value: " + money(terminal) +
+    "<br>PV terminal value: " + money(pvTerminal) +
+    "<br><br><strong>Estimated enterprise value</strong>";
 }
-
 
 renderArticleCards();
 
