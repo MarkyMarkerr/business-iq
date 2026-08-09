@@ -2,11 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  />
 
   <title>Business IQ</title>
 
-  <meta name="theme-color" content="#f4f1ea">
+  <meta name="theme-color" content="#f3f0e8">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="Business IQ">
@@ -23,11 +26,11 @@
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #17221d;
       background:
-        radial-gradient(circle at top left, #f7e7c5 0, transparent 30%),
-        radial-gradient(circle at top right, #dfe9e4 0, transparent 28%),
-        #f4f1ea;
-      color: #1e2723;
+        radial-gradient(circle at top left, #f8e8c7 0, transparent 26%),
+        radial-gradient(circle at top right, #dcebe4 0, transparent 26%),
+        #f3f0e8;
       min-height: 100vh;
     }
 
@@ -36,71 +39,75 @@
       font: inherit;
     }
 
+    button {
+      cursor: pointer;
+    }
+
     .app {
-      max-width: 760px;
+      max-width: 780px;
       margin: 0 auto;
       padding:
-        calc(env(safe-area-inset-top) + 22px)
+        calc(env(safe-area-inset-top) + 18px)
         16px
         calc(env(safe-area-inset-bottom) + 50px);
     }
 
     .hero {
-      padding: 20px 4px 18px;
+      padding: 18px 4px 18px;
     }
 
     .eyebrow {
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: 0.09em;
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: .09em;
       text-transform: uppercase;
-      color: #6d746f;
+      color: #6d756f;
       margin-bottom: 10px;
     }
 
     h1 {
       margin: 0;
-      font-size: clamp(44px, 13vw, 72px);
-      line-height: 0.95;
-      letter-spacing: -0.06em;
-      font-weight: 850;
+      font-size: clamp(46px, 13vw, 74px);
+      line-height: .95;
+      letter-spacing: -.06em;
+      font-weight: 900;
     }
 
     .hero p {
       margin: 17px 0 0;
-      color: #68706b;
-      line-height: 1.5;
+      max-width: 650px;
+      color: #69716c;
       font-size: 17px;
-      max-width: 620px;
+      line-height: 1.5;
     }
 
     .search-wrap {
       position: sticky;
-      top: 8px;
-      z-index: 20;
-      margin: 10px 0 20px;
+      top: 6px;
+      z-index: 30;
+      margin: 10px 0 22px;
     }
 
     .search {
       width: 100%;
-      padding: 15px 18px;
-      border: 1px solid rgba(30,39,35,.09);
+      border: 1px solid rgba(20,40,30,.08);
       background: rgba(255,255,255,.9);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
       border-radius: 18px;
+      padding: 15px 17px;
+      box-shadow: 0 8px 26px rgba(20,35,28,.06);
       outline: none;
-      box-shadow: 0 8px 25px rgba(30,39,35,.06);
       font-size: 16px;
     }
 
     .section-title {
-      font-size: 13px;
-      letter-spacing: .08em;
+      margin: 29px 4px 12px;
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: .09em;
       text-transform: uppercase;
-      color: #7b817d;
-      font-weight: 800;
-      margin: 28px 4px 12px;
+      color: #7b827e;
     }
 
     .grid {
@@ -109,35 +116,37 @@
       gap: 12px;
     }
 
-    .topic {
-      border: 1px solid rgba(30,39,35,.07);
-      border-radius: 22px;
-      padding: 18px;
-      min-height: 145px;
-      background: rgba(255,255,255,.84);
-      box-shadow: 0 10px 30px rgba(30,39,35,.05);
-      cursor: pointer;
-      transition: transform .15s ease;
+    .card {
+      border: 1px solid rgba(20,40,30,.07);
+      border-radius: 23px;
+      padding: 17px;
+      background: rgba(255,255,255,.86);
+      box-shadow: 0 10px 28px rgba(20,35,28,.05);
+      transition: transform .12s ease;
     }
 
-    .topic:active {
-      transform: scale(.98);
+    .card:active {
+      transform: scale(.985);
+    }
+
+    .topic {
+      min-height: 150px;
     }
 
     .topic:nth-child(4n+1) {
-      background: linear-gradient(145deg, #fff9ea, #ffffff);
+      background: linear-gradient(145deg,#fff8e8,#fff);
     }
 
     .topic:nth-child(4n+2) {
-      background: linear-gradient(145deg, #edf7f0, #ffffff);
+      background: linear-gradient(145deg,#edf8f1,#fff);
     }
 
     .topic:nth-child(4n+3) {
-      background: linear-gradient(145deg, #eef3fb, #ffffff);
+      background: linear-gradient(145deg,#eef4fb,#fff);
     }
 
     .topic:nth-child(4n+4) {
-      background: linear-gradient(145deg, #f6effa, #ffffff);
+      background: linear-gradient(145deg,#f8eff9,#fff);
     }
 
     .icon {
@@ -145,17 +154,25 @@
       margin-bottom: 12px;
     }
 
+    .topic h3,
+    .lesson h3 {
+      margin: 0 0 7px;
+      letter-spacing: -.025em;
+    }
+
     .topic h3 {
-      margin: 0 0 6px;
       font-size: 18px;
-      letter-spacing: -.02em;
+    }
+
+    .topic p,
+    .lesson p {
+      margin: 0;
+      color: #727a75;
+      line-height: 1.45;
     }
 
     .topic p {
-      margin: 0;
-      color: #717973;
       font-size: 13px;
-      line-height: 1.45;
     }
 
     .lesson-list {
@@ -164,74 +181,64 @@
     }
 
     .lesson {
-      background: rgba(255,255,255,.88);
-      border: 1px solid rgba(30,39,35,.07);
-      border-radius: 22px;
       padding: 19px;
-      box-shadow: 0 9px 28px rgba(30,39,35,.05);
-      cursor: pointer;
     }
 
     .lesson .tag {
       font-size: 11px;
-      font-weight: 800;
-      letter-spacing: .08em;
+      font-weight: 850;
       text-transform: uppercase;
+      letter-spacing: .08em;
       color: #718078;
       margin-bottom: 7px;
     }
 
     .lesson h3 {
-      margin: 0 0 7px;
       font-size: 20px;
-      letter-spacing: -.025em;
     }
 
     .lesson p {
-      margin: 0;
-      color: #717973;
       font-size: 14px;
-      line-height: 1.45;
     }
 
     .calculator {
-      background: #203028;
+      background: #1f3028;
       color: white;
+      border-radius: 25px;
       padding: 22px;
-      border-radius: 24px;
-      margin-top: 10px;
-      box-shadow: 0 12px 35px rgba(30,39,35,.15);
+      margin-top: 12px;
+      box-shadow: 0 13px 36px rgba(20,35,28,.14);
     }
 
     .calculator h2 {
-      margin: 0 0 5px;
       font-size: 25px;
+      margin: 0 0 6px;
     }
 
-    .calculator p {
+    .calculator > p {
       margin: 0 0 18px;
-      color: #c9d2cd;
+      color: #cad3ce;
       line-height: 1.45;
       font-size: 14px;
     }
 
     .calc-field {
-      margin-bottom: 12px;
+      margin: 11px 0;
     }
 
     .calc-field label {
       display: block;
-      font-size: 12px;
-      font-weight: 750;
-      color: #d1d8d4;
       margin: 0 0 6px 2px;
+      font-size: 12px;
+      color: #d6ddd9;
+      font-weight: 750;
     }
 
     .calc-field input {
       width: 100%;
       border: 0;
-      padding: 13px 14px;
       border-radius: 13px;
+      padding: 13px 14px;
       font-size: 17px;
       outline: none;
     }
@@ -239,33 +246,32 @@
     .calc-button {
       width: 100%;
       border: 0;
-      margin-top: 5px;
-      background: #f1d79a;
-      color: #263229;
+      margin-top: 7px;
       border-radius: 14px;
       padding: 13px;
-      font-weight: 800;
-      cursor: pointer;
+      background: #f1d79a;
+      color: #263229;
+      font-weight: 850;
     }
 
     .result {
       margin-top: 17px;
       padding-top: 17px;
-      border-top: 1px solid rgba(255,255,255,.15);
+      border-top: 1px solid rgba(255,255,255,.14);
       display: none;
     }
 
     .result-value {
-      font-size: 34px;
-      font-weight: 850;
+      font-size: 33px;
+      font-weight: 900;
       letter-spacing: -.04em;
     }
 
     .result-sub {
-      color: #c8d0cc;
+      color: #c9d1cd;
       font-size: 13px;
-      margin-top: 4px;
-      line-height: 1.45;
+      margin-top: 6px;
+      line-height: 1.5;
     }
 
     .overlay {
@@ -273,84 +279,94 @@
       position: fixed;
       inset: 0;
       z-index: 100;
-      background: #f4f1ea;
+      background:
+        radial-gradient(circle at top left, #f7e8c9 0, transparent 24%),
+        #f3f0e8;
       overflow-y: auto;
     }
 
     .article {
-      max-width: 720px;
+      max-width: 740px;
       margin: 0 auto;
       padding:
-        calc(env(safe-area-inset-top) + 16px)
-        20px
-        calc(env(safe-area-inset-bottom) + 50px);
+        calc(env(safe-area-inset-top) + 14px)
+        18px
+        calc(env(safe-area-inset-bottom) + 55px);
     }
 
-    .back {
+    .top-actions {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .pill-button {
       border: 0;
-      background: rgba(255,255,255,.9);
-      padding: 10px 14px;
+      background: rgba(255,255,255,.92);
       border-radius: 999px;
+      padding: 10px 14px;
       font-weight: 750;
-      cursor: pointer;
-      margin-bottom: 26px;
+      box-shadow: 0 5px 18px rgba(20,35,28,.05);
     }
 
     .article-category {
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 850;
       text-transform: uppercase;
-      letter-spacing: .08em;
-      color: #778078;
+      letter-spacing: .09em;
+      color: #768079;
     }
 
     .article h2 {
-      font-size: clamp(36px, 10vw, 54px);
+      margin: 9px 0 16px;
+      font-size: clamp(36px, 10vw, 55px);
       letter-spacing: -.05em;
       line-height: 1;
-      margin: 10px 0 18px;
     }
 
-    .article .intro {
-      font-size: 19px;
-      line-height: 1.55;
-      color: #626b65;
-      margin-bottom: 30px;
+    .intro {
+      color: #626c66;
+      font-size: 18px;
+      line-height: 1.56;
+      margin-bottom: 25px;
     }
 
     .content-card {
-      background: rgba(255,255,255,.88);
-      border: 1px solid rgba(30,39,35,.07);
-      border-radius: 22px;
-      padding: 21px;
-      margin: 14px 0;
+      background: rgba(255,255,255,.9);
+      border: 1px solid rgba(20,40,30,.07);
+      border-radius: 21px;
+      padding: 19px;
+      margin: 13px 0;
     }
 
     .content-card h3 {
+      margin: 0 0 9px;
       font-size: 21px;
-      margin: 0 0 10px;
+      letter-spacing: -.02em;
     }
 
     .content-card p,
     .content-card li {
-      line-height: 1.6;
       color: #4d5751;
       font-size: 16px;
+      line-height: 1.62;
     }
 
-    .content-card ul {
-      padding-left: 20px;
-      margin-bottom: 0;
+    .content-card ul,
+    .content-card ol {
+      padding-left: 22px;
+      margin-bottom: 2px;
     }
 
     .formula {
-      background: #203028;
+      background: #1f3028;
       color: white;
+      border-radius: 18px;
       padding: 18px;
-      border-radius: 17px;
       margin: 14px 0;
-      font-size: 18px;
-      font-weight: 750;
+      font-size: 17px;
+      font-weight: 800;
       line-height: 1.5;
     }
 
@@ -359,11 +375,8 @@
       border-radius: 18px;
       padding: 18px;
       margin: 14px 0;
-      line-height: 1.6;
-    }
-
-    .example strong {
-      color: #4c3c1f;
+      color: #50452c;
+      line-height: 1.62;
     }
 
     .warning {
@@ -371,28 +384,80 @@
       border-radius: 18px;
       padding: 18px;
       margin: 14px 0;
-      line-height: 1.6;
+      color: #60483f;
+      line-height: 1.62;
+    }
+
+    .insight {
+      background: #edf7f1;
+      border-radius: 18px;
+      padding: 18px;
+      margin: 14px 0;
+      color: #334b3e;
+      line-height: 1.62;
+    }
+
+    .related {
+      margin-top: 28px;
+    }
+
+    .related h3 {
+      font-size: 14px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: #79817c;
+      margin-bottom: 11px;
+    }
+
+    .related-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .related button {
+      width: 100%;
+      text-align: left;
+      border: 0;
+      border-radius: 17px;
+      padding: 15px 16px;
+      background: rgba(255,255,255,.92);
+      color: #203028;
+      font-weight: 800;
+      box-shadow: 0 7px 20px rgba(20,35,28,.04);
+    }
+
+    .small {
+      font-size: 13px;
+      color: #8d948f;
+      margin-top: 3px;
+      font-weight: 500;
+    }
+
+    .breadcrumb {
+      color: #7f8782;
+      font-size: 12px;
+      margin-bottom: 8px;
     }
 
     .footer {
       text-align: center;
       font-size: 12px;
-      color: #989e9a;
-      padding: 34px 10px 0;
+      color: #979e99;
+      padding: 35px 10px 0;
     }
 
     .hidden {
       display: none !important;
     }
 
-    @media (max-width: 440px) {
-      .grid {
-        grid-template-columns: 1fr 1fr;
+    @media(max-width:440px) {
+      .topic {
+        min-height: 145px;
+        padding: 15px;
       }
 
-      .topic {
-        padding: 16px;
-        min-height: 140px;
+      .topic h3 {
+        font-size: 17px;
       }
     }
   </style>
@@ -400,15 +465,15 @@
 
 <body>
 
-<div class="app" id="home">
+<div class="app">
 
   <header class="hero">
-    <div class="eyebrow">Business buying · valuation · financial analysis</div>
+    <div class="eyebrow">Buying · Selling · Valuation · Financial Analysis</div>
     <h1>Business IQ</h1>
 
     <p>
-      Learn how buyers evaluate businesses, understand financial statements,
-      estimate value and identify what makes a company attractive — or risky.
+      Learn how businesses are valued, how buyers think, how cash flow is created,
+      and how financial statements connect to the price someone might pay.
     </p>
   </header>
 
@@ -417,335 +482,503 @@
       class="search"
       id="search"
       type="search"
-      placeholder="Search valuation, EBITDA, cash flow..."
+      placeholder="Search DCF, free cash flow, EBITDA, working capital..."
       oninput="filterLessons()"
     />
   </div>
 
-  <div class="section-title">Explore</div>
+  <div class="section-title">Start here</div>
 
   <div class="grid">
 
-    <div class="topic" onclick="openLesson('buyer')">
+    <div class="card topic" onclick="openLesson('valuationOverview')">
+      <div class="icon">📊</div>
+      <h3>Business Valuation</h3>
+      <p>How multiples, cash flow and risk determine value.</p>
+    </div>
+
+    <div class="card topic" onclick="openLesson('buyerMindset')">
       <div class="icon">🔎</div>
       <h3>Buying a Business</h3>
-      <p>What buyers investigate before making an offer.</p>
+      <p>What a serious buyer actually investigates.</p>
     </div>
 
-    <div class="topic" onclick="openLesson('valuation')">
-      <div class="icon">📊</div>
-      <h3>Valuation</h3>
-      <p>EBITDA, SDE, DCF, assets and valuation multiples.</p>
-    </div>
-
-    <div class="topic" onclick="openLesson('financials')">
+    <div class="card topic" onclick="openLesson('financialStatements')">
       <div class="icon">📑</div>
       <h3>Financial Statements</h3>
-      <p>Understand income statements, balance sheets and cash flow.</p>
+      <p>Income statement, balance sheet and cash flow.</p>
     </div>
 
-    <div class="topic" onclick="openLesson('quality')">
+    <div class="card topic" onclick="openLesson('fcf')">
+      <div class="icon">💵</div>
+      <h3>Free Cash Flow</h3>
+      <p>The cash a business can actually generate.</p>
+    </div>
+
+    <div class="card topic" onclick="openLesson('dcf')">
+      <div class="icon">⏳</div>
+      <h3>DCF Valuation</h3>
+      <p>Value future cash flows in today's dollars.</p>
+    </div>
+
+    <div class="card topic" onclick="openLesson('quality')">
       <div class="icon">⭐</div>
       <h3>Business Quality</h3>
-      <p>What makes one business worth more than another.</p>
+      <p>Why two equal-profit companies can have different values.</p>
     </div>
 
-    <div class="topic" onclick="openLesson('normalizing')">
+    <div class="card topic" onclick="openLesson('normalization')">
       <div class="icon">🧮</div>
       <h3>Normalize Earnings</h3>
-      <p>Adjust reported profit to estimate true earning power.</p>
+      <p>Find the true sustainable earning power.</p>
     </div>
 
-    <div class="topic" onclick="openLesson('selling')">
-      <div class="icon">🤝</div>
-      <h3>Selling a Business</h3>
-      <p>How owners prepare a company for a stronger sale.</p>
-    </div>
-
-    <div class="topic" onclick="openLesson('due')">
+    <div class="card topic" onclick="openLesson('dueDiligence')">
       <div class="icon">✅</div>
       <h3>Due Diligence</h3>
-      <p>Financial, legal, customer and operational review.</p>
-    </div>
-
-    <div class="topic" onclick="openLesson('redflags')">
-      <div class="icon">🚩</div>
-      <h3>Red Flags</h3>
-      <p>Warning signs that can destroy value after closing.</p>
+      <p>Test whether the business is what the seller claims.</p>
     </div>
 
   </div>
 
-  <div class="section-title">Quick valuation</div>
+  <div class="section-title">Valuation calculators</div>
 
   <div class="calculator">
 
-    <h2>EBITDA Multiple Calculator</h2>
-
-    <p>
-      A simple starting point for estimating enterprise value.
-    </p>
+    <h2>EBITDA Multiple</h2>
+    <p>Estimate enterprise value and then convert it to equity value.</p>
 
     <div class="calc-field">
-      <label>Annual EBITDA</label>
-      <input type="number" id="ebitda" placeholder="Example: 1200000">
+      <label>Normalized EBITDA</label>
+      <input type="number" id="ebitda" placeholder="1200000">
     </div>
 
     <div class="calc-field">
-      <label>Valuation multiple</label>
-      <input type="number" id="multiple" step="0.1" placeholder="Example: 5">
+      <label>Multiple</label>
+      <input type="number" step="0.1" id="multiple" placeholder="5">
     </div>
 
     <div class="calc-field">
       <label>Debt</label>
-      <input type="number" id="debt" placeholder="Example: 500000">
+      <input type="number" id="debt" placeholder="500000">
     </div>
 
     <div class="calc-field">
       <label>Excess cash</label>
-      <input type="number" id="cash" placeholder="Example: 200000">
+      <input type="number" id="cash" placeholder="200000">
     </div>
 
-    <button class="calc-button" onclick="calculateValue()">
-      Calculate value
+    <button class="calc-button" onclick="calculateMultiple()">
+      Calculate
     </button>
 
-    <div class="result" id="result">
-      <div class="result-value" id="resultValue"></div>
-      <div class="result-sub" id="resultSub"></div>
+    <div class="result" id="multipleResult">
+      <div class="result-value" id="multipleValue"></div>
+      <div class="result-sub" id="multipleSub"></div>
     </div>
 
   </div>
 
-  <div class="section-title">Core lessons</div>
+  <div class="calculator">
+
+    <h2>Free Cash Flow</h2>
+    <p>Approximate unlevered free cash flow from operating results.</p>
+
+    <div class="calc-field">
+      <label>EBIT</label>
+      <input type="number" id="fcfEbit" placeholder="1000000">
+    </div>
+
+    <div class="calc-field">
+      <label>Tax rate %</label>
+      <input type="number" id="fcfTax" placeholder="25">
+    </div>
+
+    <div class="calc-field">
+      <label>Depreciation & amortization</label>
+      <input type="number" id="fcfDa" placeholder="150000">
+    </div>
+
+    <div class="calc-field">
+      <label>Capital expenditures</label>
+      <input type="number" id="fcfCapex" placeholder="200000">
+    </div>
+
+    <div class="calc-field">
+      <label>Increase in net working capital</label>
+      <input type="number" id="fcfNwc" placeholder="50000">
+    </div>
+
+    <button class="calc-button" onclick="calculateFCF()">
+      Calculate FCF
+    </button>
+
+    <div class="result" id="fcfResult">
+      <div class="result-value" id="fcfValue"></div>
+      <div class="result-sub" id="fcfSub"></div>
+    </div>
+
+  </div>
+
+  <div class="calculator">
+
+    <h2>Simple DCF</h2>
+    <p>
+      Forecast five years of growing free cash flow and estimate a terminal value.
+    </p>
+
+    <div class="calc-field">
+      <label>Current annual free cash flow</label>
+      <input type="number" id="dcfFcf" placeholder="800000">
+    </div>
+
+    <div class="calc-field">
+      <label>Annual FCF growth %</label>
+      <input type="number" step="0.1" id="dcfGrowth" placeholder="5">
+    </div>
+
+    <div class="calc-field">
+      <label>Discount rate / WACC %</label>
+      <input type="number" step="0.1" id="dcfRate" placeholder="12">
+    </div>
+
+    <div class="calc-field">
+      <label>Terminal growth %</label>
+      <input type="number" step="0.1" id="dcfTerminal" placeholder="2.5">
+    </div>
+
+    <button class="calc-button" onclick="calculateDCF()">
+      Estimate enterprise value
+    </button>
+
+    <div class="result" id="dcfResult">
+      <div class="result-value" id="dcfValue"></div>
+      <div class="result-sub" id="dcfSub"></div>
+    </div>
+
+  </div>
+
+  <div class="section-title">Deep learning library</div>
 
   <div class="lesson-list" id="lessonList">
 
-    <div class="lesson searchable" data-search="ebitda valuation multiple enterprise value" onclick="openLesson('valuation')">
-      <div class="tag">Valuation</div>
-      <h3>How EBITDA multiples actually work</h3>
-      <p>Understand the difference between EBITDA, enterprise value and equity value.</p>
+    <div class="card lesson searchable"
+      data-search="free cash flow fcf cash earnings valuation dcf capex working capital"
+      onclick="openLesson('fcf')">
+      <div class="tag">Cash Flow</div>
+      <h3>Free cash flow: what the owner really gets</h3>
+      <p>Profit is not the same as cash available to investors.</p>
     </div>
 
-    <div class="lesson searchable" data-search="income statement revenue gross profit expenses earnings" onclick="openLesson('income')">
+    <div class="card lesson searchable"
+      data-search="discounted cash flow dcf valuation present value future cash terminal value wacc"
+      onclick="openLesson('dcf')">
+      <div class="tag">Valuation</div>
+      <h3>Discounted cash flow from beginning to end</h3>
+      <p>Turn future business cash flows into a present-day value.</p>
+    </div>
+
+    <div class="card lesson searchable"
+      data-search="wacc discount rate risk cost of capital equity debt"
+      onclick="openLesson('wacc')">
+      <div class="tag">DCF</div>
+      <h3>WACC and the discount rate</h3>
+      <p>Why risky cash flows are worth less today.</p>
+    </div>
+
+    <div class="card lesson searchable"
+      data-search="terminal value perpetuity growth exit multiple dcf"
+      onclick="openLesson('terminalValue')">
+      <div class="tag">DCF</div>
+      <h3>Terminal value</h3>
+      <p>Why most of a DCF's value can come from years far in the future.</p>
+    </div>
+
+    <div class="card lesson searchable"
+      data-search="enterprise value equity value cash debt acquisition price"
+      onclick="openLesson('evEquity')">
+      <div class="tag">Valuation</div>
+      <h3>Enterprise value vs equity value</h3>
+      <p>The business price and the shareholder price are not the same thing.</p>
+    </div>
+
+    <div class="card lesson searchable"
+      data-search="ebitda multiple valuation earnings interest taxes depreciation amortization"
+      onclick="openLesson('ebitda')">
+      <div class="tag">Valuation</div>
+      <h3>EBITDA and EBITDA multiples</h3>
+      <p>Why buyers use EBITDA and where it can mislead you.</p>
+    </div>
+
+    <div class="card lesson searchable"
+      data-search="ebit nopat taxes operating profit free cash flow"
+      onclick="openLesson('nopat')">
+      <div class="tag">Cash Flow</div>
+      <h3>NOPAT</h3>
+      <p>Operating profit after tax before financing decisions.</p>
+    </div>
+
+    <div class="card lesson searchable"
+      data-search="capital expenditures capex maintenance growth depreciation free cash flow"
+      onclick="openLesson('capex')">
+      <div class="tag">Cash Flow</div>
+      <h3>Capital expenditures</h3>
+      <p>Why replacing equipment can make EBITDA overstate economic earnings.</p>
+    </div>
+
+    <div class="card lesson searchable"
+      data-search="working capital receivable inventory payable cash flow acquisition"
+      onclick="openLesson('workingCapital')">
+      <div class="tag">Cash Flow</div>
+      <h3>Working capital</h3>
+      <p>How growth can consume cash even while profit rises.</p>
+    </div>
+
+    <div class="card lesson searchable"
+      data-search="income statement revenue gross margin operating expenses net income"
+      onclick="openLesson('incomeStatement')">
       <div class="tag">Financial Statements</div>
       <h3>How to read an income statement</h3>
-      <p>Start at revenue and work down to the earnings generated by the business.</p>
+      <p>Revenue to profit, line by line.</p>
     </div>
 
-    <div class="lesson searchable" data-search="balance sheet assets liabilities equity retained earnings debt cash" onclick="openLesson('balance')">
+    <div class="card lesson searchable"
+      data-search="balance sheet assets liabilities equity debt cash receivables inventory"
+      onclick="openLesson('balanceSheet')">
       <div class="tag">Financial Statements</div>
       <h3>How to read a balance sheet</h3>
-      <p>See what the business owns, what it owes and what belongs to shareholders.</p>
+      <p>Understand what the company owns and owes.</p>
     </div>
 
-    <div class="lesson searchable" data-search="cash flow statement operating investing financing capex" onclick="openLesson('cashflow')">
+    <div class="card lesson searchable"
+      data-search="cash flow statement operating investing financing"
+      onclick="openLesson('cashFlowStatement')">
       <div class="tag">Financial Statements</div>
-      <h3>Profit is not cash flow</h3>
-      <p>Why a profitable company can still run out of cash.</p>
+      <h3>How to read a cash flow statement</h3>
+      <p>Follow the actual movement of cash.</p>
     </div>
 
-    <div class="lesson searchable" data-search="customer concentration recurring revenue owner dependence moat business quality" onclick="openLesson('quality')">
+    <div class="card lesson searchable"
+      data-search="quality of earnings normalization addbacks owner compensation one time"
+      onclick="openLesson('normalization')">
+      <div class="tag">Due Diligence</div>
+      <h3>Normalized earnings and add-backs</h3>
+      <p>How buyers test whether reported earnings are sustainable.</p>
+    </div>
+
+    <div class="card lesson searchable"
+      data-search="customer concentration recurring revenue owner dependence management moat"
+      onclick="openLesson('quality')">
+      <div class="tag">Business Quality</div>
+      <h3>Why some businesses deserve higher multiples</h3>
+      <p>Durability and predictability matter as much as current profit.</p>
+    </div>
+
+    <div class="card lesson searchable"
+      data-search="roic return invested capital valuation growth returns"
+      onclick="openLesson('roic')">
+      <div class="tag">Returns</div>
+      <h3>Return on invested capital</h3>
+      <p>How efficiently the business turns capital into operating profit.</p>
+    </div>
+
+    <div class="card lesson searchable"
+      data-search="due diligence acquisition buyer legal financial operational commercial"
+      onclick="openLesson('dueDiligence')">
       <div class="tag">Buying</div>
-      <h3>Why buyers pay higher multiples</h3>
-      <p>Recurring revenue, diversification and transferable operations can increase value.</p>
+      <h3>Due diligence</h3>
+      <p>What a buyer should investigate before closing.</p>
     </div>
 
-    <div class="lesson searchable" data-search="working capital accounts receivable inventory accounts payable" onclick="openLesson('workingcapital')">
-      <div class="tag">Deal Mechanics</div>
-      <h3>Working capital in a business purchase</h3>
-      <p>A profitable company still needs enough operating assets to function after closing.</p>
-    </div>
-
-    <div class="lesson searchable" data-search="sde seller discretionary earnings owner salary small business" onclick="openLesson('sde')">
+    <div class="card lesson searchable"
+      data-search="sde seller discretionary earnings small business owner salary"
+      onclick="openLesson('sde')">
       <div class="tag">Valuation</div>
       <h3>SDE vs EBITDA</h3>
-      <p>Why smaller owner-operated businesses are often valued differently.</p>
-    </div>
-
-    <div class="lesson searchable" data-search="return on equity roe return invested capital roic" onclick="openLesson('returns')">
-      <div class="tag">Analysis</div>
-      <h3>Return on equity vs return on business value</h3>
-      <p>Different denominators answer very different questions.</p>
+      <p>Why very small businesses are often valued differently.</p>
     </div>
 
   </div>
 
   <div class="footer">
-    Educational information only — not accounting, tax, legal or investment advice.
+    Educational information only. Valuation outcomes depend heavily on facts,
+    assumptions, taxes, deal terms and professional judgment.
   </div>
 
 </div>
 
 <div class="overlay" id="overlay">
   <article class="article">
-    <button class="back" onclick="closeLesson()">← Back</button>
 
+    <div class="top-actions">
+      <button class="pill-button" onclick="goBack()">← Back</button>
+      <button class="pill-button" onclick="closeLesson()">Home</button>
+    </div>
+
+    <div class="breadcrumb" id="breadcrumb"></div>
     <div class="article-category" id="articleCategory"></div>
     <h2 id="articleTitle"></h2>
     <div class="intro" id="articleIntro"></div>
-
     <div id="articleBody"></div>
+
+    <div class="related" id="related"></div>
+
   </article>
 </div>
 
 <script>
 
+const historyStack = [];
+
 const lessons = {
 
-buyer: {
-  category: "Buying a Business",
-  title: "How a buyer looks at a business",
-  intro: "A buyer is not simply buying last year's profit. They are buying the probability that future cash flow will continue after the current owner leaves.",
+valuationOverview: {
+  category: "Business Valuation",
+  breadcrumb: "Valuation",
+  title: "What is a business actually worth?",
+  intro: "A business is generally worth the present value of the economic benefits a buyer expects to receive, adjusted for risk.",
   body: `
     <div class="content-card">
-      <h3>Start with earnings</h3>
+      <h3>Three broad valuation approaches</h3>
+      <p><strong>Income approach:</strong> value the future cash flows the business can generate.</p>
+      <p><strong>Market approach:</strong> compare the business with prices paid for similar companies.</p>
+      <p><strong>Asset approach:</strong> estimate the value of assets less liabilities.</p>
+    </div>
+
+    <div class="content-card">
+      <h3>Why cash flow matters most</h3>
       <p>
-        Buyers usually begin by determining the company's sustainable earning power.
-        That may mean EBITDA for a larger company or Seller's Discretionary Earnings
-        for a smaller owner-operated business.
+        Accounting earnings are useful, but buyers ultimately care about how much
+        cash the business can produce after taxes, working-capital needs and capital investment.
+      </p>
+    </div>
+
+    <div class="insight">
+      A useful mental model is:
+      <strong>value increases when expected future cash flow rises or risk falls.</strong>
+    </div>
+
+    <div class="content-card">
+      <h3>Why EBITDA multiples are popular</h3>
+      <p>
+        Multiples are faster and easier than building a full DCF.
+        They are often used as a market shorthand for the same underlying question:
+        how much should a buyer pay for the business's earnings?
+      </p>
+    </div>
+  `,
+  related: [
+    ["ebitda", "EBITDA multiples"],
+    ["dcf", "Discounted cash flow"],
+    ["fcf", "Free cash flow"],
+    ["evEquity", "Enterprise vs equity value"]
+  ]
+},
+
+buyerMindset: {
+  category: "Buying a Business",
+  breadcrumb: "Buying",
+  title: "How a buyer thinks",
+  intro: "A buyer is purchasing future economic performance, not merely a set of historical financial statements.",
+  body: `
+    <div class="content-card">
+      <h3>The core question</h3>
+      <p>
+        How much cash can this business reliably generate after I own it?
       </p>
     </div>
 
     <div class="content-card">
-      <h3>Then judge the quality of those earnings</h3>
+      <h3>Buyers typically assess</h3>
       <ul>
-        <li>Are revenues recurring or must they be won again every month?</li>
-        <li>Are margins stable?</li>
-        <li>Is the company growing?</li>
-        <li>Does one customer represent a large percentage of sales?</li>
-        <li>Does the owner personally control every important relationship?</li>
-        <li>Will employees, customers and suppliers remain after the sale?</li>
+        <li>Revenue stability and growth</li>
+        <li>Customer concentration</li>
+        <li>Gross and operating margins</li>
+        <li>Recurring revenue</li>
+        <li>Capital expenditure requirements</li>
+        <li>Working-capital requirements</li>
+        <li>Management quality</li>
+        <li>Owner dependence</li>
+        <li>Competitive position</li>
+        <li>Legal and regulatory risk</li>
       </ul>
     </div>
 
-    <div class="content-card">
-      <h3>The question behind almost everything</h3>
-      <p>
-        Buyers repeatedly ask: <strong>How likely is this cash flow to continue after I own the company?</strong>
-      </p>
+    <div class="example">
+      Two businesses each report $1 million of EBITDA.
+      One requires $500,000 of annual equipment replacement.
+      The other requires only $50,000.
+      Their economic value may be very different.
     </div>
-
-    <div class="warning">
-      A company earning $1 million with one customer generating 70% of revenue
-      may be worth substantially less than another company earning the same $1 million
-      from hundreds of diversified customers.
-    </div>
-  `
+  `,
+  related: [
+    ["quality", "Business quality"],
+    ["dueDiligence", "Due diligence"],
+    ["fcf", "Free cash flow"],
+    ["normalization", "Normalize earnings"]
+  ]
 },
 
-valuation: {
-  category: "Valuation",
-  title: "Understanding EBITDA multiples",
-  intro: "One of the most common shorthand valuation methods is to multiply normalized EBITDA by a market multiple.",
-  body: `
-    <div class="formula">
-      Enterprise Value = Normalized EBITDA × Multiple
-    </div>
-
-    <div class="example">
-      <strong>Example</strong><br><br>
-      EBITDA: $1,200,000<br>
-      Multiple: 5.0×<br><br>
-      Enterprise Value = $6,000,000
-    </div>
-
-    <div class="content-card">
-      <h3>Enterprise value is not necessarily what the seller receives</h3>
-      <p>
-        Enterprise value represents the value of the operating business before
-        considering how it is financed.
-      </p>
-    </div>
-
-    <div class="formula">
-      Equity Value ≈ Enterprise Value − Debt + Excess Cash
-    </div>
-
-    <div class="example">
-      Enterprise Value: $6,000,000<br>
-      Debt: $500,000<br>
-      Excess Cash: $200,000<br><br>
-      <strong>Estimated Equity Value = $5,700,000</strong>
-    </div>
-
-    <div class="content-card">
-      <h3>Where does the multiple come from?</h3>
-      <p>
-        Multiples generally reflect risk, growth and market demand.
-        Businesses with stronger growth, recurring revenue, low customer concentration
-        and strong management can often command higher multiples.
-      </p>
-    </div>
-  `
-},
-
-financials: {
+financialStatements: {
   category: "Financial Statements",
-  title: "The three financial statements",
-  intro: "The income statement, balance sheet and cash-flow statement describe different parts of the same business.",
+  breadcrumb: "Financial statements",
+  title: "How the three statements fit together",
+  intro: "Each financial statement answers a different question, and good business analysis requires all three.",
   body: `
     <div class="content-card">
-      <h3>1. Income Statement</h3>
-      <p>
-        Shows financial performance over a period of time:
-        revenue, expenses and profit.
-      </p>
+      <h3>Income statement</h3>
+      <p>How much revenue, expense and accounting profit occurred during the period?</p>
     </div>
 
     <div class="content-card">
-      <h3>2. Balance Sheet</h3>
-      <p>
-        Shows the financial position at one point in time:
-        assets, liabilities and shareholders' equity.
-      </p>
+      <h3>Balance sheet</h3>
+      <p>What does the business own, what does it owe, and what is left for shareholders at a point in time?</p>
     </div>
 
     <div class="content-card">
-      <h3>3. Cash Flow Statement</h3>
-      <p>
-        Explains why cash increased or decreased through operating,
-        investing and financing activities.
-      </p>
+      <h3>Cash flow statement</h3>
+      <p>Why did actual cash increase or decrease?</p>
     </div>
 
     <div class="formula">
       Assets = Liabilities + Shareholders' Equity
     </div>
 
-    <div class="content-card">
-      <h3>Think of them together</h3>
-      <p>
-        The income statement tells you whether the company earned money.
-        The balance sheet tells you what it owns and owes.
-        The cash-flow statement tells you where the actual cash went.
-      </p>
+    <div class="insight">
+      Net income flows into retained earnings, while many balance-sheet changes
+      explain why cash flow differs from net income.
     </div>
-  `
+  `,
+  related: [
+    ["incomeStatement", "Income statement"],
+    ["balanceSheet", "Balance sheet"],
+    ["cashFlowStatement", "Cash flow statement"],
+    ["fcf", "Free cash flow"]
+  ]
 },
 
-income: {
+incomeStatement: {
   category: "Financial Statements",
-  title: "How to read an income statement",
-  intro: "Read an income statement from the top down. Each level tells you something different about the economics of the business.",
+  breadcrumb: "Statements → Income statement",
+  title: "Reading an income statement",
+  intro: "Read it from the top down and ask what each layer tells you about the economics of the company.",
   body: `
-    <div class="content-card">
-      <h3>Revenue</h3>
-      <p>
-        The value of goods or services sold during the period.
-        Start by studying both the level of revenue and its growth rate.
-      </p>
-    </div>
-
     <div class="formula">
       Revenue − Cost of Goods Sold = Gross Profit
     </div>
 
     <div class="content-card">
-      <h3>Gross margin</h3>
+      <h3>Revenue</h3>
       <p>
-        Gross profit shows how much remains after the direct cost of delivering
-        the product or service.
+        Study not just the amount but the source, growth, recurrence and concentration.
+      </p>
+    </div>
+
+    <div class="content-card">
+      <h3>Gross profit</h3>
+      <p>
+        Gross profit shows how much remains after direct costs.
+        Gross margin can reveal pricing power and cost pressure.
       </p>
     </div>
 
@@ -756,25 +989,35 @@ income: {
     <div class="content-card">
       <h3>Operating expenses</h3>
       <p>
-        These may include wages, rent, marketing, insurance, professional fees
-        and administrative costs.
+        Salaries, rent, insurance, marketing and administrative expenses usually appear here.
       </p>
     </div>
 
     <div class="content-card">
-      <h3>Watch the trend</h3>
+      <h3>EBIT and net income</h3>
       <p>
-        A single year's numbers can mislead you. Buyers often examine several years
-        to identify whether revenue, margins and earnings are improving or deteriorating.
+        EBIT measures operating profit before interest and taxes.
+        Net income includes financing costs and taxes.
       </p>
     </div>
-  `
+
+    <div class="warning">
+      Revenue growth is not automatically good if margins are collapsing or if growth requires excessive working capital.
+    </div>
+  `,
+  related: [
+    ["ebitda", "EBITDA"],
+    ["nopat", "NOPAT"],
+    ["cashFlowStatement", "Cash flow statement"],
+    ["fcf", "Free cash flow"]
+  ]
 },
 
-balance: {
+balanceSheet: {
   category: "Financial Statements",
-  title: "How to read a balance sheet",
-  intro: "A balance sheet is a snapshot of what a business owns and owes at a particular date.",
+  breadcrumb: "Statements → Balance sheet",
+  title: "Reading a balance sheet",
+  intro: "The balance sheet shows the financial position of the company at a specific point in time.",
   body: `
     <div class="formula">
       Assets = Liabilities + Equity
@@ -788,7 +1031,7 @@ balance: {
         <li>Inventory</li>
         <li>Equipment</li>
         <li>Property</li>
-        <li>Other long-term assets</li>
+        <li>Intangible assets</li>
       </ul>
     </div>
 
@@ -797,175 +1040,608 @@ balance: {
       <ul>
         <li>Accounts payable</li>
         <li>Accrued expenses</li>
-        <li>Loans</li>
+        <li>Bank debt</li>
         <li>Taxes payable</li>
-        <li>Other obligations</li>
+        <li>Long-term obligations</li>
       </ul>
     </div>
 
     <div class="content-card">
-      <h3>Shareholders' equity</h3>
+      <h3>Equity</h3>
       <p>
-        Equity is the residual accounting interest after liabilities are deducted
-        from assets. It is not the same thing as the market value of the business.
-      </p>
-    </div>
-
-    <div class="warning">
-      A company with $1.3 million of accounting shareholders' equity may be worth
-      substantially more — or less — than $1.3 million as an operating business.
-    </div>
-  `
-},
-
-cashflow: {
-  category: "Financial Statements",
-  title: "Profit is not cash flow",
-  intro: "Accounting profit and cash generation can differ dramatically.",
-  body: `
-    <div class="content-card">
-      <h3>Operating cash flow</h3>
-      <p>
-        Shows cash generated or consumed by normal business operations.
-      </p>
-    </div>
-
-    <div class="content-card">
-      <h3>Investing cash flow</h3>
-      <p>
-        Often includes purchases and sales of equipment, property and other long-term assets.
-      </p>
-    </div>
-
-    <div class="content-card">
-      <h3>Financing cash flow</h3>
-      <p>
-        Includes borrowing, repayment of debt, issuance of shares and distributions.
+        Accounting equity is the residual book value after liabilities.
+        It is not the same thing as market value.
       </p>
     </div>
 
     <div class="example">
-      A company may report $500,000 of profit but spend $400,000 replacing equipment
-      and another $200,000 building inventory. Accounting profit may look healthy
-      while cash actually falls.
+      A business may have $1.3 million of book equity but sell for $6 million
+      because buyers are purchasing future earnings, not just recorded net assets.
     </div>
-
-    <div class="content-card">
-      <h3>What buyers care about</h3>
-      <p>
-        Buyers ultimately care about cash that can be taken out of the business
-        after funding the investments required to maintain it.
-      </p>
-    </div>
-  `
+  `,
+  related: [
+    ["workingCapital", "Working capital"],
+    ["evEquity", "Enterprise vs equity value"],
+    ["cashFlowStatement", "Cash flow statement"]
+  ]
 },
 
-quality: {
-  category: "Business Quality",
-  title: "Why buyers pay higher multiples",
-  intro: "Two companies can produce identical EBITDA and still have very different values.",
+cashFlowStatement: {
+  category: "Financial Statements",
+  breadcrumb: "Statements → Cash flow",
+  title: "Reading a cash flow statement",
+  intro: "The cash flow statement reconciles accounting performance with actual changes in cash.",
   body: `
     <div class="content-card">
-      <h3>Characteristics buyers tend to like</h3>
-      <ul>
-        <li>Recurring or contracted revenue</li>
-        <li>Diversified customer base</li>
-        <li>Stable or expanding margins</li>
-        <li>Consistent historical growth</li>
-        <li>Low capital expenditure requirements</li>
-        <li>Strong management beneath the owner</li>
-        <li>Transferable customer relationships</li>
-        <li>Documented systems and processes</li>
-        <li>Low employee turnover</li>
-        <li>Defensible competitive advantages</li>
-      </ul>
+      <h3>Operating activities</h3>
+      <p>
+        Cash produced or consumed by normal business operations.
+      </p>
     </div>
 
     <div class="content-card">
-      <h3>Lower risk often means a higher multiple</h3>
+      <h3>Investing activities</h3>
       <p>
-        A valuation multiple is partly a shorthand expression of risk.
-        If future cash flows appear predictable, a buyer may be willing to pay
-        more dollars today for each dollar of current earnings.
+        Purchases or sales of equipment, property and other long-term investments.
       </p>
     </div>
-  `
+
+    <div class="content-card">
+      <h3>Financing activities</h3>
+      <p>
+        Borrowing, debt repayment, dividends and equity transactions.
+      </p>
+    </div>
+
+    <div class="example">
+      Net income may be $700,000 while cash rises only $200,000 because inventory
+      increased and equipment purchases consumed cash.
+    </div>
+  `,
+  related: [
+    ["fcf", "Free cash flow"],
+    ["workingCapital", "Working capital"],
+    ["capex", "Capital expenditures"]
+  ]
 },
 
-normalizing: {
+ebitda: {
   category: "Valuation",
-  title: "Normalizing earnings",
-  intro: "Private-company financial statements often contain expenses or income that do not represent the economics a new owner will experience.",
+  breadcrumb: "Valuation → EBITDA",
+  title: "EBITDA: useful, but incomplete",
+  intro: "EBITDA approximates operating earnings before financing, taxes and non-cash depreciation and amortization.",
+  body: `
+    <div class="formula">
+      EBITDA = EBIT + Depreciation + Amortization
+    </div>
+
+    <div class="content-card">
+      <h3>Why buyers use it</h3>
+      <p>
+        It allows easier comparison between companies with different debt,
+        tax situations and accounting depreciation.
+      </p>
+    </div>
+
+    <div class="formula">
+      Enterprise Value ≈ Normalized EBITDA × Multiple
+    </div>
+
+    <div class="content-card">
+      <h3>Its biggest weakness</h3>
+      <p>
+        EBITDA ignores capital expenditures and working-capital requirements.
+        Those can consume real cash.
+      </p>
+    </div>
+
+    <div class="example">
+      EBITDA = $1,000,000<br>
+      Maintenance CapEx = $400,000<br><br>
+      Another company also has $1,000,000 EBITDA but only $50,000 of maintenance CapEx.
+      The second company may deserve a higher valuation.
+    </div>
+
+    <div class="insight">
+      EBITDA is often a useful starting point. Free cash flow is closer to the economic benefit an owner can ultimately extract.
+    </div>
+  `,
+  related: [
+    ["fcf", "Free cash flow"],
+    ["capex", "CapEx"],
+    ["normalization", "Normalized EBITDA"],
+    ["evEquity", "Enterprise value"]
+  ]
+},
+
+fcf: {
+  category: "Free Cash Flow",
+  breadcrumb: "Cash flow → Free cash flow",
+  title: "Free cash flow",
+  intro: "Free cash flow attempts to measure the cash generated by the operations of a business after paying the investments required to support those operations.",
+  body: `
+    <div class="formula">
+      Unlevered FCF =
+      NOPAT
+      + Depreciation & Amortization
+      − Capital Expenditures
+      − Increase in Net Working Capital
+    </div>
+
+    <div class="content-card">
+      <h3>Why this matters for valuation</h3>
+      <p>
+        A business is valuable because it can generate cash for capital providers.
+        A DCF valuation forecasts these future cash flows and discounts them back to today.
+      </p>
+    </div>
+
+    <div class="content-card">
+      <h3>Step 1: NOPAT</h3>
+      <p>
+        Start with operating profit after tax, ignoring the company's financing structure.
+      </p>
+    </div>
+
+    <div class="content-card">
+      <h3>Step 2: add back D&A</h3>
+      <p>
+        Depreciation and amortization reduce accounting profit but do not directly use cash in the current period.
+      </p>
+    </div>
+
+    <div class="content-card">
+      <h3>Step 3: subtract CapEx</h3>
+      <p>
+        Actual purchases of equipment and other long-term assets consume cash.
+      </p>
+    </div>
+
+    <div class="content-card">
+      <h3>Step 4: subtract increases in working capital</h3>
+      <p>
+        More receivables or inventory can tie up cash even when the company reports higher profit.
+      </p>
+    </div>
+
+    <div class="example">
+      EBIT: $1,000,000<br>
+      Tax rate: 25%<br>
+      NOPAT: $750,000<br>
+      + D&A: $150,000<br>
+      − CapEx: $200,000<br>
+      − Increase in working capital: $50,000<br><br>
+      <strong>FCF = $650,000</strong>
+    </div>
+
+    <div class="insight">
+      A company reporting $1 million of EBITDA might generate far less than $1 million of free cash flow.
+    </div>
+  `,
+  related: [
+    ["nopat", "NOPAT"],
+    ["capex", "Capital expenditures"],
+    ["workingCapital", "Working capital"],
+    ["dcf", "DCF valuation"]
+  ]
+},
+
+nopat: {
+  category: "Free Cash Flow",
+  breadcrumb: "FCF → NOPAT",
+  title: "NOPAT",
+  intro: "NOPAT means Net Operating Profit After Tax. It measures after-tax operating earnings without regard to how the company is financed.",
+  body: `
+    <div class="formula">
+      NOPAT = EBIT × (1 − Tax Rate)
+    </div>
+
+    <div class="example">
+      EBIT = $1,000,000<br>
+      Tax rate = 25%<br><br>
+      NOPAT = $750,000
+    </div>
+
+    <div class="content-card">
+      <h3>Why use EBIT instead of net income?</h3>
+      <p>
+        Net income includes interest expense.
+        If you're valuing the entire enterprise, you generally want operating cash flow before financing choices.
+      </p>
+    </div>
+  `,
+  related: [
+    ["fcf", "Free cash flow"],
+    ["ebitda", "EBITDA"],
+    ["dcf", "DCF"]
+  ]
+},
+
+capex: {
+  category: "Free Cash Flow",
+  breadcrumb: "FCF → CapEx",
+  title: "Capital expenditures",
+  intro: "Capital expenditures are cash spent on long-lived assets such as equipment, vehicles, property and technology infrastructure.",
+  body: `
+    <div class="content-card">
+      <h3>Maintenance CapEx</h3>
+      <p>
+        Spending required to maintain the existing earnings capacity of the business.
+      </p>
+    </div>
+
+    <div class="content-card">
+      <h3>Growth CapEx</h3>
+      <p>
+        Spending intended to increase future capacity, revenue or profitability.
+      </p>
+    </div>
+
+    <div class="insight">
+      Maintenance CapEx is especially important when comparing EBITDA with true economic cash generation.
+    </div>
+
+    <div class="example">
+      Company A EBITDA: $1M<br>
+      Maintenance CapEx: $400k<br><br>
+      Company B EBITDA: $1M<br>
+      Maintenance CapEx: $50k<br><br>
+      All else equal, Company B converts more EBITDA into cash.
+    </div>
+  `,
+  related: [
+    ["fcf", "Free cash flow"],
+    ["ebitda", "EBITDA"],
+    ["dcf", "DCF"]
+  ]
+},
+
+workingCapital: {
+  category: "Free Cash Flow",
+  breadcrumb: "FCF → Working capital",
+  title: "Working capital",
+  intro: "Working capital represents operating assets and liabilities that support day-to-day operations.",
+  body: `
+    <div class="formula">
+      Operating NWC ≈
+      Accounts Receivable
+      + Inventory
+      − Accounts Payable
+      − Other Operating Current Liabilities
+    </div>
+
+    <div class="content-card">
+      <h3>Why growth can consume cash</h3>
+      <p>
+        If sales grow, receivables and inventory may rise before the company collects cash from customers.
+      </p>
+    </div>
+
+    <div class="example">
+      Receivables increase by $150,000<br>
+      Inventory increases by $100,000<br>
+      Payables increase by $50,000<br><br>
+      Increase in NWC = $200,000<br><br>
+      That $200,000 reduces free cash flow.
+    </div>
+
+    <div class="content-card">
+      <h3>Working capital in an acquisition</h3>
+      <p>
+        Buyers often negotiate a normal working-capital target so the business arrives at closing with enough operating resources to function normally.
+      </p>
+    </div>
+  `,
+  related: [
+    ["fcf", "Free cash flow"],
+    ["balanceSheet", "Balance sheet"],
+    ["dueDiligence", "Due diligence"]
+  ]
+},
+
+dcf: {
+  category: "DCF Valuation",
+  breadcrumb: "Valuation → DCF",
+  title: "Discounted cash flow valuation",
+  intro: "A DCF estimates what a business is worth today by forecasting the cash it will generate in the future and discounting those cash flows for time and risk.",
+  body: `
+    <div class="formula">
+      Value =
+      Present Value of Forecast Cash Flows
+      + Present Value of Terminal Value
+    </div>
+
+    <div class="content-card">
+      <h3>Step 1: forecast free cash flow</h3>
+      <p>
+        Estimate revenue, margins, taxes, capital expenditures and working capital for future years.
+      </p>
+    </div>
+
+    <div class="content-card">
+      <h3>Step 2: choose a discount rate</h3>
+      <p>
+        The discount rate reflects the time value of money and the risk associated with receiving those future cash flows.
+      </p>
+    </div>
+
+    <div class="content-card">
+      <h3>Step 3: discount each cash flow</h3>
+      <p>
+        Money expected five years from now is worth less than the same amount received today.
+      </p>
+    </div>
+
+    <div class="formula">
+      Present Value =
+      Future Cash Flow ÷ (1 + Discount Rate)^Year
+    </div>
+
+    <div class="content-card">
+      <h3>Step 4: estimate terminal value</h3>
+      <p>
+        Because a business is normally expected to operate beyond the explicit forecast period, a terminal value estimates the value of all cash flows after that period.
+      </p>
+    </div>
+
+    <div class="example">
+      If next year's FCF is $1,000,000 and the discount rate is 10%,
+      its present value is approximately $909,091.
+    </div>
+
+    <div class="warning">
+      A DCF can look extremely precise while being highly sensitive to assumptions.
+      Small changes in growth rates or discount rates can materially change value.
+    </div>
+  `,
+  related: [
+    ["fcf", "Free cash flow"],
+    ["wacc", "WACC"],
+    ["terminalValue", "Terminal value"],
+    ["evEquity", "Enterprise to equity value"]
+  ]
+},
+
+wacc: {
+  category: "DCF Valuation",
+  breadcrumb: "DCF → Discount rate",
+  title: "WACC and the discount rate",
+  intro: "The discount rate translates future risky cash flows into today's dollars.",
+  body: `
+    <div class="content-card">
+      <h3>The intuition</h3>
+      <p>
+        The riskier the business, the greater the return investors generally require.
+        A higher required return means a lower present value.
+      </p>
+    </div>
+
+    <div class="formula">
+      Higher Discount Rate → Lower Present Value
+    </div>
+
+    <div class="content-card">
+      <h3>What WACC means</h3>
+      <p>
+        WACC is the weighted average cost of capital.
+        It blends the required return on equity with the after-tax cost of debt.
+      </p>
+    </div>
+
+    <div class="content-card">
+      <h3>Private-company complication</h3>
+      <p>
+        Estimating an appropriate discount rate for a private company can require significant judgment,
+        especially because small businesses may have company-specific risks not captured in public-market data.
+      </p>
+    </div>
+
+    <div class="example">
+      A business with very concentrated customers, unstable margins and owner dependence
+      would generally warrant a higher required return than a stable recurring-revenue business.
+    </div>
+  `,
+  related: [
+    ["dcf", "DCF"],
+    ["quality", "Business quality"],
+    ["terminalValue", "Terminal value"]
+  ]
+},
+
+terminalValue: {
+  category: "DCF Valuation",
+  breadcrumb: "DCF → Terminal value",
+  title: "Terminal value",
+  intro: "Terminal value estimates the value of all cash flows occurring after the explicit forecast period.",
+  body: `
+    <div class="content-card">
+      <h3>Perpetual-growth method</h3>
+    </div>
+
+    <div class="formula">
+      Terminal Value =
+      FCF in Next Year ÷
+      (Discount Rate − Terminal Growth Rate)
+    </div>
+
+    <div class="example">
+      Year 6 FCF = $1,200,000<br>
+      Discount rate = 10%<br>
+      Terminal growth = 2.5%<br><br>
+      Terminal value ≈ $16,000,000
+    </div>
+
+    <div class="content-card">
+      <h3>Exit-multiple method</h3>
+      <p>
+        Another approach applies a valuation multiple to an operating metric such as EBITDA in the final forecast year.
+      </p>
+    </div>
+
+    <div class="warning">
+      Terminal value often represents a large percentage of total DCF value.
+      That makes the terminal assumptions especially important.
+    </div>
+  `,
+  related: [
+    ["dcf", "DCF"],
+    ["wacc", "Discount rate"],
+    ["ebitda", "EBITDA multiples"]
+  ]
+},
+
+evEquity: {
+  category: "Valuation",
+  breadcrumb: "Valuation → Enterprise and equity",
+  title: "Enterprise value vs equity value",
+  intro: "Enterprise value measures the value of the operating business. Equity value is the value attributable to shareholders after considering debt and cash.",
+  body: `
+    <div class="formula">
+      Equity Value ≈
+      Enterprise Value
+      − Debt
+      + Excess Cash
+    </div>
+
+    <div class="example">
+      Enterprise value: $6,000,000<br>
+      Debt: $500,000<br>
+      Excess cash: $200,000<br><br>
+      Equity value ≈ $5,700,000
+    </div>
+
+    <div class="content-card">
+      <h3>Why EBITDA multiples usually produce enterprise value</h3>
+      <p>
+        EBITDA is calculated before interest expense, so it is generally paired with a capital-structure-neutral valuation measure.
+      </p>
+    </div>
+
+    <div class="content-card">
+      <h3>Why deal structure matters</h3>
+      <p>
+        Actual purchase-price mechanics may also involve working-capital adjustments,
+        debt-like items, earn-outs and other negotiated terms.
+      </p>
+    </div>
+  `,
+  related: [
+    ["ebitda", "EBITDA"],
+    ["workingCapital", "Working capital"],
+    ["dcf", "DCF"]
+  ]
+},
+
+normalization: {
+  category: "Quality of Earnings",
+  breadcrumb: "Buying → Normalization",
+  title: "Normalized earnings",
+  intro: "Private-company financial statements often contain expenses or income that will not continue under a new owner.",
   body: `
     <div class="content-card">
       <h3>Common adjustments</h3>
       <ul>
+        <li>One-time legal fees</li>
         <li>Owner compensation above or below market</li>
-        <li>Personal vehicle or travel expenses</li>
-        <li>One-time legal expenses</li>
+        <li>Personal expenses</li>
+        <li>Non-recurring consulting costs</li>
         <li>Unusual repairs</li>
-        <li>Related-party rent that is above or below market</li>
-        <li>Non-recurring insurance proceeds</li>
-        <li>One-time consulting expenses</li>
+        <li>Related-party rent adjustments</li>
       </ul>
     </div>
 
     <div class="example">
       Reported EBITDA: $800,000<br>
-      Add back one-time legal expense: $100,000<br>
-      Reduce excessive owner compensation: $150,000<br><br>
-      <strong>Normalized EBITDA: $1,050,000</strong>
+      One-time legal expense: +$100,000<br>
+      Excess owner compensation: +$150,000<br><br>
+      Normalized EBITDA = $1,050,000
     </div>
 
     <div class="warning">
-      Every adjustment needs to be defensible. Buyers will usually challenge
-      aggressive add-backs.
+      Add-backs should represent expenses that genuinely will not recur.
+      Aggressive adjustments can make a business look more profitable than it really is.
     </div>
-  `
+  `,
+  related: [
+    ["ebitda", "EBITDA"],
+    ["dueDiligence", "Due diligence"],
+    ["fcf", "Free cash flow"]
+  ]
 },
 
-selling: {
-  category: "Selling a Business",
-  title: "Preparing a business for sale",
-  intro: "The best time to prepare a company for sale is often years before the actual sale process.",
+quality: {
+  category: "Business Quality",
+  breadcrumb: "Buying → Quality",
+  title: "What makes a business worth more?",
+  intro: "Valuation is not only about how much a company earns. It is also about how durable those earnings appear.",
   body: `
     <div class="content-card">
-      <h3>Clean up the financials</h3>
-      <p>
-        Separate personal expenses, document unusual items and make the financial
-        statements easy for a buyer to understand.
-      </p>
+      <h3>Traits buyers often value</h3>
+      <ul>
+        <li>Recurring or contracted revenue</li>
+        <li>Low customer concentration</li>
+        <li>Strong margins</li>
+        <li>Pricing power</li>
+        <li>Predictable cash conversion</li>
+        <li>Low maintenance CapEx</li>
+        <li>Stable management</li>
+        <li>Low owner dependence</li>
+        <li>Defensible competitive position</li>
+        <li>Consistent historical growth</li>
+      </ul>
     </div>
 
-    <div class="content-card">
-      <h3>Reduce dependence on the owner</h3>
-      <p>
-        If every important relationship, approval and decision goes through the owner,
-        the buyer may view the business as difficult to transfer.
-      </p>
+    <div class="insight">
+      A valuation multiple is partly a compressed expression of growth, risk and cash-flow quality.
     </div>
-
-    <div class="content-card">
-      <h3>Diversify customers</h3>
-      <p>
-        Losing one major customer immediately after closing is a major buyer concern.
-      </p>
-    </div>
-
-    <div class="content-card">
-      <h3>Document systems</h3>
-      <p>
-        Processes, contracts, supplier relationships, pricing systems and employee
-        responsibilities should be transferable.
-      </p>
-    </div>
-  `
+  `,
+  related: [
+    ["wacc", "Risk and discount rates"],
+    ["ebitda", "EBITDA multiples"],
+    ["fcf", "Free cash flow"],
+    ["buyerMindset", "How buyers think"]
+  ]
 },
 
-due: {
-  category: "Due Diligence",
-  title: "What buyers investigate",
-  intro: "Due diligence is the process of testing whether the business is actually what the seller says it is.",
+roic: {
+  category: "Returns",
+  breadcrumb: "Analysis → ROIC",
+  title: "Return on invested capital",
+  intro: "ROIC measures how efficiently a business produces after-tax operating profit from the capital invested in its operations.",
+  body: `
+    <div class="formula">
+      ROIC ≈ NOPAT ÷ Invested Capital
+    </div>
+
+    <div class="content-card">
+      <h3>Why buyers care</h3>
+      <p>
+        A company that can reinvest money at high returns may be able to compound value rapidly.
+      </p>
+    </div>
+
+    <div class="example">
+      NOPAT = $750,000<br>
+      Invested capital = $3,000,000<br><br>
+      ROIC = 25%
+    </div>
+
+    <div class="insight">
+      Growth is much more valuable when incremental investments generate attractive returns.
+    </div>
+  `,
+  related: [
+    ["nopat", "NOPAT"],
+    ["fcf", "Free cash flow"],
+    ["quality", "Business quality"]
+  ]
+},
+
+dueDiligence: {
+  category: "Buying a Business",
+  breadcrumb: "Buying → Due diligence",
+  title: "Due diligence",
+  intro: "Due diligence tests the seller's claims and identifies risks that could affect value, structure or whether the transaction should proceed.",
   body: `
     <div class="content-card">
       <h3>Financial</h3>
@@ -973,10 +1649,11 @@ due: {
         <li>Historical financial statements</li>
         <li>Tax returns</li>
         <li>Bank statements</li>
-        <li>Accounts receivable aging</li>
+        <li>Receivables aging</li>
         <li>Inventory</li>
         <li>Debt</li>
-        <li>Capital expenditures</li>
+        <li>CapEx history</li>
+        <li>Quality of earnings</li>
       </ul>
     </div>
 
@@ -985,192 +1662,201 @@ due: {
       <ul>
         <li>Customer concentration</li>
         <li>Customer retention</li>
-        <li>Pricing power</li>
-        <li>Competitors</li>
-        <li>Market trends</li>
+        <li>Pricing trends</li>
+        <li>Competition</li>
+        <li>Market growth</li>
       </ul>
     </div>
 
     <div class="content-card">
       <h3>Operational</h3>
       <ul>
-        <li>Employee dependence</li>
+        <li>Management depth</li>
+        <li>Owner dependence</li>
         <li>Supplier concentration</li>
         <li>Equipment condition</li>
-        <li>Technology systems</li>
-        <li>Key-person risk</li>
+        <li>Systems and processes</li>
       </ul>
     </div>
 
     <div class="content-card">
       <h3>Legal</h3>
       <p>
-        Buyers commonly examine contracts, leases, litigation, employment matters,
-        intellectual property and regulatory issues.
+        Material contracts, litigation, leases, employment obligations,
+        intellectual property, permits and regulatory matters are commonly reviewed.
       </p>
     </div>
-  `
-},
-
-redflags: {
-  category: "Buying a Business",
-  title: "Business acquisition red flags",
-  intro: "Some risks are manageable. Others can fundamentally change what a business is worth.",
-  body: `
-    <div class="content-card">
-      <h3>Watch carefully for</h3>
-      <ul>
-        <li>One customer representing a large percentage of revenue</li>
-        <li>Declining revenue or margins</li>
-        <li>Large unexplained EBITDA adjustments</li>
-        <li>Owner relationships that cannot easily transfer</li>
-        <li>Unusually high employee turnover</li>
-        <li>Old or poorly maintained equipment</li>
-        <li>Major upcoming capital expenditures</li>
-        <li>Slow collections from customers</li>
-        <li>Inventory that may be obsolete</li>
-        <li>Important contracts that can terminate on a change of control</li>
-      </ul>
-    </div>
-
-    <div class="warning">
-      Strong reported earnings do not automatically mean a strong business.
-      The durability of those earnings is often more important than the number itself.
-    </div>
-  `
-},
-
-workingcapital: {
-  category: "Deal Mechanics",
-  title: "Working capital in an acquisition",
-  intro: "A buyer generally expects to receive a business with enough working capital to continue operating normally after closing.",
-  body: `
-    <div class="formula">
-      Net Working Capital ≈ Current Operating Assets − Current Operating Liabilities
-    </div>
-
-    <div class="content-card">
-      <h3>Common components</h3>
-      <p>
-        Accounts receivable and inventory often increase working capital,
-        while accounts payable and accrued operating liabilities reduce it.
-      </p>
-    </div>
-
-    <div class="example">
-      Accounts receivable: $900,000<br>
-      Inventory: $300,000<br>
-      Accounts payable: $500,000<br><br>
-      Approximate operating working capital = $700,000
-    </div>
-
-    <div class="content-card">
-      <h3>Why a target matters</h3>
-      <p>
-        Deals often establish a normalized working-capital target.
-        If the seller delivers less than the target at closing, the purchase price
-        may be adjusted downward.
-      </p>
-    </div>
-  `
+  `,
+  related: [
+    ["normalization", "Quality of earnings"],
+    ["quality", "Business quality"],
+    ["workingCapital", "Working capital"],
+    ["buyerMindset", "Buyer mindset"]
+  ]
 },
 
 sde: {
   category: "Valuation",
-  title: "SDE vs EBITDA",
-  intro: "Small owner-operated businesses are often analyzed using Seller's Discretionary Earnings, while larger businesses are more commonly evaluated using EBITDA.",
+  breadcrumb: "Valuation → SDE",
+  title: "Seller's Discretionary Earnings vs EBITDA",
+  intro: "Very small owner-operated businesses are frequently analyzed using SDE rather than EBITDA.",
   body: `
     <div class="content-card">
-      <h3>Seller's Discretionary Earnings</h3>
+      <h3>SDE</h3>
       <p>
-        SDE attempts to measure the total financial benefit available to one
-        owner-operator before certain owner-specific expenses.
+        SDE attempts to capture the total economic benefit available to one owner-operator,
+        before certain owner-specific expenses.
       </p>
     </div>
 
     <div class="content-card">
       <h3>EBITDA</h3>
       <p>
-        EBITDA is earnings before interest, taxes, depreciation and amortization.
-        It generally assumes the business must still pay market compensation
-        for necessary management roles.
+        EBITDA generally assumes the business must still pay market compensation for the management roles required to operate it.
       </p>
     </div>
 
     <div class="example">
-      A small company may show:<br><br>
       EBITDA = $300,000<br>
-      Owner salary = $200,000<br><br>
-      Depending on the circumstances, SDE might be approximately $500,000.
+      Owner compensation = $200,000<br><br>
+      Depending on circumstances, SDE might approach $500,000.
     </div>
 
     <div class="warning">
-      You cannot simply add every owner's salary to EBITDA in every valuation.
-      Someone may still need to perform that owner's job after the acquisition.
+      If the buyer must hire someone to replace the seller, that replacement cost is economically real.
     </div>
-  `
-},
-
-returns: {
-  category: "Financial Analysis",
-  title: "Return on equity vs return on business value",
-  intro: "The percentage return changes depending on what you use as the denominator.",
-  body: `
-    <div class="formula">
-      Return on Equity = Net Income ÷ Shareholders' Equity
-    </div>
-
-    <div class="content-card">
-      <p>
-        ROE measures accounting profit relative to the shareholders' book equity
-        recorded on the balance sheet.
-      </p>
-    </div>
-
-    <div class="formula">
-      Earnings Yield ≈ Annual Earnings ÷ Purchase Price
-    </div>
-
-    <div class="example">
-      Business value: $6,300,000<br>
-      Annual earnings: $1,260,000<br><br>
-      Earnings yield = 20%
-    </div>
-
-    <div class="content-card">
-      <h3>Why they are different</h3>
-      <p>
-        Book equity is an accounting number. Business value is what someone might
-        pay for the company. Using one instead of the other answers a different question.
-      </p>
-    </div>
-  `
+  `,
+  related: [
+    ["ebitda", "EBITDA"],
+    ["normalization", "Normalization"],
+    ["valuationOverview", "Valuation overview"]
+  ]
 }
 
 };
 
 function openLesson(id) {
+
   const lesson = lessons[id];
 
   if (!lesson) return;
 
-  document.getElementById("articleCategory").textContent = lesson.category;
-  document.getElementById("articleTitle").textContent = lesson.title;
-  document.getElementById("articleIntro").textContent = lesson.intro;
-  document.getElementById("articleBody").innerHTML = lesson.body;
+  const overlay = document.getElementById("overlay");
 
-  document.getElementById("overlay").style.display = "block";
+  if (overlay.style.display === "block") {
+    const current = overlay.dataset.current;
+    if (current && current !== id) {
+      historyStack.push(current);
+    }
+  }
+
+  overlay.dataset.current = id;
+
+  document.getElementById("breadcrumb").textContent =
+    lesson.breadcrumb || "";
+
+  document.getElementById("articleCategory").textContent =
+    lesson.category || "";
+
+  document.getElementById("articleTitle").textContent =
+    lesson.title || "";
+
+  document.getElementById("articleIntro").textContent =
+    lesson.intro || "";
+
+  document.getElementById("articleBody").innerHTML =
+    lesson.body || "";
+
+  renderRelated(lesson.related || []);
+
+  overlay.style.display = "block";
   document.body.style.overflow = "hidden";
+  overlay.scrollTop = 0;
+}
 
-  document.getElementById("overlay").scrollTop = 0;
+function renderRelated(items) {
+
+  const related = document.getElementById("related");
+
+  if (!items.length) {
+    related.innerHTML = "";
+    return;
+  }
+
+  let html = `
+    <h3>Go deeper</h3>
+    <div class="related-grid">
+  `;
+
+  items.forEach(item => {
+    const id = item[0];
+    const label = item[1];
+    const description = lessons[id]
+      ? lessons[id].intro
+      : "";
+
+    html += `
+      <button onclick="openLesson('${id}')">
+        ${label}
+        <div class="small">${description}</div>
+      </button>
+    `;
+  });
+
+  html += `</div>`;
+
+  related.innerHTML = html;
+}
+
+function goBack() {
+
+  if (historyStack.length > 0) {
+
+    const previous = historyStack.pop();
+
+    const lesson = lessons[previous];
+
+    if (!lesson) return;
+
+    const overlay = document.getElementById("overlay");
+
+    overlay.dataset.current = previous;
+
+    document.getElementById("breadcrumb").textContent =
+      lesson.breadcrumb || "";
+
+    document.getElementById("articleCategory").textContent =
+      lesson.category || "";
+
+    document.getElementById("articleTitle").textContent =
+      lesson.title || "";
+
+    document.getElementById("articleIntro").textContent =
+      lesson.intro || "";
+
+    document.getElementById("articleBody").innerHTML =
+      lesson.body || "";
+
+    renderRelated(lesson.related || []);
+
+    overlay.scrollTop = 0;
+
+  } else {
+    closeLesson();
+  }
 }
 
 function closeLesson() {
   document.getElementById("overlay").style.display = "none";
   document.body.style.overflow = "";
+  historyStack.length = 0;
 }
 
-function calculateValue() {
+function money(value) {
+  return "$" + Math.round(value).toLocaleString("en-CA");
+}
+
+function calculateMultiple() {
 
   const ebitda = Number(document.getElementById("ebitda").value) || 0;
   const multiple = Number(document.getElementById("multiple").value) || 0;
@@ -1180,50 +1866,140 @@ function calculateValue() {
   const enterpriseValue = ebitda * multiple;
   const equityValue = enterpriseValue - debt + cash;
 
-  const result = document.getElementById("result");
+  document.getElementById("multipleResult").style.display = "block";
 
-  result.style.display = "block";
+  document.getElementById("multipleValue").textContent =
+    money(equityValue);
 
-  document.getElementById("resultValue").textContent =
-    "$" + equityValue.toLocaleString("en-CA", {
-      maximumFractionDigits: 0
-    });
+  document.getElementById("multipleSub").innerHTML =
+    "Enterprise value: " + money(enterpriseValue) +
+    "<br>− Debt: " + money(debt) +
+    "<br>+ Excess cash: " + money(cash) +
+    "<br><br><strong>Estimated equity value</strong>";
+}
 
-  document.getElementById("resultSub").innerHTML =
-    "Enterprise value: $" +
-    enterpriseValue.toLocaleString("en-CA", {
-      maximumFractionDigits: 0
-    }) +
-    "<br>Minus debt: $" +
-    debt.toLocaleString("en-CA") +
-    "<br>Plus excess cash: $" +
-    cash.toLocaleString("en-CA");
+function calculateFCF() {
+
+  const ebit = Number(document.getElementById("fcfEbit").value) || 0;
+  const tax = (Number(document.getElementById("fcfTax").value) || 0) / 100;
+  const da = Number(document.getElementById("fcfDa").value) || 0;
+  const capex = Number(document.getElementById("fcfCapex").value) || 0;
+  const nwc = Number(document.getElementById("fcfNwc").value) || 0;
+
+  const nopat = ebit * (1 - tax);
+  const fcf = nopat + da - capex - nwc;
+
+  document.getElementById("fcfResult").style.display = "block";
+
+  document.getElementById("fcfValue").textContent =
+    money(fcf);
+
+  document.getElementById("fcfSub").innerHTML =
+    "NOPAT: " + money(nopat) +
+    "<br>+ D&A: " + money(da) +
+    "<br>− CapEx: " + money(capex) +
+    "<br>− Increase in working capital: " + money(nwc);
+}
+
+function calculateDCF() {
+
+  const startingFCF =
+    Number(document.getElementById("dcfFcf").value) || 0;
+
+  const growth =
+    (Number(document.getElementById("dcfGrowth").value) || 0) / 100;
+
+  const rate =
+    (Number(document.getElementById("dcfRate").value) || 0) / 100;
+
+  const terminalGrowth =
+    (Number(document.getElementById("dcfTerminal").value) || 0) / 100;
+
+  if (rate <= terminalGrowth) {
+
+    document.getElementById("dcfResult").style.display = "block";
+
+    document.getElementById("dcfValue").textContent =
+      "Check assumptions";
+
+    document.getElementById("dcfSub").textContent =
+      "The discount rate must be greater than the terminal growth rate.";
+
+    return;
+  }
+
+  let pvForecast = 0;
+  let fcf = startingFCF;
+  let detail = "";
+
+  for (let year = 1; year <= 5; year++) {
+
+    fcf = fcf * (1 + growth);
+
+    const pv =
+      fcf / Math.pow(1 + rate, year);
+
+    pvForecast += pv;
+
+    detail +=
+      "Year " + year +
+      " FCF: " + money(fcf) +
+      " | PV: " + money(pv) +
+      "<br>";
+  }
+
+  const nextYearFCF =
+    fcf * (1 + terminalGrowth);
+
+  const terminalValue =
+    nextYearFCF / (rate - terminalGrowth);
+
+  const pvTerminal =
+    terminalValue / Math.pow(1 + rate, 5);
+
+  const enterpriseValue =
+    pvForecast + pvTerminal;
+
+  document.getElementById("dcfResult").style.display = "block";
+
+  document.getElementById("dcfValue").textContent =
+    money(enterpriseValue);
+
+  document.getElementById("dcfSub").innerHTML =
+    detail +
+    "<br>Terminal value: " +
+    money(terminalValue) +
+    "<br>PV of terminal value: " +
+    money(pvTerminal) +
+    "<br><br><strong>Estimated enterprise value</strong>";
 }
 
 function filterLessons() {
 
   const search =
-    document.getElementById("search").value.toLowerCase().trim();
+    document.getElementById("search")
+      .value
+      .toLowerCase()
+      .trim();
 
-  const lessons =
-    document.querySelectorAll(".searchable");
+  document
+    .querySelectorAll(".searchable")
+    .forEach(item => {
 
-  lessons.forEach(item => {
+      const text =
+        (
+          item.textContent +
+          " " +
+          item.dataset.search
+        ).toLowerCase();
 
-    const text =
-      (
-        item.textContent +
-        " " +
-        item.dataset.search
-      ).toLowerCase();
+      if (!search || text.includes(search)) {
+        item.classList.remove("hidden");
+      } else {
+        item.classList.add("hidden");
+      }
 
-    if (!search || text.includes(search)) {
-      item.classList.remove("hidden");
-    } else {
-      item.classList.add("hidden");
-    }
-
-  });
+    });
 }
 
 </script>
