@@ -1,2504 +1,3927 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-  />
-
-  <title>Business IQ</title>
-
-  <meta name="theme-color" content="#f3f0e8">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="Business IQ">
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: #19231f;
-      background:
-        radial-gradient(circle at top left, #f7e7c5 0, transparent 27%),
-        radial-gradient(circle at top right, #dcece4 0, transparent 25%),
-        #f3f0e8;
-      min-height: 100vh;
-    }
-
-    button,
-    input {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    .app {
-      max-width: 800px;
-      margin: 0 auto;
-      padding:
-        calc(env(safe-area-inset-top) + 18px)
-        16px
-        calc(env(safe-area-inset-bottom) + 60px);
-    }
-
-    .hero {
-      padding: 18px 4px 15px;
-    }
-
-    .eyebrow {
-      font-size: 12px;
-      font-weight: 850;
-      letter-spacing: .09em;
-      text-transform: uppercase;
-      color: #6f7772;
-      margin-bottom: 10px;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(48px, 13vw, 76px);
-      line-height: .94;
-      letter-spacing: -.06em;
-      font-weight: 900;
-    }
-
-    .hero p {
-      max-width: 650px;
-      margin: 17px 0 0;
-      color: #68716c;
-      font-size: 17px;
-      line-height: 1.5;
-    }
-
-    .nav {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding: 7px 0 5px;
-      scrollbar-width: none;
-      margin-bottom: 8px;
-    }
-
-    .nav::-webkit-scrollbar {
-      display: none;
-    }
-
-    .nav button {
-      flex: 0 0 auto;
-      border: 0;
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.85);
-      color: #314039;
-      font-size: 13px;
-      font-weight: 800;
-      box-shadow: 0 5px 18px rgba(30,45,37,.04);
-    }
-
-    .nav button.active {
-      background: #203128;
-      color: white;
-    }
-
-    .search-wrap {
-      position: sticky;
-      top: 6px;
-      z-index: 30;
-      margin: 12px 0 20px;
-    }
-
-    .search {
-      width: 100%;
-      border: 1px solid rgba(30,45,37,.08);
-      background: rgba(255,255,255,.92);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border-radius: 18px;
-      padding: 15px 17px;
-      outline: none;
-      font-size: 16px;
-      box-shadow: 0 8px 28px rgba(20,35,28,.06);
-    }
-
-    .section-title {
-      margin: 29px 4px 12px;
-      font-size: 12px;
-      font-weight: 850;
-      letter-spacing: .09em;
-      text-transform: uppercase;
-      color: #7b827e;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .card {
-      border: 1px solid rgba(25,40,32,.07);
-      border-radius: 23px;
-      background: rgba(255,255,255,.87);
-      box-shadow: 0 9px 29px rgba(30,45,37,.05);
-    }
-
-    .topic {
-      padding: 17px;
-      min-height: 155px;
-    }
-
-    .topic:nth-child(4n+1) {
-      background: linear-gradient(145deg,#fff8e7,#fff);
-    }
-
-    .topic:nth-child(4n+2) {
-      background: linear-gradient(145deg,#edf8f1,#fff);
-    }
-
-    .topic:nth-child(4n+3) {
-      background: linear-gradient(145deg,#edf3fb,#fff);
-    }
-
-    .topic:nth-child(4n+4) {
-      background: linear-gradient(145deg,#f8eff9,#fff);
-    }
-
-    .topic:active,
-    .article-card:active,
-    .news-card:active {
-      transform: scale(.986);
-    }
-
-    .icon {
-      font-size: 28px;
-      margin-bottom: 12px;
-    }
-
-    .topic h3 {
-      font-size: 18px;
-      letter-spacing: -.025em;
-      margin: 0 0 6px;
-    }
-
-    .topic p {
-      margin: 0;
-      font-size: 13px;
-      line-height: 1.45;
-      color: #727a75;
-    }
-
-    .article-list,
-    .news-list {
-      display: grid;
-      gap: 12px;
-    }
-
-    .article-card,
-    .news-card {
-      padding: 19px;
-      transition: transform .12s ease;
-    }
-
-    .meta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-      margin-bottom: 8px;
-    }
-
-    .badge {
-      font-size: 10px;
-      font-weight: 850;
-      text-transform: uppercase;
-      letter-spacing: .07em;
-      padding: 5px 8px;
-      border-radius: 999px;
-      background: #edf3ef;
-      color: #5e6c64;
-    }
-
-    .badge.beginner {
-      background: #eef7ef;
-    }
-
-    .badge.intermediate {
-      background: #fff4d9;
-    }
-
-    .badge.advanced {
-      background: #f5ebf8;
-    }
-
-    .article-card h3,
-    .news-card h3 {
-      margin: 0 0 7px;
-      font-size: 21px;
-      letter-spacing: -.025em;
-      line-height: 1.18;
-    }
-
-    .article-card p {
-      margin: 0;
-      color: #707873;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .read-time {
-      color: #939a96;
-      font-size: 12px;
-      margin-top: 10px;
-    }
-
-    .series {
-      background: #203028;
-      color: white;
-      border-radius: 25px;
-      padding: 21px;
-      margin: 12px 0;
-    }
-
-    .series h2 {
-      margin: 0 0 6px;
-      font-size: 25px;
-      letter-spacing: -.03em;
-    }
-
-    .series p {
-      margin: 0 0 15px;
-      color: #cbd4cf;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .series-button {
-      width: 100%;
-      border: 0;
-      text-align: left;
-      background: rgba(255,255,255,.09);
-      color: white;
-      border-radius: 15px;
-      margin: 7px 0;
-      padding: 13px 14px;
-      font-weight: 750;
-    }
-
-    .series-button span {
-      display: block;
-      font-size: 11px;
-      color: #bbc6c0;
-      margin-top: 4px;
-      font-weight: 500;
-    }
-
-    .calculator {
-      background: #203028;
-      color: white;
-      border-radius: 25px;
-      padding: 22px;
-      margin: 12px 0;
-      box-shadow: 0 13px 36px rgba(20,35,28,.13);
-    }
-
-    .calculator h2 {
-      margin: 0 0 5px;
-      font-size: 24px;
-    }
-
-    .calculator p {
-      color: #c9d3ce;
-      line-height: 1.5;
-      font-size: 14px;
-    }
-
-    .calc-field {
-      margin: 12px 0;
-    }
-
-    .calc-field label {
-      display: block;
-      font-size: 12px;
-      font-weight: 750;
-      color: #d6ddd9;
-      margin: 0 0 6px 2px;
-    }
-
-    .calc-field input {
-      width: 100%;
-      border: 0;
-      border-radius: 13px;
-      padding: 13px;
-      outline: none;
-      font-size: 17px;
-    }
-
-    .calc-button {
-      width: 100%;
-      border: 0;
-      border-radius: 14px;
-      background: #f1d79a;
-      color: #253329;
-      padding: 13px;
-      margin-top: 7px;
-      font-weight: 850;
-    }
-
-    .result {
-      display: none;
-      margin-top: 17px;
-      padding-top: 17px;
-      border-top: 1px solid rgba(255,255,255,.14);
-    }
-
-    .result-value {
-      font-size: 33px;
-      font-weight: 900;
-      letter-spacing: -.04em;
-    }
-
-    .result-sub {
-      color: #cbd3cf;
-      font-size: 13px;
-      line-height: 1.55;
-      margin-top: 6px;
-    }
-
-    .overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 100;
-      overflow-y: auto;
-      background:
-        radial-gradient(circle at top left,#f7e8ca 0,transparent 22%),
-        #f3f0e8;
-    }
-
-    .article-page {
-      max-width: 740px;
-      margin: 0 auto;
-      padding:
-        calc(env(safe-area-inset-top) + 14px)
-        18px
-        calc(env(safe-area-inset-bottom) + 60px);
-    }
-
-    .top-actions {
-      display: flex;
-      justify-content: space-between;
-      gap: 9px;
-      margin-bottom: 24px;
-    }
-
-    .pill {
-      border: 0;
-      background: rgba(255,255,255,.92);
-      border-radius: 999px;
-      padding: 10px 14px;
-      font-weight: 800;
-      color: #2e3a34;
-      box-shadow: 0 6px 18px rgba(30,45,37,.05);
-    }
-
-    .article-kicker {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      color: #747d77;
-      font-weight: 850;
-      margin-bottom: 7px;
-    }
-
-    .article-page h2 {
-      margin: 0 0 16px;
-      font-size: clamp(37px, 10vw, 57px);
-      line-height: .99;
-      letter-spacing: -.05em;
-    }
-
-    .article-intro {
-      font-size: 19px;
-      color: #626b66;
-      line-height: 1.6;
-      margin-bottom: 26px;
-    }
-
-    .article-content h3 {
-      font-size: 24px;
-      letter-spacing: -.025em;
-      margin: 31px 0 10px;
-    }
-
-    .article-content p,
-    .article-content li {
-      color: #46514b;
-      font-size: 17px;
-      line-height: 1.72;
-    }
-
-    .article-content ul {
-      padding-left: 23px;
-    }
-
-    .formula {
-      background: #203028;
-      color: white;
-      border-radius: 18px;
-      padding: 18px;
-      margin: 18px 0;
-      font-size: 17px;
-      font-weight: 800;
-      line-height: 1.55;
-    }
-
-    .example {
-      background: #fff6df;
-      border-radius: 18px;
-      padding: 18px;
-      margin: 17px 0;
-      color: #51462f;
-      line-height: 1.65;
-    }
-
-    .insight {
-      background: #eaf6ee;
-      border-radius: 18px;
-      padding: 18px;
-      margin: 17px 0;
-      color: #354c3e;
-      line-height: 1.65;
-    }
-
-    .warning {
-      background: #fff0ec;
-      border-radius: 18px;
-      padding: 18px;
-      margin: 17px 0;
-      color: #5e4840;
-      line-height: 1.65;
-    }
-
-    .valuation-box {
-      background: #edf2f9;
-      border-radius: 18px;
-      padding: 18px;
-      margin: 17px 0;
-      color: #33475a;
-      line-height: 1.65;
-    }
-
-    .statement-wrap {
-      margin: 20px 0;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .statement {
-      width: 100%;
-      min-width: 330px;
-      border-collapse: collapse;
-      background: rgba(255,255,255,.94);
-      border-radius: 18px;
-      overflow: hidden;
-      box-shadow: 0 8px 25px rgba(30,45,37,.05);
-    }
-
-    .statement th {
-      text-align: left;
-      background: #203028;
-      color: white;
-      padding: 12px 13px;
-      font-size: 13px;
-    }
-
-    .statement th:not(:first-child),
-    .statement td:not(:first-child) {
-      text-align: right;
-    }
-
-    .statement td {
-      padding: 11px 13px;
-      border-bottom: 1px solid #eceeea;
-      color: #435048;
-      font-size: 14px;
-    }
-
-    .statement .subtotal td {
-      font-weight: 800;
-      border-top: 1px solid #ccd4cf;
-    }
-
-    .statement .total td {
-      font-weight: 900;
-      border-top: 2px solid #66756c;
-    }
-
-    .statement .indent {
-      padding-left: 27px;
-    }
-
-    .line-highlight td {
-      background: #f0f7f2;
-      font-weight: 800;
-    }
-
-    .related {
-      margin-top: 35px;
-    }
-
-    .related h3 {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      color: #7c837f;
-    }
-
-    .related button {
-      width: 100%;
-      border: 0;
-      background: rgba(255,255,255,.9);
-      text-align: left;
-      border-radius: 17px;
-      padding: 15px;
-      margin: 6px 0;
-      color: #26362e;
-      font-weight: 800;
-    }
-
-    .related button span {
-      display: block;
-      color: #838b86;
-      font-weight: 500;
-      margin-top: 4px;
-      font-size: 12px;
-    }
-
-    .news-hero {
-      background: #203028;
-      color: white;
-      padding: 22px;
-      border-radius: 25px;
-      margin-bottom: 15px;
-    }
-
-    .news-hero h2 {
-      margin: 0 0 7px;
-      font-size: 27px;
-    }
-
-    .news-hero p {
-      margin: 0;
-      color: #c9d3ce;
-      line-height: 1.5;
-      font-size: 14px;
-    }
-
-    .news-controls {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding: 3px 0 14px;
-      scrollbar-width: none;
-    }
-
-    .news-controls::-webkit-scrollbar {
-      display: none;
-    }
-
-    .news-controls button {
-      flex: 0 0 auto;
-      border: 0;
-      border-radius: 999px;
-      padding: 9px 13px;
-      background: white;
-      color: #425048;
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .news-controls button.active {
-      background: #203128;
-      color: white;
-    }
-
-    .news-card {
-      text-decoration: none;
-      color: inherit;
-      display: block;
-    }
-
-    .news-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: flex-start;
-      margin-bottom: 9px;
-    }
-
-    .news-source {
-      font-size: 12px;
-      font-weight: 850;
-      color: #627169;
-    }
-
-    .news-date {
-      font-size: 11px;
-      color: #969e99;
-      white-space: nowrap;
-    }
-
-    .news-link {
-      font-size: 13px;
-      font-weight: 800;
-      color: #355840;
-      margin-top: 12px;
-    }
-
-    .news-status {
-      color: #78817b;
-      font-size: 13px;
-      margin: 5px 3px 13px;
-    }
-
-    .refresh-news {
-      border: 0;
-      background: #203128;
-      color: white;
-      border-radius: 999px;
-      padding: 10px 14px;
-      font-weight: 800;
-      font-size: 13px;
-    }
-
-    .news-heading-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      margin: 20px 3px 12px;
-    }
-
-    .news-heading-row h3 {
-      margin: 0;
-      font-size: 20px;
-    }
-
-    .news-error {
-      background: #fff0ec;
-      border-radius: 18px;
-      padding: 18px;
-      color: #63483f;
-      line-height: 1.5;
-    }
-
-    .spinner {
-      width: 25px;
-      height: 25px;
-      border-radius: 50%;
-      border: 3px solid #d9dedb;
-      border-top-color: #203128;
-      animation: spin .8s linear infinite;
-      margin: 28px auto 10px;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    .loading-text {
-      text-align: center;
-      color: #848c87;
-      font-size: 13px;
-    }
-
-    .footer {
-      text-align: center;
-      color: #929995;
-      font-size: 12px;
-      line-height: 1.5;
-      padding: 36px 10px 0;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<title>Business IQ</title>
+
+<meta name="theme-color" content="#f3f0e8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Business IQ">
+
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #19231f;
+  background:
+    radial-gradient(circle at top left, #f7e7c5 0, transparent 27%),
+    radial-gradient(circle at top right, #dcece4 0, transparent 25%),
+    #f3f0e8;
+  min-height: 100vh;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.app {
+  max-width: 800px;
+  margin: 0 auto;
+  padding:
+    calc(env(safe-area-inset-top) + 18px)
+    16px
+    calc(env(safe-area-inset-bottom) + 70px);
+}
+
+/* HEADER */
+
+.hero {
+  padding: 18px 4px 15px;
+}
+
+.eyebrow {
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: #6f7772;
+  margin-bottom: 10px;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(48px, 13vw, 76px);
+  line-height: .94;
+  letter-spacing: -.06em;
+  font-weight: 900;
+}
+
+.hero p {
+  max-width: 650px;
+  margin: 17px 0 0;
+  color: #68716c;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+/* NAV */
+
+.nav {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 7px 0 5px;
+  scrollbar-width: none;
+  margin-bottom: 8px;
+}
+
+.nav::-webkit-scrollbar {
+  display: none;
+}
+
+.nav button {
+  flex: 0 0 auto;
+  border: 0;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.86);
+  color: #314039;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.nav button.active {
+  background: #203128;
+  color: white;
+}
+
+/* SEARCH */
+
+.search-wrap {
+  position: sticky;
+  top: 6px;
+  z-index: 30;
+  margin: 12px 0 20px;
+}
+
+.search {
+  width: 100%;
+  border: 1px solid rgba(30,45,37,.08);
+  background: rgba(255,255,255,.94);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: 18px;
+  padding: 15px 17px;
+  outline: none;
+  font-size: 16px;
+  box-shadow: 0 8px 28px rgba(20,35,28,.06);
+}
+
+.section-title {
+  margin: 29px 4px 12px;
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: #7b827e;
+}
+
+/* CARDS */
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.card {
+  border: 1px solid rgba(25,40,32,.07);
+  border-radius: 23px;
+  background: rgba(255,255,255,.88);
+  box-shadow: 0 9px 29px rgba(30,45,37,.05);
+}
+
+.topic {
+  padding: 17px;
+  min-height: 155px;
+}
+
+.topic:nth-child(4n+1) {
+  background: linear-gradient(145deg,#fff8e7,#fff);
+}
+
+.topic:nth-child(4n+2) {
+  background: linear-gradient(145deg,#edf8f1,#fff);
+}
+
+.topic:nth-child(4n+3) {
+  background: linear-gradient(145deg,#edf3fb,#fff);
+}
+
+.topic:nth-child(4n+4) {
+  background: linear-gradient(145deg,#f8eff9,#fff);
+}
+
+.topic:active,
+.article-card:active,
+.news-card:active {
+  transform: scale(.986);
+}
+
+.icon {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+.topic h3 {
+  font-size: 18px;
+  letter-spacing: -.025em;
+  margin: 0 0 6px;
+}
+
+.topic p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #727a75;
+}
+
+/* ARTICLE CARDS */
+
+.article-list,
+.news-list {
+  display: grid;
+  gap: 12px;
+}
+
+.article-card {
+  padding: 19px;
+}
+
+.meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 8px;
+}
+
+.badge {
+  font-size: 10px;
+  font-weight: 850;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: #edf3ef;
+  color: #5e6c64;
+}
+
+.badge.beginner {
+  background: #eef7ef;
+}
+
+.badge.intermediate {
+  background: #fff4d9;
+}
+
+.badge.advanced {
+  background: #f5ebf8;
+}
+
+.article-card h3 {
+  margin: 0 0 7px;
+  font-size: 21px;
+  line-height: 1.16;
+  letter-spacing: -.025em;
+}
+
+.article-card p {
+  margin: 0;
+  color: #707873;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.read-time {
+  color: #939a96;
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+/* COURSES */
+
+.series {
+  background: #203028;
+  color: white;
+  border-radius: 25px;
+  padding: 21px;
+  margin: 12px 0;
+}
+
+.series h2 {
+  margin: 0 0 6px;
+  font-size: 25px;
+  letter-spacing: -.03em;
+}
+
+.series p {
+  margin: 0 0 15px;
+  color: #cbd4cf;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.series-button {
+  width: 100%;
+  border: 0;
+  text-align: left;
+  background: rgba(255,255,255,.09);
+  color: white;
+  border-radius: 15px;
+  margin: 7px 0;
+  padding: 13px 14px;
+  font-weight: 750;
+}
+
+.series-button span {
+  display: block;
+  font-size: 11px;
+  color: #bbc6c0;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+/* CALCULATORS */
+
+.calculator {
+  background: #203028;
+  color: white;
+  border-radius: 25px;
+  padding: 22px;
+  margin: 12px 0;
+}
+
+.calculator h2 {
+  margin: 0 0 5px;
+  font-size: 24px;
+}
+
+.calculator p {
+  color: #c9d3ce;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.calc-field {
+  margin: 12px 0;
+}
+
+.calc-field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 750;
+  color: #d6ddd9;
+  margin: 0 0 6px 2px;
+}
+
+.calc-field input {
+  width: 100%;
+  border: 0;
+  border-radius: 13px;
+  padding: 13px;
+  outline: none;
+  font-size: 17px;
+}
+
+.calc-button {
+  width: 100%;
+  border: 0;
+  border-radius: 14px;
+  background: #f1d79a;
+  color: #253329;
+  padding: 13px;
+  margin-top: 7px;
+  font-weight: 850;
+}
+
+.result {
+  display: none;
+  margin-top: 17px;
+  padding-top: 17px;
+  border-top: 1px solid rgba(255,255,255,.14);
+}
+
+.result-value {
+  font-size: 33px;
+  font-weight: 900;
+}
+
+.result-sub {
+  color: #cbd3cf;
+  font-size: 13px;
+  line-height: 1.55;
+  margin-top: 6px;
+}
+
+/* ARTICLE PAGE */
+
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  overflow-y: auto;
+  background:
+    radial-gradient(circle at top left,#f7e8ca 0,transparent 22%),
+    #f3f0e8;
+}
+
+.article-page {
+  max-width: 740px;
+  margin: 0 auto;
+  padding:
+    calc(env(safe-area-inset-top) + 14px)
+    18px
+    calc(env(safe-area-inset-bottom) + 60px);
+}
+
+.top-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.pill {
+  border: 0;
+  background: rgba(255,255,255,.94);
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-weight: 800;
+  color: #2e3a34;
+}
+
+.article-kicker {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: #747d77;
+  font-weight: 850;
+  margin-bottom: 7px;
+}
+
+.article-page h2 {
+  margin: 0 0 16px;
+  font-size: clamp(37px,10vw,57px);
+  line-height: .99;
+  letter-spacing: -.05em;
+}
+
+.article-intro {
+  font-size: 19px;
+  color: #626b66;
+  line-height: 1.6;
+  margin-bottom: 26px;
+}
+
+.article-content h3 {
+  font-size: 24px;
+  margin: 31px 0 10px;
+}
+
+.article-content p,
+.article-content li {
+  color: #46514b;
+  font-size: 17px;
+  line-height: 1.72;
+}
+
+.article-content ul {
+  padding-left: 23px;
+}
+
+.formula {
+  background: #203028;
+  color: white;
+  border-radius: 18px;
+  padding: 18px;
+  margin: 18px 0;
+  font-weight: 800;
+  line-height: 1.55;
+}
+
+.example {
+  background: #fff6df;
+  border-radius: 18px;
+  padding: 18px;
+  margin: 17px 0;
+  color: #51462f;
+  line-height: 1.65;
+}
+
+.insight {
+  background: #eaf6ee;
+  border-radius: 18px;
+  padding: 18px;
+  margin: 17px 0;
+  color: #354c3e;
+  line-height: 1.65;
+}
+
+.warning {
+  background: #fff0ec;
+  border-radius: 18px;
+  padding: 18px;
+  margin: 17px 0;
+  color: #5e4840;
+  line-height: 1.65;
+}
+
+.valuation-box {
+  background: #edf2f9;
+  border-radius: 18px;
+  padding: 18px;
+  margin: 17px 0;
+  color: #33475a;
+  line-height: 1.65;
+}
+
+/* FINANCIAL STATEMENTS */
+
+.statement-wrap {
+  margin: 20px 0;
+  overflow-x: auto;
+}
+
+.statement {
+  width: 100%;
+  min-width: 330px;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.statement th {
+  text-align: left;
+  background: #203028;
+  color: white;
+  padding: 12px 13px;
+  font-size: 13px;
+}
+
+.statement th:not(:first-child),
+.statement td:not(:first-child) {
+  text-align: right;
+}
+
+.statement td {
+  padding: 11px 13px;
+  border-bottom: 1px solid #eceeea;
+  color: #435048;
+  font-size: 14px;
+}
+
+.statement .subtotal td {
+  font-weight: 800;
+  border-top: 1px solid #ccd4cf;
+}
+
+.statement .total td {
+  font-weight: 900;
+  border-top: 2px solid #66756c;
+}
+
+.statement .indent {
+  padding-left: 27px;
+}
+
+.line-highlight td {
+  background: #f0f7f2;
+  font-weight: 800;
+}
+
+.related {
+  margin-top: 35px;
+}
+
+.related h3 {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: #7c837f;
+}
+
+.related button {
+  width: 100%;
+  border: 0;
+  background: white;
+  text-align: left;
+  border-radius: 17px;
+  padding: 15px;
+  margin: 6px 0;
+  color: #26362e;
+  font-weight: 800;
+}
+
+.related button span {
+  display: block;
+  color: #838b86;
+  font-weight: 500;
+  margin-top: 4px;
+  font-size: 12px;
+}
+
+/* NEWS */
+
+.news-hero {
+  background: #203028;
+  color: white;
+  padding: 22px;
+  border-radius: 25px;
+  margin-bottom: 15px;
+}
+
+.news-hero h2 {
+  margin: 0 0 7px;
+  font-size: 28px;
+}
+
+.news-hero p {
+  margin: 0;
+  color: #c9d3ce;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.news-controls {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 3px 0 14px;
+  scrollbar-width: none;
+}
+
+.news-controls::-webkit-scrollbar {
+  display: none;
+}
+
+.news-controls button {
+  flex: 0 0 auto;
+  border: 0;
+  border-radius: 999px;
+  padding: 9px 13px;
+  background: white;
+  color: #425048;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.news-controls button.active {
+  background: #203128;
+  color: white;
+}
+
+.news-heading-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 3px 12px;
+}
+
+.news-heading-row h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.refresh-news {
+  border: 0;
+  background: #203128;
+  color: white;
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-weight: 800;
+  font-size: 13px;
+}
+
+.news-status {
+  font-size: 13px;
+  color: #78817b;
+  margin: 5px 3px 13px;
+}
+
+.news-card {
+  padding: 19px;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.news-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 9px;
+}
+
+.news-source {
+  font-size: 12px;
+  font-weight: 850;
+  color: #627169;
+}
+
+.news-date {
+  font-size: 11px;
+  color: #969e99;
+  white-space: nowrap;
+}
+
+.news-card h3 {
+  margin: 0;
+  font-size: 21px;
+  line-height: 1.2;
+  letter-spacing: -.025em;
+}
+
+.news-link {
+  font-size: 13px;
+  font-weight: 800;
+  color: #355840;
+  margin-top: 12px;
+}
+
+.news-loading {
+  padding: 28px 0;
+}
+
+.spinner {
+  width: 25px;
+  height: 25px;
+  border: 3px solid #d8ddda;
+  border-top-color: #203128;
+  border-radius: 50%;
+  margin: 0 auto 10px;
+  animation: spin .8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  text-align: center;
+  font-size: 13px;
+  color: #858d88;
+}
+
+.news-error {
+  background: #fff0ec;
+  border-radius: 18px;
+  padding: 18px;
+  color: #624a42;
+  line-height: 1.5;
+}
+
+.end-message {
+  text-align: center;
+  padding: 25px 10px;
+  color: #8a928d;
+  font-size: 13px;
+}
+
+/* Sentinel for infinite scrolling */
+
+#newsSentinel {
+  height: 20px;
+  width: 100%;
+}
+
+.footer {
+  text-align: center;
+  color: #929995;
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 36px 10px 0;
+}
+
+.hidden {
+  display: none !important;
+}
+
+</style>
 </head>
 
 <body>
 
 <div class="app">
 
-  <header class="hero">
-    <div class="eyebrow">Business buying · financial analysis · valuation</div>
+<header class="hero">
 
-    <h1>Business IQ</h1>
-
-    <p>
-      Learn how buyers analyze businesses, understand financial statements,
-      value future cash flows and keep up with the world of business valuation.
-    </p>
-  </header>
-
-  <div class="nav">
-    <button class="active" onclick="showSection('home',this)">Home</button>
-    <button onclick="showSection('articles',this)">Articles</button>
-    <button onclick="showSection('series',this)">Courses</button>
-    <button onclick="showSection('calculators',this)">Calculators</button>
-    <button onclick="showSection('news',this)">News & Insights</button>
+  <div class="eyebrow">
+    Business buying · financial analysis · valuation
   </div>
 
-  <div class="search-wrap" id="searchWrap">
-    <input
-      id="search"
-      class="search"
-      placeholder="Search EBITDA, DCF, free cash flow, working capital..."
-      oninput="searchArticles()"
-    />
+  <h1>Business IQ</h1>
+
+  <p>
+    Learn how buyers analyze businesses, read financial statements,
+    value cash flow and keep up with business valuation and acquisition insights.
+  </p>
+
+</header>
+
+
+<div class="nav">
+
+  <button class="active" onclick="showSection('home',this)">
+    Home
+  </button>
+
+  <button onclick="showSection('articles',this)">
+    Articles
+  </button>
+
+  <button onclick="showSection('series',this)">
+    Courses
+  </button>
+
+  <button onclick="showSection('calculators',this)">
+    Calculators
+  </button>
+
+  <button onclick="showSection('news',this)">
+    News & Insights
+  </button>
+
+</div>
+
+
+<div class="search-wrap" id="searchWrap">
+
+  <input
+    id="search"
+    class="search"
+    placeholder="Search EBITDA, DCF, free cash flow..."
+    oninput="searchArticles()"
+  >
+
+</div>
+
+
+<!-- HOME -->
+
+<main id="homeSection">
+
+<div class="section-title">
+  Explore topics
+</div>
+
+<div class="grid">
+
+  <div class="card topic" onclick="filterTopic('Valuation')">
+    <div class="icon">📊</div>
+    <h3>Valuation</h3>
+    <p>Multiples, DCF, enterprise value and equity value.</p>
   </div>
 
-  <main id="homeSection">
-
-    <div class="section-title">Explore topics</div>
-
-    <div class="grid">
-
-      <div class="card topic" onclick="filterTopic('Valuation')">
-        <div class="icon">📊</div>
-        <h3>Valuation</h3>
-        <p>Multiples, DCF, enterprise value and what determines price.</p>
-      </div>
-
-      <div class="card topic" onclick="filterTopic('Cash Flow')">
-        <div class="icon">💵</div>
-        <h3>Free Cash Flow</h3>
-        <p>How accounting profit becomes real economic cash.</p>
-      </div>
-
-      <div class="card topic" onclick="filterTopic('Financial Statements')">
-        <div class="icon">📑</div>
-        <h3>Financial Statements</h3>
-        <p>Read income statements, balance sheets and cash flow statements.</p>
-      </div>
-
-      <div class="card topic" onclick="filterTopic('Buying')">
-        <div class="icon">🔎</div>
-        <h3>Buying a Business</h3>
-        <p>What buyers investigate and why certain risks matter.</p>
-      </div>
-
-      <div class="card topic" onclick="filterTopic('Business Quality')">
-        <div class="icon">⭐</div>
-        <h3>Business Quality</h3>
-        <p>Recurring revenue, concentration and durable earnings.</p>
-      </div>
-
-      <div class="card topic" onclick="openNewsTab()">
-        <div class="icon">📰</div>
-        <h3>Latest Insights</h3>
-        <p>Current valuation, M&A and private-business articles.</p>
-      </div>
-
-    </div>
-
-    <div class="section-title">Start learning</div>
-
-    <div class="series">
-      <h2>Business Valuation 101</h2>
-
-      <button class="series-button" onclick="openArticle('valueMeaning')">
-        1. What does business value actually mean?
-        <span>Beginner · 7 min</span>
-      </button>
-
-      <button class="series-button" onclick="openArticle('enterpriseEquity')">
-        2. Enterprise value vs equity value
-        <span>Beginner · 8 min</span>
-      </button>
-
-      <button class="series-button" onclick="openArticle('ebitdaGuide')">
-        3. EBITDA and valuation multiples
-        <span>Beginner · 10 min</span>
-      </button>
-
-      <button class="series-button" onclick="openArticle('fcfGuide')">
-        4. Free cash flow
-        <span>Intermediate · 14 min</span>
-      </button>
-
-      <button class="series-button" onclick="openArticle('dcfGuide')">
-        5. DCF valuation
-        <span>Intermediate · 15 min</span>
-      </button>
-    </div>
-
-    <div class="section-title">Recommended articles</div>
-    <div class="article-list" id="featuredArticles"></div>
-
-  </main>
-
-  <main id="articlesSection" class="hidden">
-    <div class="section-title">Article library</div>
-    <div class="article-list" id="articleList"></div>
-  </main>
-
-  <main id="seriesSection" class="hidden">
-
-    <div class="section-title">Learning paths</div>
-
-    <div class="series">
-      <h2>Reading a Business</h2>
-
-      <button class="series-button" onclick="openArticle('incomeStatementGuide')">
-        Income statement
-      </button>
-
-      <button class="series-button" onclick="openArticle('balanceSheetGuide')">
-        Balance sheet
-      </button>
-
-      <button class="series-button" onclick="openArticle('cashFlowStatementGuide')">
-        Cash flow statement
-      </button>
-
-      <button class="series-button" onclick="openArticle('workingCapitalGuide')">
-        Working capital
-      </button>
-
-      <button class="series-button" onclick="openArticle('fcfGuide')">
-        Free cash flow
-      </button>
-    </div>
-
-    <div class="series">
-      <h2>Buying a Business</h2>
-
-      <button class="series-button" onclick="openArticle('buyerChecklist')">
-        What buyers actually look for
-      </button>
-
-      <button class="series-button" onclick="openArticle('qualityEarnings')">
-        Quality of earnings
-      </button>
-
-      <button class="series-button" onclick="openArticle('customerConcentration')">
-        Customer concentration
-      </button>
-
-      <button class="series-button" onclick="openArticle('ownerDependence')">
-        Owner dependence
-      </button>
-
-      <button class="series-button" onclick="openArticle('dueDiligenceGuide')">
-        Due diligence
-      </button>
-    </div>
-
-    <div class="series">
-      <h2>Deep DCF</h2>
-
-      <button class="series-button" onclick="openArticle('fcfGuide')">
-        Free cash flow
-      </button>
-
-      <button class="series-button" onclick="openArticle('waccGuide')">
-        WACC and discount rates
-      </button>
-
-      <button class="series-button" onclick="openArticle('terminalValueGuide')">
-        Terminal value
-      </button>
-
-      <button class="series-button" onclick="openArticle('dcfGuide')">
-        Full DCF
-      </button>
-
-      <button class="series-button" onclick="openArticle('dcfSensitivity')">
-        Sensitivity analysis
-      </button>
-    </div>
-
-  </main>
-
-  <main id="calculatorsSection" class="hidden">
-
-    <div class="section-title">Valuation tools</div>
-
-    <div class="calculator">
-      <h2>EBITDA Multiple</h2>
-
-      <div class="calc-field">
-        <label>Normalized EBITDA</label>
-        <input id="ebitda" type="number" placeholder="850000">
-      </div>
-
-      <div class="calc-field">
-        <label>Multiple</label>
-        <input id="multiple" type="number" step="0.1" placeholder="5">
-      </div>
-
-      <div class="calc-field">
-        <label>Debt</label>
-        <input id="debt" type="number" placeholder="800000">
-      </div>
-
-      <div class="calc-field">
-        <label>Excess cash</label>
-        <input id="cash" type="number" placeholder="350000">
-      </div>
-
-      <button class="calc-button" onclick="calculateMultiple()">Calculate</button>
-
-      <div class="result" id="multipleResult">
-        <div class="result-value" id="multipleValue"></div>
-        <div class="result-sub" id="multipleSub"></div>
-      </div>
-    </div>
-
-    <div class="calculator">
-      <h2>Free Cash Flow</h2>
-
-      <div class="calc-field">
-        <label>EBIT</label>
-        <input id="fcfEbit" type="number" placeholder="700000">
-      </div>
-
-      <div class="calc-field">
-        <label>Tax rate %</label>
-        <input id="fcfTax" type="number" placeholder="25">
-      </div>
-
-      <div class="calc-field">
-        <label>Depreciation & amortization</label>
-        <input id="fcfDa" type="number" placeholder="150000">
-      </div>
-
-      <div class="calc-field">
-        <label>Capital expenditures</label>
-        <input id="fcfCapex" type="number" placeholder="250000">
-      </div>
-
-      <div class="calc-field">
-        <label>Increase in net working capital</label>
-        <input id="fcfNwc" type="number" placeholder="100000">
-      </div>
-
-      <button class="calc-button" onclick="calculateFCF()">Calculate FCF</button>
-
-      <div class="result" id="fcfResult">
-        <div class="result-value" id="fcfValue"></div>
-        <div class="result-sub" id="fcfSub"></div>
-      </div>
-    </div>
-
-    <div class="calculator">
-      <h2>5-Year DCF</h2>
-
-      <div class="calc-field">
-        <label>Current annual FCF</label>
-        <input id="dcfFcf" type="number" placeholder="325000">
-      </div>
-
-      <div class="calc-field">
-        <label>Annual FCF growth %</label>
-        <input id="dcfGrowth" type="number" step="0.1" placeholder="5">
-      </div>
-
-      <div class="calc-field">
-        <label>Discount rate %</label>
-        <input id="dcfRate" type="number" step="0.1" placeholder="12">
-      </div>
-
-      <div class="calc-field">
-        <label>Terminal growth %</label>
-        <input id="dcfTerminal" type="number" step="0.1" placeholder="2.5">
-      </div>
-
-      <button class="calc-button" onclick="calculateDCF()">Calculate DCF</button>
-
-      <div class="result" id="dcfResult">
-        <div class="result-value" id="dcfValue"></div>
-        <div class="result-sub" id="dcfSub"></div>
-      </div>
-    </div>
-
-  </main>
-
-  <main id="newsSection" class="hidden">
-
-    <div class="news-hero">
-      <h2>News & Insights</h2>
-      <p>
-        Current articles about business valuation, private-company acquisitions,
-        M&A, EBITDA multiples, private equity and buying or selling businesses.
-      </p>
-    </div>
-
-    <div class="news-controls">
-      <button class="active" onclick="changeNewsCategory('all',this)">All</button>
-      <button onclick="changeNewsCategory('valuation',this)">Valuation</button>
-      <button onclick="changeNewsCategory('ma',this)">M&A</button>
-      <button onclick="changeNewsCategory('buying',this)">Buying</button>
-      <button onclick="changeNewsCategory('selling',this)">Selling</button>
-      <button onclick="changeNewsCategory('pe',this)">Private Equity</button>
-    </div>
-
-    <div class="news-heading-row">
-      <h3>Latest articles</h3>
-      <button class="refresh-news" onclick="refreshNews()">Refresh</button>
-    </div>
-
-    <div class="news-status" id="newsStatus">
-      Finding current valuation articles…
-    </div>
-
-    <div class="news-list" id="newsList"></div>
-
-    <div id="newsLoading">
-      <div class="spinner"></div>
-      <div class="loading-text">Loading business insights…</div>
-    </div>
-
-  </main>
-
-  <div class="footer">
-    Educational information only. Business valuation depends on facts,
-    assumptions and professional judgment. External articles belong to their
-    respective publishers.
+  <div class="card topic" onclick="filterTopic('Cash Flow')">
+    <div class="icon">💵</div>
+    <h3>Free Cash Flow</h3>
+    <p>How accounting earnings turn into real cash.</p>
+  </div>
+
+  <div class="card topic" onclick="filterTopic('Financial Statements')">
+    <div class="icon">📑</div>
+    <h3>Financial Statements</h3>
+    <p>Income statement, balance sheet and cash flow.</p>
+  </div>
+
+  <div class="card topic" onclick="filterTopic('Buying')">
+    <div class="icon">🔎</div>
+    <h3>Buying a Business</h3>
+    <p>What serious buyers investigate.</p>
+  </div>
+
+  <div class="card topic" onclick="filterTopic('Business Quality')">
+    <div class="icon">⭐</div>
+    <h3>Business Quality</h3>
+    <p>What makes one company worth more than another.</p>
+  </div>
+
+  <div class="card topic" onclick="openNewsTab()">
+    <div class="icon">📰</div>
+    <h3>Latest Insights</h3>
+    <p>Current valuation, M&A and acquisition articles.</p>
   </div>
 
 </div>
+
+
+<div class="section-title">
+  Business Valuation 101
+</div>
+
+<div class="series">
+
+  <h2>Start Here</h2>
+
+  <p>
+    Follow the valuation process from earnings to cash flow to value.
+  </p>
+
+  <button class="series-button" onclick="openArticle('valueMeaning')">
+    1. What does business value mean?
+    <span>Beginner</span>
+  </button>
+
+  <button class="series-button" onclick="openArticle('enterpriseEquity')">
+    2. Enterprise value vs equity value
+    <span>Beginner</span>
+  </button>
+
+  <button class="series-button" onclick="openArticle('ebitdaGuide')">
+    3. EBITDA and multiples
+    <span>Beginner</span>
+  </button>
+
+  <button class="series-button" onclick="openArticle('fcfGuide')">
+    4. Free cash flow
+    <span>Intermediate</span>
+  </button>
+
+  <button class="series-button" onclick="openArticle('dcfGuide')">
+    5. Discounted cash flow
+    <span>Intermediate</span>
+  </button>
+
+</div>
+
+<div class="section-title">
+  Recommended articles
+</div>
+
+<div class="article-list" id="featuredArticles"></div>
+
+</main>
+
+
+<!-- ARTICLE LIBRARY -->
+
+<main id="articlesSection" class="hidden">
+
+  <div class="section-title">
+    Article library
+  </div>
+
+  <div class="article-list" id="articleList"></div>
+
+</main>
+
+
+<!-- COURSES -->
+
+<main id="seriesSection" class="hidden">
+
+<div class="section-title">
+  Learning paths
+</div>
+
+<div class="series">
+
+  <h2>Reading a Business</h2>
+
+  <button class="series-button" onclick="openArticle('incomeStatementGuide')">
+    Income statement
+  </button>
+
+  <button class="series-button" onclick="openArticle('balanceSheetGuide')">
+    Balance sheet
+  </button>
+
+  <button class="series-button" onclick="openArticle('cashFlowStatementGuide')">
+    Cash flow statement
+  </button>
+
+  <button class="series-button" onclick="openArticle('workingCapitalGuide')">
+    Working capital
+  </button>
+
+  <button class="series-button" onclick="openArticle('fcfGuide')">
+    Free cash flow
+  </button>
+
+</div>
+
+
+<div class="series">
+
+  <h2>Buying a Business</h2>
+
+  <button class="series-button" onclick="openArticle('buyerChecklist')">
+    What buyers look for
+  </button>
+
+  <button class="series-button" onclick="openArticle('qualityEarnings')">
+    Quality of earnings
+  </button>
+
+  <button class="series-button" onclick="openArticle('customerConcentration')">
+    Customer concentration
+  </button>
+
+  <button class="series-button" onclick="openArticle('ownerDependence')">
+    Owner dependence
+  </button>
+
+  <button class="series-button" onclick="openArticle('dueDiligenceGuide')">
+    Due diligence
+  </button>
+
+</div>
+
+
+<div class="series">
+
+  <h2>Deep DCF</h2>
+
+  <button class="series-button" onclick="openArticle('fcfGuide')">
+    Free cash flow
+  </button>
+
+  <button class="series-button" onclick="openArticle('waccGuide')">
+    WACC and discount rates
+  </button>
+
+  <button class="series-button" onclick="openArticle('terminalValueGuide')">
+    Terminal value
+  </button>
+
+  <button class="series-button" onclick="openArticle('dcfGuide')">
+    Full DCF
+  </button>
+
+  <button class="series-button" onclick="openArticle('dcfSensitivity')">
+    Sensitivity analysis
+  </button>
+
+</div>
+
+</main>
+
+
+<!-- CALCULATORS -->
+
+<main id="calculatorsSection" class="hidden">
+
+<div class="section-title">
+  Valuation tools
+</div>
+
+
+<div class="calculator">
+
+<h2>EBITDA Multiple</h2>
+
+<div class="calc-field">
+<label>Normalized EBITDA</label>
+<input id="ebitda" type="number" placeholder="850000">
+</div>
+
+<div class="calc-field">
+<label>Multiple</label>
+<input id="multiple" type="number" step="0.1" placeholder="5">
+</div>
+
+<div class="calc-field">
+<label>Debt</label>
+<input id="debt" type="number" placeholder="800000">
+</div>
+
+<div class="calc-field">
+<label>Excess cash</label>
+<input id="cash" type="number" placeholder="350000">
+</div>
+
+<button class="calc-button" onclick="calculateMultiple()">
+Calculate
+</button>
+
+<div class="result" id="multipleResult">
+<div class="result-value" id="multipleValue"></div>
+<div class="result-sub" id="multipleSub"></div>
+</div>
+
+</div>
+
+
+<div class="calculator">
+
+<h2>Free Cash Flow</h2>
+
+<div class="calc-field">
+<label>EBIT</label>
+<input id="fcfEbit" type="number" placeholder="700000">
+</div>
+
+<div class="calc-field">
+<label>Tax rate %</label>
+<input id="fcfTax" type="number" placeholder="25">
+</div>
+
+<div class="calc-field">
+<label>D&A</label>
+<input id="fcfDa" type="number" placeholder="150000">
+</div>
+
+<div class="calc-field">
+<label>Capital expenditures</label>
+<input id="fcfCapex" type="number" placeholder="250000">
+</div>
+
+<div class="calc-field">
+<label>Increase in net working capital</label>
+<input id="fcfNwc" type="number" placeholder="100000">
+</div>
+
+<button class="calc-button" onclick="calculateFCF()">
+Calculate FCF
+</button>
+
+<div class="result" id="fcfResult">
+<div class="result-value" id="fcfValue"></div>
+<div class="result-sub" id="fcfSub"></div>
+</div>
+
+</div>
+
+
+<div class="calculator">
+
+<h2>5-Year DCF</h2>
+
+<div class="calc-field">
+<label>Current FCF</label>
+<input id="dcfFcf" type="number" placeholder="325000">
+</div>
+
+<div class="calc-field">
+<label>Annual growth %</label>
+<input id="dcfGrowth" type="number" step="0.1" placeholder="5">
+</div>
+
+<div class="calc-field">
+<label>Discount rate %</label>
+<input id="dcfRate" type="number" step="0.1" placeholder="12">
+</div>
+
+<div class="calc-field">
+<label>Terminal growth %</label>
+<input id="dcfTerminal" type="number" step="0.1" placeholder="2.5">
+</div>
+
+<button class="calc-button" onclick="calculateDCF()">
+Calculate DCF
+</button>
+
+<div class="result" id="dcfResult">
+<div class="result-value" id="dcfValue"></div>
+<div class="result-sub" id="dcfSub"></div>
+</div>
+
+</div>
+
+</main>
+
+
+<!-- NEWS -->
+
+<main id="newsSection" class="hidden">
+
+<div class="news-hero">
+
+<h2>News & Insights</h2>
+
+<p>
+Fresh articles about business valuation, buying and selling businesses,
+M&A, EBITDA multiples, private equity and private-company transactions.
+Keep scrolling and more articles will automatically load.
+</p>
+
+</div>
+
+
+<div class="news-controls">
+
+<button class="active"
+onclick="changeNewsCategory('all',this)">
+All
+</button>
+
+<button onclick="changeNewsCategory('valuation',this)">
+Valuation
+</button>
+
+<button onclick="changeNewsCategory('ma',this)">
+M&A
+</button>
+
+<button onclick="changeNewsCategory('buying',this)">
+Buying
+</button>
+
+<button onclick="changeNewsCategory('selling',this)">
+Selling
+</button>
+
+<button onclick="changeNewsCategory('pe',this)">
+Private Equity
+</button>
+
+</div>
+
+
+<div class="news-heading-row">
+
+<h3>Latest articles</h3>
+
+<button class="refresh-news"
+onclick="refreshNews()">
+Refresh
+</button>
+
+</div>
+
+
+<div class="news-status" id="newsStatus">
+Finding current articles…
+</div>
+
+
+<div class="news-list" id="newsList"></div>
+
+
+<div id="newsLoading" class="news-loading hidden">
+
+<div class="spinner"></div>
+
+<div class="loading-text">
+Finding more articles…
+</div>
+
+</div>
+
+
+<div id="newsSentinel"></div>
+
+
+<div id="newsEnd" class="end-message hidden">
+You've reached the end of the articles currently available.
+</div>
+
+</main>
+
+
+<div class="footer">
+Educational information only. External articles belong to their publishers.
+</div>
+
+</div>
+
+
+<!-- ARTICLE OVERLAY -->
 
 <div class="overlay" id="overlay">
-  <article class="article-page">
 
-    <div class="top-actions">
-      <button class="pill" onclick="goArticleBack()">← Back</button>
-      <button class="pill" onclick="closeArticle()">Home</button>
-    </div>
+<article class="article-page">
 
-    <div class="article-kicker" id="articleMeta"></div>
-    <h2 id="articleTitle"></h2>
-    <div class="article-intro" id="articleIntro"></div>
-    <div class="article-content" id="articleContent"></div>
-    <div class="related" id="relatedArticles"></div>
+<div class="top-actions">
 
-  </article>
+<button class="pill" onclick="goArticleBack()">
+← Back
+</button>
+
+<button class="pill" onclick="closeArticle()">
+Home
+</button>
+
 </div>
 
+<div class="article-kicker" id="articleMeta"></div>
+
+<h2 id="articleTitle"></h2>
+
+<div class="article-intro" id="articleIntro"></div>
+
+<div class="article-content" id="articleContent"></div>
+
+<div class="related" id="relatedArticles"></div>
+
+</article>
+
+</div>
+
+
 <script>
+
+/* =====================================
+   BUILT-IN LEARNING ARTICLES
+===================================== */
 
 const articleHistory = [];
 
 const articles = {
 
 valueMeaning: {
-  title: "What does business value actually mean?",
-  topic: "Valuation",
-  level: "Beginner",
-  time: "7 min",
-  intro:
-    "Business value reflects the economic benefits a buyer expects to receive and the risk surrounding those benefits.",
-  content: `
-    <h3>The basic idea</h3>
 
-    <p>
-      A buyer does not receive last year's profit. The buyer receives whatever
-      economic benefits the business generates after closing.
-    </p>
+title: "What does business value actually mean?",
+topic: "Valuation",
+level: "Beginner",
+time: "7 min",
 
-    <div class="formula">
-      Business Value ≈ Expected Future Cash Flow adjusted for Risk
-    </div>
+intro:
+"Business value reflects the future economic benefits a buyer expects to receive and the risk surrounding those benefits.",
 
-    <h3>Three major approaches</h3>
+content: `
 
-    <p><strong>Income approach:</strong> value future cash flows.</p>
-    <p><strong>Market approach:</strong> compare prices or multiples for similar businesses.</p>
-    <p><strong>Asset approach:</strong> value assets less liabilities.</p>
+<h3>The basic idea</h3>
 
-    <div class="valuation-box">
-      Higher expected cash flow tends to increase value. Greater uncertainty tends to reduce it.
-    </div>
-  `,
-  related: ["enterpriseEquity","ebitdaGuide","fcfGuide","dcfGuide"]
+<p>
+A buyer does not receive last year's profit.
+The buyer receives the future cash and economic benefits generated after closing.
+</p>
+
+<div class="formula">
+Business Value ≈ Expected Future Cash Flow adjusted for Risk
+</div>
+
+<h3>Three major approaches</h3>
+
+<p><strong>Income approach:</strong> value future cash flows.</p>
+
+<p><strong>Market approach:</strong> compare prices and multiples for similar businesses.</p>
+
+<p><strong>Asset approach:</strong> value assets less liabilities.</p>
+
+<div class="valuation-box">
+More expected future cash generally means more value.
+More risk generally means less value.
+</div>
+
+`,
+
+related: [
+"enterpriseEquity",
+"ebitdaGuide",
+"fcfGuide",
+"dcfGuide"
+]
+
 },
+
 
 enterpriseEquity: {
-  title: "Enterprise value vs equity value",
-  topic: "Valuation",
-  level: "Beginner",
-  time: "8 min",
-  intro:
-    "Enterprise value measures the operating business. Equity value represents the value attributable to shareholders.",
-  content: `
-    <div class="formula">
-      Equity Value ≈ Enterprise Value − Debt + Excess Cash
-    </div>
 
-    <div class="example">
-      Northstar enterprise value: $4,250,000<br>
-      Debt: ($800,000)<br>
-      Excess cash: +$350,000<br><br>
-      <strong>Indicative equity value: $3,800,000</strong>
-    </div>
+title: "Enterprise value vs equity value",
+topic: "Valuation",
+level: "Beginner",
+time: "8 min",
 
-    <p>
-      EBITDA multiples generally produce enterprise value because EBITDA is
-      calculated before interest and is therefore relatively independent of financing.
-    </p>
-  `,
-  related: ["ebitdaGuide","balanceSheetGuide","workingCapitalGuide"]
+intro:
+"Enterprise value represents the operating business. Equity value represents the value attributable to shareholders after financing adjustments.",
+
+content: `
+
+<div class="formula">
+Equity Value ≈ Enterprise Value − Debt + Excess Cash
+</div>
+
+<div class="example">
+
+Northstar enterprise value: $4,250,000<br>
+Debt: ($800,000)<br>
+Excess cash: +$350,000<br><br>
+
+<strong>Indicative equity value: $3,800,000</strong>
+
+</div>
+
+<p>
+EBITDA multiples commonly produce enterprise value because EBITDA is calculated
+before interest expense.
+</p>
+
+`,
+
+related: [
+"ebitdaGuide",
+"balanceSheetGuide",
+"workingCapitalGuide"
+]
+
 },
+
 
 ebitdaGuide: {
-  title: "EBITDA and valuation multiples",
-  topic: "Valuation",
-  level: "Beginner",
-  time: "10 min",
-  intro:
-    "EBITDA is a useful measure of operating earnings, but it is not the same as cash flow.",
-  content: `
-    <div class="formula">
-      EBITDA = EBIT + Depreciation + Amortization
-    </div>
 
-    <div class="statement-wrap">
-      <table class="statement">
-        <tr><th>Northstar Income Statement</th><th>Amount</th></tr>
-        <tr><td>Revenue</td><td>$5,000,000</td></tr>
-        <tr><td>Gross profit</td><td>$2,250,000</td></tr>
-        <tr class="line-highlight"><td>EBITDA</td><td>$850,000</td></tr>
-        <tr><td>D&A</td><td>($150,000)</td></tr>
-        <tr class="subtotal"><td>EBIT</td><td>$700,000</td></tr>
-      </table>
-    </div>
+title: "EBITDA and valuation multiples",
+topic: "Valuation",
+level: "Beginner",
+time: "10 min",
 
-    <div class="formula">
-      Enterprise Value ≈ Normalized EBITDA × Multiple
-    </div>
+intro:
+"EBITDA is a useful measure of operating earnings, but EBITDA is not the same as cash flow.",
 
-    <div class="example">
-      $850,000 × 5.0 = $4,250,000
-    </div>
+content: `
 
-    <div class="insight">
-      Northstar's $850,000 EBITDA becomes only about $325,000 of simplified
-      unlevered free cash flow.
-    </div>
-  `,
-  related: ["incomeStatementGuide","fcfGuide","maintenanceCapex","enterpriseEquity"]
+<div class="formula">
+EBITDA = EBIT + Depreciation + Amortization
+</div>
+
+<div class="statement-wrap">
+
+<table class="statement">
+
+<tr>
+<th>Northstar Income Statement</th>
+<th>Amount</th>
+</tr>
+
+<tr>
+<td>Revenue</td>
+<td>$5,000,000</td>
+</tr>
+
+<tr>
+<td>Gross profit</td>
+<td>$2,250,000</td>
+</tr>
+
+<tr class="line-highlight">
+<td>EBITDA</td>
+<td>$850,000</td>
+</tr>
+
+<tr>
+<td>D&A</td>
+<td>($150,000)</td>
+</tr>
+
+<tr class="subtotal">
+<td>EBIT</td>
+<td>$700,000</td>
+</tr>
+
+</table>
+
+</div>
+
+<div class="formula">
+Enterprise Value ≈ Normalized EBITDA × Multiple
+</div>
+
+<div class="example">
+$850,000 × 5 = $4,250,000
+</div>
+
+<div class="insight">
+Northstar's $850,000 EBITDA eventually becomes about $325,000 of simplified
+unlevered free cash flow.
+</div>
+
+`,
+
+related: [
+"incomeStatementGuide",
+"fcfGuide",
+"maintenanceCapex",
+"enterpriseEquity"
+]
+
 },
+
 
 incomeStatementGuide: {
-  title: "How to read an income statement like a buyer",
-  topic: "Financial Statements",
-  level: "Beginner",
-  time: "14 min",
-  intro:
-    "Follow Northstar Industrial Services Ltd. from $5 million of revenue to $450,000 of net income.",
-  content: `
-    <div class="statement-wrap">
-      <table class="statement">
-        <tr><th>Income Statement</th><th>2026</th></tr>
-        <tr><td>Revenue</td><td>$5,000,000</td></tr>
-        <tr><td>Cost of goods sold</td><td>($2,750,000)</td></tr>
-        <tr class="subtotal"><td>Gross Profit</td><td>$2,250,000</td></tr>
-        <tr><td class="indent">Wages & salaries</td><td>($850,000)</td></tr>
-        <tr><td class="indent">Rent</td><td>($180,000)</td></tr>
-        <tr><td class="indent">Insurance</td><td>($90,000)</td></tr>
-        <tr><td class="indent">Marketing</td><td>($80,000)</td></tr>
-        <tr><td class="indent">Other operating expenses</td><td>($200,000)</td></tr>
-        <tr class="line-highlight"><td>EBITDA</td><td>$850,000</td></tr>
-        <tr><td>Depreciation & amortization</td><td>($150,000)</td></tr>
-        <tr class="subtotal"><td>EBIT</td><td>$700,000</td></tr>
-        <tr><td>Interest expense</td><td>($100,000)</td></tr>
-        <tr><td>Income before tax</td><td>$600,000</td></tr>
-        <tr><td>Income tax expense</td><td>($150,000)</td></tr>
-        <tr class="total"><td>Net Income</td><td>$450,000</td></tr>
-      </table>
-    </div>
 
-    <div class="formula">
-      Gross Margin = $2,250,000 ÷ $5,000,000 = 45%
-    </div>
+title: "How to read an income statement like a buyer",
+topic: "Financial Statements",
+level: "Beginner",
+time: "14 min",
 
-    <div class="formula">
-      EBITDA Margin = $850,000 ÷ $5,000,000 = 17%
-    </div>
+intro:
+"Follow Northstar Industrial Services from $5 million of revenue to $450,000 of net income.",
 
-    <div class="valuation-box">
-      The income statement tells you about earning power. The next question is
-      how much of those earnings actually become cash.
-    </div>
-  `,
-  related: ["ebitdaGuide","cashFlowStatementGuide","fcfGuide","qualityEarnings"]
+content: `
+
+<div class="statement-wrap">
+
+<table class="statement">
+
+<tr>
+<th>Income Statement</th>
+<th>2026</th>
+</tr>
+
+<tr>
+<td>Revenue</td>
+<td>$5,000,000</td>
+</tr>
+
+<tr>
+<td>Cost of goods sold</td>
+<td>($2,750,000)</td>
+</tr>
+
+<tr class="subtotal">
+<td>Gross Profit</td>
+<td>$2,250,000</td>
+</tr>
+
+<tr>
+<td class="indent">Wages & salaries</td>
+<td>($850,000)</td>
+</tr>
+
+<tr>
+<td class="indent">Rent</td>
+<td>($180,000)</td>
+</tr>
+
+<tr>
+<td class="indent">Insurance</td>
+<td>($90,000)</td>
+</tr>
+
+<tr>
+<td class="indent">Marketing</td>
+<td>($80,000)</td>
+</tr>
+
+<tr>
+<td class="indent">Other operating expenses</td>
+<td>($200,000)</td>
+</tr>
+
+<tr class="line-highlight">
+<td>EBITDA</td>
+<td>$850,000</td>
+</tr>
+
+<tr>
+<td>Depreciation & amortization</td>
+<td>($150,000)</td>
+</tr>
+
+<tr class="subtotal">
+<td>EBIT</td>
+<td>$700,000</td>
+</tr>
+
+<tr>
+<td>Interest expense</td>
+<td>($100,000)</td>
+</tr>
+
+<tr>
+<td>Income before tax</td>
+<td>$600,000</td>
+</tr>
+
+<tr>
+<td>Income taxes</td>
+<td>($150,000)</td>
+</tr>
+
+<tr class="total">
+<td>Net Income</td>
+<td>$450,000</td>
+</tr>
+
+</table>
+
+</div>
+
+
+<h3>Gross margin</h3>
+
+<div class="formula">
+$2,250,000 ÷ $5,000,000 = 45%
+</div>
+
+
+<h3>EBITDA margin</h3>
+
+<div class="formula">
+$850,000 ÷ $5,000,000 = 17%
+</div>
+
+
+<div class="valuation-box">
+The income statement tells you about earning power.
+The next question is how much of those earnings become cash.
+</div>
+
+`,
+
+related: [
+"ebitdaGuide",
+"cashFlowStatementGuide",
+"fcfGuide",
+"qualityEarnings"
+]
+
 },
+
 
 balanceSheetGuide: {
-  title: "How to read a balance sheet like a buyer",
-  topic: "Financial Statements",
-  level: "Beginner",
-  time: "14 min",
-  intro:
-    "The balance sheet shows Northstar's assets, liabilities, debt, equity and operating capital.",
-  content: `
-    <div class="statement-wrap">
-      <table class="statement">
-        <tr><th>Assets</th><th>2026</th></tr>
-        <tr><td>Cash</td><td>$350,000</td></tr>
-        <tr><td>Accounts receivable</td><td>$800,000</td></tr>
-        <tr><td>Inventory</td><td>$450,000</td></tr>
-        <tr><td>Prepaid expenses</td><td>$50,000</td></tr>
-        <tr class="subtotal"><td>Total Current Assets</td><td>$1,650,000</td></tr>
-        <tr><td>Property & equipment</td><td>$1,200,000</td></tr>
-        <tr class="total"><td>Total Assets</td><td>$2,850,000</td></tr>
-      </table>
-    </div>
 
-    <div class="statement-wrap">
-      <table class="statement">
-        <tr><th>Liabilities & Equity</th><th>2026</th></tr>
-        <tr><td>Accounts payable</td><td>$400,000</td></tr>
-        <tr><td>Accrued expenses</td><td>$150,000</td></tr>
-        <tr><td>Current debt</td><td>$100,000</td></tr>
-        <tr><td>Long-term debt</td><td>$700,000</td></tr>
-        <tr class="subtotal"><td>Total Liabilities</td><td>$1,350,000</td></tr>
-        <tr><td>Share capital</td><td>$100,000</td></tr>
-        <tr><td>Retained earnings</td><td>$1,400,000</td></tr>
-        <tr class="subtotal"><td>Total Equity</td><td>$1,500,000</td></tr>
-        <tr class="total"><td>Total Liabilities + Equity</td><td>$2,850,000</td></tr>
-      </table>
-    </div>
+title: "How to read a balance sheet like a buyer",
+topic: "Financial Statements",
+level: "Beginner",
+time: "14 min",
 
-    <div class="formula">
-      Assets = Liabilities + Equity
-    </div>
+intro:
+"The balance sheet shows what Northstar owns, what it owes and the accounting equity belonging to shareholders.",
 
-    <p>
-      Northstar's $1.5 million of book equity is not necessarily its market value.
-      Buyers value the expected future economic performance of the business.
-    </p>
-  `,
-  related: ["workingCapitalGuide","enterpriseEquity","cashFlowStatementGuide"]
+content: `
+
+<div class="statement-wrap">
+
+<table class="statement">
+
+<tr>
+<th>Assets</th>
+<th>2026</th>
+</tr>
+
+<tr>
+<td>Cash</td>
+<td>$350,000</td>
+</tr>
+
+<tr>
+<td>Accounts receivable</td>
+<td>$800,000</td>
+</tr>
+
+<tr>
+<td>Inventory</td>
+<td>$450,000</td>
+</tr>
+
+<tr>
+<td>Prepaid expenses</td>
+<td>$50,000</td>
+</tr>
+
+<tr class="subtotal">
+<td>Total Current Assets</td>
+<td>$1,650,000</td>
+</tr>
+
+<tr>
+<td>Property & equipment</td>
+<td>$1,200,000</td>
+</tr>
+
+<tr class="total">
+<td>Total Assets</td>
+<td>$2,850,000</td>
+</tr>
+
+</table>
+
+</div>
+
+
+<div class="statement-wrap">
+
+<table class="statement">
+
+<tr>
+<th>Liabilities & Equity</th>
+<th>2026</th>
+</tr>
+
+<tr>
+<td>Accounts payable</td>
+<td>$400,000</td>
+</tr>
+
+<tr>
+<td>Accrued expenses</td>
+<td>$150,000</td>
+</tr>
+
+<tr>
+<td>Current debt</td>
+<td>$100,000</td>
+</tr>
+
+<tr>
+<td>Long-term debt</td>
+<td>$700,000</td>
+</tr>
+
+<tr class="subtotal">
+<td>Total Liabilities</td>
+<td>$1,350,000</td>
+</tr>
+
+<tr>
+<td>Share capital</td>
+<td>$100,000</td>
+</tr>
+
+<tr>
+<td>Retained earnings</td>
+<td>$1,400,000</td>
+</tr>
+
+<tr class="subtotal">
+<td>Total Equity</td>
+<td>$1,500,000</td>
+</tr>
+
+<tr class="total">
+<td>Total Liabilities + Equity</td>
+<td>$2,850,000</td>
+</tr>
+
+</table>
+
+</div>
+
+<div class="formula">
+Assets = Liabilities + Equity
+</div>
+
+<div class="insight">
+Accounting equity is not automatically the market value of the company.
+</div>
+
+`,
+
+related: [
+"workingCapitalGuide",
+"enterpriseEquity",
+"cashFlowStatementGuide"
+]
+
 },
+
 
 cashFlowStatementGuide: {
-  title: "The cash flow statement: where the money actually went",
-  topic: "Financial Statements",
-  level: "Beginner",
-  time: "15 min",
-  intro:
-    "Northstar earned $450,000 of accounting profit, but cash increased by only $50,000.",
-  content: `
-    <div class="statement-wrap">
-      <table class="statement">
-        <tr><th>Cash Flow Statement</th><th>2026</th></tr>
-        <tr><td>Net income</td><td>$450,000</td></tr>
-        <tr><td>Add D&A</td><td>$150,000</td></tr>
-        <tr><td>Increase in receivables</td><td>($100,000)</td></tr>
-        <tr><td>Increase in inventory</td><td>($50,000)</td></tr>
-        <tr><td>Increase in payables</td><td>$30,000</td></tr>
-        <tr><td>Increase in accrued expenses</td><td>$20,000</td></tr>
-        <tr class="subtotal"><td>Operating Cash Flow</td><td>$500,000</td></tr>
-        <tr><td>Capital expenditures</td><td>($250,000)</td></tr>
-        <tr><td>Debt repayment</td><td>($100,000)</td></tr>
-        <tr><td>Dividends</td><td>($100,000)</td></tr>
-        <tr class="total"><td>Net Increase in Cash</td><td>$50,000</td></tr>
-      </table>
-    </div>
 
-    <div class="insight">
-      Profit tells you whether the company earned money. The cash flow statement
-      tells you where the actual cash went.
-    </div>
-  `,
-  related: ["fcfGuide","workingCapitalGuide","maintenanceCapex","incomeStatementGuide"]
+title: "The cash flow statement",
+topic: "Financial Statements",
+level: "Beginner",
+time: "15 min",
+
+intro:
+"Northstar earned $450,000 of accounting profit, but its cash balance increased by only $50,000.",
+
+content: `
+
+<div class="statement-wrap">
+
+<table class="statement">
+
+<tr>
+<th>Cash Flow Statement</th>
+<th>2026</th>
+</tr>
+
+<tr>
+<td>Net income</td>
+<td>$450,000</td>
+</tr>
+
+<tr>
+<td>Add D&A</td>
+<td>$150,000</td>
+</tr>
+
+<tr>
+<td>Increase in receivables</td>
+<td>($100,000)</td>
+</tr>
+
+<tr>
+<td>Increase in inventory</td>
+<td>($50,000)</td>
+</tr>
+
+<tr>
+<td>Increase in payables</td>
+<td>$30,000</td>
+</tr>
+
+<tr>
+<td>Increase in accrued expenses</td>
+<td>$20,000</td>
+</tr>
+
+<tr class="subtotal">
+<td>Operating Cash Flow</td>
+<td>$500,000</td>
+</tr>
+
+<tr>
+<td>Capital expenditures</td>
+<td>($250,000)</td>
+</tr>
+
+<tr>
+<td>Debt repayment</td>
+<td>($100,000)</td>
+</tr>
+
+<tr>
+<td>Dividends</td>
+<td>($100,000)</td>
+</tr>
+
+<tr class="total">
+<td>Net Increase in Cash</td>
+<td>$50,000</td>
+</tr>
+
+</table>
+
+</div>
+
+<div class="insight">
+Profit tells you whether the company earned money.
+The cash flow statement tells you where the actual cash went.
+</div>
+
+`,
+
+related: [
+"fcfGuide",
+"workingCapitalGuide",
+"maintenanceCapex",
+"incomeStatementGuide"
+]
+
 },
+
 
 workingCapitalGuide: {
-  title: "Working capital",
-  topic: "Deal Mechanics",
-  level: "Intermediate",
-  time: "13 min",
-  intro:
-    "Working capital is real money tied up in receivables, inventory and operating liabilities.",
-  content: `
-    <div class="statement-wrap">
-      <table class="statement">
-        <tr><th>Operating Account</th><th>Amount</th></tr>
-        <tr><td>Accounts receivable</td><td>$800,000</td></tr>
-        <tr><td>Inventory</td><td>$450,000</td></tr>
-        <tr><td>Accounts payable</td><td>($400,000)</td></tr>
-        <tr><td>Accrued expenses</td><td>($150,000)</td></tr>
-        <tr class="total"><td>Operating NWC</td><td>$700,000</td></tr>
-      </table>
-    </div>
 
-    <div class="formula">
-      NWC = Receivables + Inventory − Payables − Accrued Liabilities
-    </div>
+title: "Working capital",
+topic: "Deal Mechanics",
+level: "Intermediate",
+time: "13 min",
 
-    <p>
-      Northstar's NWC increased from $600,000 to $700,000 during the year.
-      The $100,000 increase is a use of cash.
-    </p>
+intro:
+"Working capital represents operating cash tied up in receivables, inventory and operating liabilities.",
 
-    <div class="valuation-box">
-      Buyers often negotiate a normalized working-capital target so the company
-      is delivered with enough operating capital to function after closing.
-    </div>
-  `,
-  related: ["balanceSheetGuide","fcfGuide","buyerChecklist"]
+content: `
+
+<div class="statement-wrap">
+
+<table class="statement">
+
+<tr>
+<th>Operating Account</th>
+<th>Amount</th>
+</tr>
+
+<tr>
+<td>Accounts receivable</td>
+<td>$800,000</td>
+</tr>
+
+<tr>
+<td>Inventory</td>
+<td>$450,000</td>
+</tr>
+
+<tr>
+<td>Accounts payable</td>
+<td>($400,000)</td>
+</tr>
+
+<tr>
+<td>Accrued expenses</td>
+<td>($150,000)</td>
+</tr>
+
+<tr class="total">
+<td>Operating NWC</td>
+<td>$700,000</td>
+</tr>
+
+</table>
+
+</div>
+
+<div class="formula">
+NWC = Receivables + Inventory − Payables − Accrued Liabilities
+</div>
+
+<p>
+Northstar's working capital increased from $600,000 to $700,000.
+That $100,000 increase consumes cash.
+</p>
+
+<div class="valuation-box">
+Buyers commonly negotiate a normalized working-capital target at closing.
+</div>
+
+`,
+
+related: [
+"balanceSheetGuide",
+"fcfGuide",
+"buyerChecklist"
+]
+
 },
+
 
 fcfGuide: {
-  title: "Free cash flow",
-  topic: "Cash Flow",
-  level: "Intermediate",
-  time: "14 min",
-  intro:
-    "Free cash flow shows how much cash Northstar generates after taxes, reinvestment and working-capital requirements.",
-  content: `
-    <div class="formula">
-      Unlevered FCF =
-      NOPAT + D&A − CapEx − Increase in NWC
-    </div>
 
-    <div class="statement-wrap">
-      <table class="statement">
-        <tr><th>FCF Calculation</th><th>Amount</th></tr>
-        <tr><td>EBIT</td><td>$700,000</td></tr>
-        <tr><td>Operating tax @ 25%</td><td>($175,000)</td></tr>
-        <tr class="subtotal"><td>NOPAT</td><td>$525,000</td></tr>
-        <tr><td>Add D&A</td><td>$150,000</td></tr>
-        <tr><td>Less CapEx</td><td>($250,000)</td></tr>
-        <tr><td>Less increase in NWC</td><td>($100,000)</td></tr>
-        <tr class="total"><td>Unlevered FCF</td><td>$325,000</td></tr>
-      </table>
-    </div>
+title: "Free cash flow",
+topic: "Cash Flow",
+level: "Intermediate",
+time: "14 min",
 
-    <div class="insight">
-      $850,000 EBITDA → $700,000 EBIT → $525,000 NOPAT → $325,000 FCF
-    </div>
+intro:
+"Free cash flow shows how much operating cash remains after taxes, reinvestment and working-capital needs.",
 
-    <div class="valuation-box">
-      DCF valuation directly values expected future free cash flow.
-    </div>
-  `,
-  related: ["maintenanceCapex","workingCapitalGuide","dcfGuide"]
+content: `
+
+<div class="formula">
+Unlevered FCF =
+NOPAT + D&A − CapEx − Increase in NWC
+</div>
+
+<div class="statement-wrap">
+
+<table class="statement">
+
+<tr>
+<th>FCF Calculation</th>
+<th>Amount</th>
+</tr>
+
+<tr>
+<td>EBIT</td>
+<td>$700,000</td>
+</tr>
+
+<tr>
+<td>Operating tax @ 25%</td>
+<td>($175,000)</td>
+</tr>
+
+<tr class="subtotal">
+<td>NOPAT</td>
+<td>$525,000</td>
+</tr>
+
+<tr>
+<td>Add D&A</td>
+<td>$150,000</td>
+</tr>
+
+<tr>
+<td>Less CapEx</td>
+<td>($250,000)</td>
+</tr>
+
+<tr>
+<td>Less increase in NWC</td>
+<td>($100,000)</td>
+</tr>
+
+<tr class="total">
+<td>Unlevered FCF</td>
+<td>$325,000</td>
+</tr>
+
+</table>
+
+</div>
+
+<div class="insight">
+$850,000 EBITDA → $700,000 EBIT → $525,000 NOPAT → $325,000 FCF
+</div>
+
+<div class="valuation-box">
+DCF valuation directly values expected future free cash flow.
+</div>
+
+`,
+
+related: [
+"maintenanceCapex",
+"workingCapitalGuide",
+"dcfGuide"
+]
+
 },
+
 
 maintenanceCapex: {
-  title: "Maintenance CapEx vs growth CapEx",
-  topic: "Cash Flow",
-  level: "Intermediate",
-  time: "9 min",
-  intro:
-    "Maintenance CapEx preserves existing earnings. Growth CapEx is intended to create additional capacity or earnings.",
-  content: `
-    <p>
-      If Northstar's $250,000 of annual CapEx consists of $200,000 of maintenance
-      spending and $50,000 of growth spending, a large amount of cash is required
-      simply to preserve current operations.
-    </p>
 
-    <div class="valuation-box">
-      High maintenance CapEx can make EBITDA overstate the economic cash generation
-      of a business.
-    </div>
-  `,
-  related: ["fcfGuide","ebitdaGuide"]
+title: "Maintenance CapEx vs growth CapEx",
+topic: "Cash Flow",
+level: "Intermediate",
+time: "9 min",
+
+intro:
+"Maintenance CapEx preserves existing earning capacity while growth CapEx is intended to create future growth.",
+
+content: `
+
+<p>
+Assume Northstar spends $250,000 on capital expenditures.
+</p>
+
+<div class="example">
+Maintenance CapEx: $200,000<br>
+Growth CapEx: $50,000
+</div>
+
+<p>
+A buyer should recognize that much of this spending is required merely
+to keep the current business operating.
+</p>
+
+<div class="valuation-box">
+High maintenance CapEx can make EBITDA materially overstate economic cash generation.
+</div>
+
+`,
+
+related: [
+"fcfGuide",
+"ebitdaGuide"
+]
+
 },
+
 
 dcfGuide: {
-  title: "DCF valuation from beginning to end",
-  topic: "Valuation",
-  level: "Intermediate",
-  time: "15 min",
-  intro:
-    "A discounted cash flow valuation estimates today's value of future free cash flows.",
-  content: `
-    <div class="formula">
-      Present Value = Future Cash Flow ÷ (1 + Discount Rate)^Year
-    </div>
 
-    <p>
-      Start with Northstar's current $325,000 of simplified FCF. Forecast revenue,
-      margins, taxes, CapEx and working capital over several years.
-    </p>
+title: "Discounted cash flow valuation",
+topic: "Valuation",
+level: "Intermediate",
+time: "15 min",
 
-    <h3>Terminal value</h3>
+intro:
+"A DCF estimates today's value of the future free cash flows a business is expected to generate.",
 
-    <div class="formula">
-      Terminal Value =
-      Next Year's FCF ÷
-      (Discount Rate − Terminal Growth Rate)
-    </div>
+content: `
 
-    <div class="warning">
-      DCF values are highly sensitive to growth, discount-rate and terminal assumptions.
-    </div>
-  `,
-  related: ["fcfGuide","waccGuide","terminalValueGuide","dcfSensitivity"]
+<div class="formula">
+Present Value =
+Future Cash Flow ÷ (1 + Discount Rate)^Year
+</div>
+
+<h3>Start with free cash flow</h3>
+
+<p>
+Suppose Northstar currently generates $325,000 of simplified unlevered FCF.
+You forecast how that cash flow changes over the next several years.
+</p>
+
+<h3>Discount each year</h3>
+
+<p>
+Cash received in the future is worth less than cash received today.
+Riskier cash flows are also discounted more heavily.
+</p>
+
+<h3>Terminal value</h3>
+
+<div class="formula">
+Terminal Value =
+Next Year's FCF ÷
+(Discount Rate − Terminal Growth Rate)
+</div>
+
+<div class="warning">
+DCF valuations are highly sensitive to assumptions.
+A precise-looking answer is not necessarily a precise economic truth.
+</div>
+
+`,
+
+related: [
+"fcfGuide",
+"waccGuide",
+"terminalValueGuide",
+"dcfSensitivity"
+]
+
 },
+
 
 waccGuide: {
-  title: "WACC and discount rates",
-  topic: "Valuation",
-  level: "Advanced",
-  time: "12 min",
-  intro:
-    "The discount rate reflects the return investors require for the time and risk involved.",
-  content: `
-    <div class="formula">
-      Greater Risk → Higher Required Return → Lower Present Value
-    </div>
 
-    <p>
-      Customer concentration, unstable margins, owner dependence and small-business
-      risk can all influence how risky future cash flows appear.
-    </p>
-  `,
-  related: ["dcfGuide","businessQuality"]
+title: "WACC and discount rates",
+topic: "Valuation",
+level: "Advanced",
+time: "12 min",
+
+intro:
+"The discount rate reflects the required return for the time and risk involved in receiving future cash flows.",
+
+content: `
+
+<div class="formula">
+Greater Risk → Higher Required Return → Lower Present Value
+</div>
+
+<p>
+Customer concentration, unstable margins, owner dependence,
+competitive threats and small-company risks can increase uncertainty.
+</p>
+
+<div class="valuation-box">
+A riskier company generally needs either a lower purchase price
+or stronger expected future cash flows to offer the same expected return.
+</div>
+
+`,
+
+related: [
+"dcfGuide",
+"businessQuality"
+]
+
 },
+
 
 terminalValueGuide: {
-  title: "Terminal value",
-  topic: "Valuation",
-  level: "Advanced",
-  time: "10 min",
-  intro:
-    "Terminal value estimates the value of cash flows beyond the explicit forecast period.",
-  content: `
-    <div class="formula">
-      Terminal Value =
-      Next Year's FCF ÷
-      (Discount Rate − Terminal Growth Rate)
-    </div>
 
-    <div class="warning">
-      Terminal value can represent a large portion of total DCF value,
-      making the assumptions especially important.
-    </div>
-  `,
-  related: ["dcfGuide","waccGuide","dcfSensitivity"]
+title: "Terminal value",
+topic: "Valuation",
+level: "Advanced",
+time: "10 min",
+
+intro:
+"Terminal value estimates the value of cash flows occurring after the explicit forecast period.",
+
+content: `
+
+<div class="formula">
+Terminal Value =
+Next Year's FCF ÷
+(Discount Rate − Terminal Growth Rate)
+</div>
+
+<p>
+Terminal value often represents a large percentage of total DCF value.
+That means small assumption changes can have large effects.
+</p>
+
+`,
+
+related: [
+"dcfGuide",
+"waccGuide",
+"dcfSensitivity"
+]
+
 },
+
 
 dcfSensitivity: {
-  title: "DCF sensitivity analysis",
-  topic: "Valuation",
-  level: "Advanced",
-  time: "9 min",
-  intro:
-    "A DCF should produce a range of possible values rather than pretending one number is perfectly precise.",
-  content: `
-    <div class="example">
-      10% discount rate → higher value<br>
-      12% discount rate → lower value<br>
-      14% discount rate → lower still
-    </div>
 
-    <p>
-      Repeat the analysis with different terminal growth rates and operating forecasts.
-    </p>
-  `,
-  related: ["dcfGuide","waccGuide","terminalValueGuide"]
+title: "DCF sensitivity analysis",
+topic: "Valuation",
+level: "Advanced",
+time: "9 min",
+
+intro:
+"A DCF should usually be considered a range of possible values rather than one perfectly precise answer.",
+
+content: `
+
+<div class="example">
+10% discount rate → higher valuation<br>
+12% discount rate → lower valuation<br>
+14% discount rate → lower again
+</div>
+
+<p>
+Repeat the same analysis with different terminal growth,
+margin and operating assumptions.
+</p>
+
+<div class="insight">
+Understanding what drives the valuation is often more useful than
+producing one highly precise-looking number.
+</div>
+
+`,
+
+related: [
+"dcfGuide",
+"waccGuide",
+"terminalValueGuide"
+]
+
 },
+
 
 buyerChecklist: {
-  title: "What buyers actually look for",
-  topic: "Buying",
-  level: "Beginner",
-  time: "13 min",
-  intro:
-    "The main question is whether the company's earnings and cash flow will survive a change of ownership.",
-  content: `
-    <ul>
-      <li>Sustainable earnings</li>
-      <li>Recurring revenue</li>
-      <li>Customer concentration</li>
-      <li>Owner dependence</li>
-      <li>Management depth</li>
-      <li>Maintenance CapEx</li>
-      <li>Working-capital requirements</li>
-      <li>Debt</li>
-      <li>Legal and operational risks</li>
-    </ul>
 
-    <div class="insight">
-      A buyer is constantly asking: how likely is this cash flow to continue
-      after the seller leaves?
-    </div>
-  `,
-  related: ["businessQuality","customerConcentration","ownerDependence","dueDiligenceGuide"]
+title: "What buyers actually look for",
+topic: "Buying",
+level: "Beginner",
+time: "13 min",
+
+intro:
+"A buyer wants confidence that earnings and cash flow will continue after ownership changes.",
+
+content: `
+
+<ul>
+<li>Sustainable earnings</li>
+<li>Recurring revenue</li>
+<li>Customer concentration</li>
+<li>Owner dependence</li>
+<li>Management depth</li>
+<li>Maintenance CapEx</li>
+<li>Working-capital needs</li>
+<li>Debt</li>
+<li>Legal risks</li>
+<li>Operational risks</li>
+</ul>
+
+<div class="insight">
+The buyer is constantly asking:
+How likely is this cash flow to continue after the seller leaves?
+</div>
+
+`,
+
+related: [
+"businessQuality",
+"customerConcentration",
+"ownerDependence",
+"dueDiligenceGuide"
+]
+
 },
+
 
 qualityEarnings: {
-  title: "Quality of earnings and normalization",
-  topic: "Buying",
-  level: "Intermediate",
-  time: "12 min",
-  intro:
-    "Normalization attempts to identify the sustainable earnings a buyer should expect under normal ownership.",
-  content: `
-    <div class="example">
-      Reported EBITDA: $800,000<br>
-      One-time legal expense: +$100,000<br>
-      Excess owner compensation: +$150,000<br><br>
-      <strong>Normalized EBITDA: $1,050,000</strong>
-    </div>
 
-    <p>
-      Every adjustment should be supportable. Recurring expenses should not be
-      disguised as one-time add-backs.
-    </p>
-  `,
-  related: ["ebitdaGuide","buyerChecklist","dueDiligenceGuide"]
+title: "Quality of earnings and normalization",
+topic: "Buying",
+level: "Intermediate",
+time: "12 min",
+
+intro:
+"Normalization attempts to determine the sustainable earnings that should remain under normal ownership.",
+
+content: `
+
+<div class="example">
+Reported EBITDA: $800,000<br>
+One-time legal expense: +$100,000<br>
+Excess owner compensation: +$150,000<br><br>
+
+<strong>Normalized EBITDA: $1,050,000</strong>
+</div>
+
+<p>
+Every adjustment should be supportable.
+Recurring expenses should not be disguised as one-time costs.
+</p>
+
+`,
+
+related: [
+"ebitdaGuide",
+"buyerChecklist",
+"dueDiligenceGuide"
+]
+
 },
+
 
 customerConcentration: {
-  title: "Customer concentration",
-  topic: "Business Quality",
-  level: "Intermediate",
-  time: "9 min",
-  intro:
-    "A company can be profitable yet risky if a large share of sales depends on one customer.",
-  content: `
-    <div class="example">
-      Revenue: $5,000,000<br>
-      Largest customer: $2,000,000<br><br>
-      Customer concentration = 40%
-    </div>
 
-    <p>
-      Losing that relationship could severely reduce earnings while many fixed costs remain.
-    </p>
-  `,
-  related: ["businessQuality","ownerDependence","buyerChecklist"]
+title: "Customer concentration",
+topic: "Business Quality",
+level: "Intermediate",
+time: "9 min",
+
+intro:
+"A profitable company can still be risky when a large share of sales depends on one customer.",
+
+content: `
+
+<div class="example">
+Total revenue: $5,000,000<br>
+Largest customer: $2,000,000<br><br>
+
+Customer concentration = 40%
+</div>
+
+<p>
+Losing that customer could severely reduce revenue while many fixed costs remain.
+</p>
+
+<div class="valuation-box">
+Higher concentration generally means more risk and can justify a lower valuation multiple.
+</div>
+
+`,
+
+related: [
+"businessQuality",
+"ownerDependence",
+"buyerChecklist"
+]
+
 },
+
 
 ownerDependence: {
-  title: "Owner dependence",
-  topic: "Business Quality",
-  level: "Intermediate",
-  time: "9 min",
-  intro:
-    "A business may be difficult to transfer if the seller controls every key relationship and decision.",
-  content: `
-    <ul>
-      <li>Owner handles major customers</li>
-      <li>No second-level management</li>
-      <li>Processes are undocumented</li>
-      <li>Owner performs essential technical work</li>
-    </ul>
-  `,
-  related: ["businessQuality","buyerChecklist","customerConcentration"]
+
+title: "Owner dependence",
+topic: "Business Quality",
+level: "Intermediate",
+time: "9 min",
+
+intro:
+"A company can be difficult to transfer when the seller personally controls every important relationship and process.",
+
+content: `
+
+<ul>
+<li>Owner handles major customers</li>
+<li>No second-level management</li>
+<li>Processes are undocumented</li>
+<li>Owner approves all important decisions</li>
+<li>Owner performs essential technical work</li>
+</ul>
+
+<div class="valuation-box">
+Reducing owner dependence can make a business more transferable and more attractive to buyers.
+</div>
+
+`,
+
+related: [
+"businessQuality",
+"buyerChecklist",
+"customerConcentration"
+]
+
 },
+
 
 businessQuality: {
-  title: "Why some businesses deserve higher valuation multiples",
-  topic: "Business Quality",
-  level: "Intermediate",
-  time: "11 min",
-  intro:
-    "Two businesses with identical EBITDA can deserve very different valuations.",
-  content: `
-    <ul>
-      <li>Recurring revenue</li>
-      <li>Diversified customers</li>
-      <li>Pricing power</li>
-      <li>Strong management</li>
-      <li>Low maintenance CapEx</li>
-      <li>Strong cash conversion</li>
-      <li>Sustainable growth</li>
-    </ul>
 
-    <div class="insight">
-      A multiple is partly a compressed expression of growth, risk and cash-flow quality.
-    </div>
-  `,
-  related: ["customerConcentration","ownerDependence","fcfGuide","waccGuide"]
+title: "Why some businesses deserve higher multiples",
+topic: "Business Quality",
+level: "Intermediate",
+time: "11 min",
+
+intro:
+"Two businesses with identical EBITDA can deserve very different valuations.",
+
+content: `
+
+<ul>
+<li>Recurring revenue</li>
+<li>Diversified customers</li>
+<li>Pricing power</li>
+<li>Strong management</li>
+<li>Low maintenance CapEx</li>
+<li>Strong cash conversion</li>
+<li>Defensible competitive advantages</li>
+<li>Sustainable growth</li>
+</ul>
+
+<div class="insight">
+A valuation multiple is partly a compressed expression
+of growth, risk and cash-flow quality.
+</div>
+
+`,
+
+related: [
+"customerConcentration",
+"ownerDependence",
+"fcfGuide",
+"waccGuide"
+]
+
 },
 
-dueDiligenceGuide: {
-  title: "Due diligence",
-  topic: "Buying",
-  level: "Intermediate",
-  time: "14 min",
-  intro:
-    "Due diligence tests whether the company actually matches the story presented by the seller.",
-  content: `
-    <h3>Financial</h3>
-    <ul>
-      <li>Financial statements</li>
-      <li>Tax returns</li>
-      <li>Bank statements</li>
-      <li>Receivable aging</li>
-      <li>Inventory</li>
-      <li>Debt</li>
-      <li>CapEx history</li>
-      <li>Quality of earnings</li>
-    </ul>
 
-    <h3>Commercial and operational</h3>
-    <ul>
-      <li>Customer concentration</li>
-      <li>Retention</li>
-      <li>Pricing</li>
-      <li>Management</li>
-      <li>Employees</li>
-      <li>Suppliers</li>
-      <li>Equipment</li>
-    </ul>
-  `,
-  related: ["qualityEarnings","buyerChecklist","workingCapitalGuide"]
+dueDiligenceGuide: {
+
+title: "Due diligence",
+topic: "Buying",
+level: "Intermediate",
+time: "14 min",
+
+intro:
+"Due diligence tests whether the company actually matches the story presented by the seller.",
+
+content: `
+
+<h3>Financial</h3>
+
+<ul>
+<li>Financial statements</li>
+<li>Tax returns</li>
+<li>Bank statements</li>
+<li>Receivable aging</li>
+<li>Inventory</li>
+<li>Debt</li>
+<li>CapEx history</li>
+<li>Quality of earnings</li>
+</ul>
+
+<h3>Commercial</h3>
+
+<ul>
+<li>Customer concentration</li>
+<li>Customer retention</li>
+<li>Pricing</li>
+<li>Competition</li>
+</ul>
+
+<h3>Operational</h3>
+
+<ul>
+<li>Management</li>
+<li>Employees</li>
+<li>Suppliers</li>
+<li>Equipment</li>
+</ul>
+
+`,
+
+related: [
+"qualityEarnings",
+"buyerChecklist",
+"workingCapitalGuide"
+]
+
 }
 
 };
 
 
-/* ---------------------------
-   BUILT-IN ARTICLE SYSTEM
----------------------------- */
+/* =====================================
+   ARTICLE UI
+===================================== */
 
 function renderArticleCards() {
 
-  const list = document.getElementById("articleList");
-  const featured = document.getElementById("featuredArticles");
+const list =
+document.getElementById("articleList");
 
-  list.innerHTML = "";
-  featured.innerHTML = "";
+const featured =
+document.getElementById("featuredArticles");
 
-  Object.keys(articles).forEach(id => {
+list.innerHTML = "";
+featured.innerHTML = "";
 
-    const a = articles[id];
+Object.keys(articles).forEach(id => {
 
-    const html = `
-      <div
-        class="card article-card searchableArticle"
-        data-topic="${a.topic}"
-        data-search="${(
-          a.title + " " +
-          a.topic + " " +
-          a.level + " " +
-          a.intro
-        ).toLowerCase()}"
-        onclick="openArticle('${id}')"
-      >
+const a =
+articles[id];
 
-        <div class="meta-row">
-          <div class="badge">${a.topic}</div>
-          <div class="badge ${a.level.toLowerCase()}">${a.level}</div>
-        </div>
+const html = `
 
-        <h3>${a.title}</h3>
+<div
+class="card article-card searchableArticle"
+data-topic="${a.topic}"
+data-search="${(
+a.title + " " +
+a.topic + " " +
+a.level + " " +
+a.intro
+).toLowerCase()}"
+onclick="openArticle('${id}')"
+>
 
-        <p>${a.intro}</p>
+<div class="meta-row">
 
-        <div class="read-time">${a.time} read</div>
+<div class="badge">
+${a.topic}
+</div>
 
-      </div>
-    `;
+<div class="badge ${a.level.toLowerCase()}">
+${a.level}
+</div>
 
-    list.insertAdjacentHTML("beforeend", html);
+</div>
 
-    if ([
-      "incomeStatementGuide",
-      "balanceSheetGuide",
-      "fcfGuide",
-      "ebitdaGuide",
-      "dcfGuide",
-      "buyerChecklist"
-    ].includes(id)) {
-      featured.insertAdjacentHTML("beforeend", html);
-    }
+<h3>
+${a.title}
+</h3>
 
-  });
+<p>
+${a.intro}
+</p>
+
+<div class="read-time">
+${a.time} read
+</div>
+
+</div>
+
+`;
+
+list.insertAdjacentHTML(
+"beforeend",
+html
+);
+
+if ([
+"incomeStatementGuide",
+"balanceSheetGuide",
+"fcfGuide",
+"ebitdaGuide",
+"dcfGuide",
+"buyerChecklist"
+].includes(id)) {
+
+featured.insertAdjacentHTML(
+"beforeend",
+html
+);
+
+}
+
+});
 
 }
 
 
 function openArticle(id) {
 
-  const article = articles[id];
+const article =
+articles[id];
 
-  if (!article) return;
+if (!article) return;
 
-  const overlay = document.getElementById("overlay");
+const overlay =
+document.getElementById("overlay");
 
-  const current = overlay.dataset.current;
+const current =
+overlay.dataset.current;
 
-  if (
-    overlay.style.display === "block" &&
-    current &&
-    current !== id
-  ) {
-    articleHistory.push(current);
-  }
+if (
+overlay.style.display === "block" &&
+current &&
+current !== id
+) {
 
-  overlay.dataset.current = id;
+articleHistory.push(current);
 
-  document.getElementById("articleMeta").textContent =
-    article.topic + " · " +
-    article.level + " · " +
-    article.time;
+}
 
-  document.getElementById("articleTitle").textContent =
-    article.title;
+overlay.dataset.current = id;
 
-  document.getElementById("articleIntro").textContent =
-    article.intro;
+document.getElementById("articleMeta")
+.textContent =
+article.topic +
+" · " +
+article.level +
+" · " +
+article.time;
 
-  document.getElementById("articleContent").innerHTML =
-    article.content;
+document.getElementById("articleTitle")
+.textContent =
+article.title;
 
-  renderRelated(article.related || []);
+document.getElementById("articleIntro")
+.textContent =
+article.intro;
 
-  overlay.style.display = "block";
+document.getElementById("articleContent")
+.innerHTML =
+article.content;
 
-  document.body.style.overflow = "hidden";
+renderRelated(
+article.related || []
+);
 
-  overlay.scrollTop = 0;
+overlay.style.display =
+"block";
+
+document.body.style.overflow =
+"hidden";
+
+overlay.scrollTop = 0;
 
 }
 
 
 function renderRelated(ids) {
 
-  const box = document.getElementById("relatedArticles");
+const box =
+document.getElementById("relatedArticles");
 
-  if (!ids.length) {
-    box.innerHTML = "";
-    return;
-  }
+if (!ids.length) {
 
-  let html = "<h3>Continue learning</h3>";
+box.innerHTML = "";
+return;
 
-  ids.forEach(id => {
+}
 
-    const a = articles[id];
+let html =
+"<h3>Continue learning</h3>";
 
-    if (!a) return;
+ids.forEach(id => {
 
-    html += `
-      <button onclick="openArticle('${id}')">
-        ${a.title}
-        <span>${a.level} · ${a.time}</span>
-      </button>
-    `;
+const a =
+articles[id];
 
-  });
+if (!a) return;
 
-  box.innerHTML = html;
+html += `
+
+<button onclick="openArticle('${id}')">
+
+${a.title}
+
+<span>
+${a.level} · ${a.time}
+</span>
+
+</button>
+
+`;
+
+});
+
+box.innerHTML =
+html;
 
 }
 
 
 function goArticleBack() {
 
-  if (articleHistory.length) {
+if (articleHistory.length) {
 
-    const id = articleHistory.pop();
+const id =
+articleHistory.pop();
 
-    const article = articles[id];
+const article =
+articles[id];
 
-    if (!article) return;
+const overlay =
+document.getElementById("overlay");
 
-    const overlay = document.getElementById("overlay");
+overlay.dataset.current =
+id;
 
-    overlay.dataset.current = id;
+document.getElementById("articleMeta")
+.textContent =
+article.topic +
+" · " +
+article.level +
+" · " +
+article.time;
 
-    document.getElementById("articleMeta").textContent =
-      article.topic + " · " +
-      article.level + " · " +
-      article.time;
+document.getElementById("articleTitle")
+.textContent =
+article.title;
 
-    document.getElementById("articleTitle").textContent =
-      article.title;
+document.getElementById("articleIntro")
+.textContent =
+article.intro;
 
-    document.getElementById("articleIntro").textContent =
-      article.intro;
+document.getElementById("articleContent")
+.innerHTML =
+article.content;
 
-    document.getElementById("articleContent").innerHTML =
-      article.content;
+renderRelated(
+article.related || []
+);
 
-    renderRelated(article.related || []);
+overlay.scrollTop = 0;
 
-    overlay.scrollTop = 0;
+} else {
 
-  } else {
+closeArticle();
 
-    closeArticle();
-
-  }
+}
 
 }
 
 
 function closeArticle() {
 
-  document.getElementById("overlay").style.display = "none";
+document.getElementById("overlay")
+.style.display =
+"none";
 
-  document.body.style.overflow = "";
+document.body.style.overflow =
+"";
 
-  articleHistory.length = 0;
+articleHistory.length = 0;
 
 }
 
 
-/* ---------------------------
+/* =====================================
    NAVIGATION
----------------------------- */
+===================================== */
 
 function showSection(section, button) {
 
-  [
-    "home",
-    "articles",
-    "series",
-    "calculators",
-    "news"
-  ].forEach(id => {
+[
+"home",
+"articles",
+"series",
+"calculators",
+"news"
+].forEach(id => {
 
-    document.getElementById(id + "Section")
-      .classList.add("hidden");
+document
+.getElementById(id + "Section")
+.classList.add("hidden");
 
-  });
+});
 
-  document.getElementById(section + "Section")
-    .classList.remove("hidden");
+document
+.getElementById(section + "Section")
+.classList.remove("hidden");
 
-  document.querySelectorAll(".nav button")
-    .forEach(btn => btn.classList.remove("active"));
+document
+.querySelectorAll(".nav button")
+.forEach(btn =>
+btn.classList.remove("active")
+);
 
-  button.classList.add("active");
+button.classList.add("active");
 
-  const searchWrap =
-    document.getElementById("searchWrap");
+const searchWrap =
+document.getElementById("searchWrap");
 
-  if (section === "news" || section === "calculators") {
-    searchWrap.classList.add("hidden");
-  } else {
-    searchWrap.classList.remove("hidden");
-  }
+if (
+section === "news" ||
+section === "calculators"
+) {
 
-  if (section === "news" && !newsLoaded) {
-    refreshNews();
-  }
+searchWrap.classList.add("hidden");
 
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
+} else {
+
+searchWrap.classList.remove("hidden");
+
+}
+
+if (
+section === "news" &&
+!newsInitialized
+) {
+
+initializeNews();
+
+}
+
+window.scrollTo({
+top: 0,
+behavior: "smooth"
+});
 
 }
 
 
 function openNewsTab() {
 
-  const buttons =
-    document.querySelectorAll(".nav button");
-
-  showSection(
-    "news",
-    buttons[4]
-  );
+showSection(
+"news",
+document.querySelectorAll(".nav button")[4]
+);
 
 }
 
 
 function filterTopic(topic) {
 
-  showSection(
-    "articles",
-    document.querySelectorAll(".nav button")[1]
-  );
+showSection(
+"articles",
+document.querySelectorAll(".nav button")[1]
+);
 
-  document.querySelectorAll("#articleList .searchableArticle")
-    .forEach(card => {
+document
+.querySelectorAll("#articleList .searchableArticle")
+.forEach(card => {
 
-      if (card.dataset.topic === topic) {
-        card.classList.remove("hidden");
-      } else {
-        card.classList.add("hidden");
-      }
+if (
+card.dataset.topic === topic
+) {
 
-    });
+card.classList.remove("hidden");
 
-  document.getElementById("search").value = "";
+} else {
+
+card.classList.add("hidden");
+
+}
+
+});
+
+document.getElementById("search").value = "";
 
 }
 
 
 function searchArticles() {
 
-  const q =
-    document.getElementById("search")
-      .value
-      .toLowerCase()
-      .trim();
+const q =
+document
+.getElementById("search")
+.value
+.toLowerCase()
+.trim();
 
-  if (q) {
+if (q) {
 
-    showSection(
-      "articles",
-      document.querySelectorAll(".nav button")[1]
-    );
+showSection(
+"articles",
+document.querySelectorAll(".nav button")[1]
+);
 
-  }
+}
 
-  document.querySelectorAll("#articleList .searchableArticle")
-    .forEach(card => {
+document
+.querySelectorAll("#articleList .searchableArticle")
+.forEach(card => {
 
-      if (!q || card.dataset.search.includes(q)) {
-        card.classList.remove("hidden");
-      } else {
-        card.classList.add("hidden");
-      }
+if (
+!q ||
+card.dataset.search.includes(q)
+) {
 
-    });
+card.classList.remove("hidden");
+
+} else {
+
+card.classList.add("hidden");
+
+}
+
+});
 
 }
 
 
-/* ---------------------------
+/* =====================================
    CALCULATORS
----------------------------- */
+===================================== */
 
 function money(value) {
 
-  return "$" +
-    Math.round(value)
-      .toLocaleString("en-CA");
+return "$" +
+Math.round(value)
+.toLocaleString("en-CA");
 
 }
 
 
 function calculateMultiple() {
 
-  const ebitda =
-    Number(document.getElementById("ebitda").value) || 0;
+const ebitda =
+Number(
+document.getElementById("ebitda").value
+) || 0;
 
-  const multiple =
-    Number(document.getElementById("multiple").value) || 0;
+const multiple =
+Number(
+document.getElementById("multiple").value
+) || 0;
 
-  const debt =
-    Number(document.getElementById("debt").value) || 0;
+const debt =
+Number(
+document.getElementById("debt").value
+) || 0;
 
-  const cash =
-    Number(document.getElementById("cash").value) || 0;
+const cash =
+Number(
+document.getElementById("cash").value
+) || 0;
 
-  const enterpriseValue =
-    ebitda * multiple;
+const enterpriseValue =
+ebitda * multiple;
 
-  const equityValue =
-    enterpriseValue - debt + cash;
+const equityValue =
+enterpriseValue -
+debt +
+cash;
 
-  document.getElementById("multipleResult")
-    .style.display = "block";
+document
+.getElementById("multipleResult")
+.style.display =
+"block";
 
-  document.getElementById("multipleValue")
-    .textContent = money(equityValue);
+document
+.getElementById("multipleValue")
+.textContent =
+money(equityValue);
 
-  document.getElementById("multipleSub")
-    .innerHTML =
-      "Enterprise value: " +
-      money(enterpriseValue) +
-      "<br>− Debt: " +
-      money(debt) +
-      "<br>+ Excess cash: " +
-      money(cash);
+document
+.getElementById("multipleSub")
+.innerHTML =
+"Enterprise value: " +
+money(enterpriseValue) +
+"<br>− Debt: " +
+money(debt) +
+"<br>+ Excess cash: " +
+money(cash);
 
 }
 
 
 function calculateFCF() {
 
-  const ebit =
-    Number(document.getElementById("fcfEbit").value) || 0;
+const ebit =
+Number(
+document.getElementById("fcfEbit").value
+) || 0;
 
-  const tax =
-    (Number(document.getElementById("fcfTax").value) || 0) / 100;
+const tax =
+(
+Number(
+document.getElementById("fcfTax").value
+) || 0
+) / 100;
 
-  const da =
-    Number(document.getElementById("fcfDa").value) || 0;
+const da =
+Number(
+document.getElementById("fcfDa").value
+) || 0;
 
-  const capex =
-    Number(document.getElementById("fcfCapex").value) || 0;
+const capex =
+Number(
+document.getElementById("fcfCapex").value
+) || 0;
 
-  const nwc =
-    Number(document.getElementById("fcfNwc").value) || 0;
+const nwc =
+Number(
+document.getElementById("fcfNwc").value
+) || 0;
 
-  const nopat =
-    ebit * (1 - tax);
+const nopat =
+ebit * (1 - tax);
 
-  const fcf =
-    nopat + da - capex - nwc;
+const fcf =
+nopat +
+da -
+capex -
+nwc;
 
-  document.getElementById("fcfResult")
-    .style.display = "block";
+document
+.getElementById("fcfResult")
+.style.display =
+"block";
 
-  document.getElementById("fcfValue")
-    .textContent = money(fcf);
+document
+.getElementById("fcfValue")
+.textContent =
+money(fcf);
 
-  document.getElementById("fcfSub")
-    .innerHTML =
-      "NOPAT: " +
-      money(nopat) +
-      "<br>+ D&A: " +
-      money(da) +
-      "<br>− CapEx: " +
-      money(capex) +
-      "<br>− Increase in NWC: " +
-      money(nwc);
+document
+.getElementById("fcfSub")
+.innerHTML =
+"NOPAT: " +
+money(nopat) +
+"<br>+ D&A: " +
+money(da) +
+"<br>− CapEx: " +
+money(capex) +
+"<br>− Increase in NWC: " +
+money(nwc);
 
 }
 
 
 function calculateDCF() {
 
-  const start =
-    Number(document.getElementById("dcfFcf").value) || 0;
+const start =
+Number(
+document.getElementById("dcfFcf").value
+) || 0;
 
-  const growth =
-    (Number(document.getElementById("dcfGrowth").value) || 0) / 100;
+const growth =
+(
+Number(
+document.getElementById("dcfGrowth").value
+) || 0
+) / 100;
 
-  const rate =
-    (Number(document.getElementById("dcfRate").value) || 0) / 100;
+const rate =
+(
+Number(
+document.getElementById("dcfRate").value
+) || 0
+) / 100;
 
-  const terminalGrowth =
-    (Number(document.getElementById("dcfTerminal").value) || 0) / 100;
+const terminalGrowth =
+(
+Number(
+document.getElementById("dcfTerminal").value
+) || 0
+) / 100;
 
-  const result =
-    document.getElementById("dcfResult");
+const result =
+document.getElementById("dcfResult");
 
-  result.style.display = "block";
+result.style.display =
+"block";
 
-  if (rate <= terminalGrowth) {
+if (
+rate <= terminalGrowth
+) {
 
-    document.getElementById("dcfValue")
-      .textContent = "Check assumptions";
+document
+.getElementById("dcfValue")
+.textContent =
+"Check assumptions";
 
-    document.getElementById("dcfSub")
-      .textContent =
-        "Discount rate must be greater than terminal growth.";
+document
+.getElementById("dcfSub")
+.textContent =
+"Discount rate must be greater than terminal growth.";
 
-    return;
+return;
 
-  }
+}
 
-  let fcf = start;
-  let pvForecast = 0;
-  let detail = "";
+let fcf =
+start;
 
-  for (let year = 1; year <= 5; year++) {
+let pvForecast =
+0;
 
-    fcf *= (1 + growth);
+let detail =
+"";
 
-    const pv =
-      fcf / Math.pow(1 + rate, year);
+for (
+let year = 1;
+year <= 5;
+year++
+) {
 
-    pvForecast += pv;
+fcf *=
+(1 + growth);
 
-    detail +=
-      "Year " + year +
-      " FCF: " + money(fcf) +
-      " · PV: " + money(pv) +
-      "<br>";
+const pv =
+fcf /
+Math.pow(
+1 + rate,
+year
+);
 
-  }
+pvForecast +=
+pv;
 
-  const nextYear =
-    fcf * (1 + terminalGrowth);
+detail +=
+"Year " +
+year +
+" FCF: " +
+money(fcf) +
+" · PV: " +
+money(pv) +
+"<br>";
 
-  const terminal =
-    nextYear / (rate - terminalGrowth);
+}
 
-  const pvTerminal =
-    terminal / Math.pow(1 + rate, 5);
+const nextYear =
+fcf *
+(1 + terminalGrowth);
 
-  const enterpriseValue =
-    pvForecast + pvTerminal;
+const terminal =
+nextYear /
+(rate - terminalGrowth);
 
-  document.getElementById("dcfValue")
-    .textContent =
-      money(enterpriseValue);
+const pvTerminal =
+terminal /
+Math.pow(
+1 + rate,
+5
+);
 
-  document.getElementById("dcfSub")
-    .innerHTML =
-      detail +
-      "<br>Terminal value: " +
-      money(terminal) +
-      "<br>PV terminal value: " +
-      money(pvTerminal);
+const enterpriseValue =
+pvForecast +
+pvTerminal;
+
+document
+.getElementById("dcfValue")
+.textContent =
+money(enterpriseValue);
+
+document
+.getElementById("dcfSub")
+.innerHTML =
+detail +
+"<br>Terminal value: " +
+money(terminal) +
+"<br>PV terminal value: " +
+money(pvTerminal);
 
 }
 
 
-/* ---------------------------
-   LIVE NEWS & INSIGHTS
----------------------------- */
+/* =====================================
+   NEWS SEARCH SETTINGS
+===================================== */
 
 const newsSearches = {
 
-  all: [
-    '"business valuation" when:30d',
-    '"EBITDA multiple" acquisition when:30d',
-    '"private company" valuation M&A when:30d',
-    '"buying a business" valuation when:30d',
-    '"selling a business" valuation when:30d',
-    '"private equity" acquisition valuation when:30d'
-  ],
+all: [
 
-  valuation: [
-    '"business valuation" when:30d',
-    '"company valuation" EBITDA when:30d',
-    '"valuation multiples" business when:30d',
-    '"discounted cash flow" valuation when:30d'
-  ],
+'"business valuation" when:30d',
+'"business valuation" private company when:90d',
+'"private company valuation" when:90d',
+'"EBITDA multiple" acquisition when:90d',
+'"EBITDA multiples" business when:90d',
+'"valuation multiples" M&A when:90d',
+'"buying a business" valuation when:90d',
+'"selling a business" valuation when:90d',
+'"business acquisition" valuation when:90d',
+'"private equity" acquisition valuation when:90d',
+'"lower middle market" acquisition when:90d',
+'"middle market" valuation multiples when:90d',
+'"small business acquisition" when:90d',
+'"business sale" EBITDA when:90d',
+'"company valuation" M&A when:90d',
+'"deal multiples" acquisition when:90d',
+'"enterprise value" acquisition when:90d',
+'"free cash flow" business valuation when:90d',
+'"discounted cash flow" business valuation when:90d',
+'"business appraisal" when:90d',
+'"mergers acquisitions" valuation when:90d',
+'"private business" acquisition when:90d',
+'"business broker" valuation when:90d',
+'"M&A market" middle market when:90d'
 
-  ma: [
-    '"M&A" valuation multiples when:30d',
-    '"mergers acquisitions" valuation when:30d',
-    '"deal multiples" acquisition when:30d'
-  ],
+],
 
-  buying: [
-    '"buying a business" when:30d',
-    '"business acquisition" buyer when:30d',
-    '"acquire a business" valuation when:30d'
-  ],
+valuation: [
 
-  selling: [
-    '"selling a business" valuation when:30d',
-    '"business sale" valuation when:30d',
-    '"prepare business for sale" when:30d'
-  ],
+'"business valuation" when:90d',
+'"private company valuation" when:90d',
+'"company valuation" when:90d',
+'"valuation multiples" business when:90d',
+'"EBITDA multiple" valuation when:90d',
+'"enterprise value" valuation when:90d',
+'"discounted cash flow" valuation when:90d',
+'"free cash flow" valuation when:90d',
+'"business appraisal" valuation when:90d',
+'"small business valuation" when:90d',
+'"middle market valuation" when:90d',
+'"private business valuation" when:90d'
 
-  pe: [
-    '"private equity" acquisition when:30d',
-    '"private equity" valuation multiples when:30d',
-    '"private equity" small business acquisition when:30d'
-  ]
+],
+
+ma: [
+
+'"M&A" valuation when:90d',
+'"M&A" valuation multiples when:90d',
+'"mergers acquisitions" valuation when:90d',
+'"deal multiples" M&A when:90d',
+'"middle market M&A" when:90d',
+'"lower middle market" M&A when:90d',
+'"acquisition multiples" when:90d',
+'"deal activity" M&A when:90d',
+'"business acquisition" M&A when:90d',
+'"transaction multiples" when:90d'
+
+],
+
+buying: [
+
+'"buying a business" when:90d',
+'"business acquisition" buyer when:90d',
+'"acquire a business" when:90d',
+'"business buyer" acquisition when:90d',
+'"search fund" acquisition when:90d',
+'"entrepreneurship through acquisition" when:90d',
+'"small business acquisition" when:90d',
+'"buy a company" when:90d',
+'"acquisition due diligence" business when:90d'
+
+],
+
+selling: [
+
+'"selling a business" when:90d',
+'"business sale" valuation when:90d',
+'"sell a company" valuation when:90d',
+'"prepare business for sale" when:90d',
+'"exit planning" business owner when:90d',
+'"business broker" sale when:90d',
+'"business owner" exit valuation when:90d',
+'"company sale" EBITDA multiple when:90d',
+'"sell-side" M&A business when:90d'
+
+],
+
+pe: [
+
+'"private equity" acquisition when:90d',
+'"private equity" valuation when:90d',
+'"private equity" EBITDA multiples when:90d',
+'"private equity" middle market when:90d',
+'"private equity" lower middle market when:90d',
+'"private equity" portfolio acquisition when:90d',
+'"private equity buyout" when:90d',
+'"private equity deal" valuation when:90d',
+'"PE acquisition" business when:90d'
+
+]
 
 };
 
-let currentNewsCategory = "all";
-let newsLoaded = false;
+
+/* =====================================
+   INFINITE NEWS ENGINE
+===================================== */
+
+let currentNewsCategory =
+"all";
+
+let newsInitialized =
+false;
+
+let newsLoading =
+false;
+
+let newsQueryIndex =
+0;
+
+let allNewsStories =
+[];
+
+let displayedNewsCount =
+0;
+
+const newsBatchSize =
+10;
+
+const queriesPerFetch =
+2;
 
 
 function googleNewsRSS(query) {
 
-  return (
-    "https://news.google.com/rss/search?q=" +
-    encodeURIComponent(query) +
-    "&hl=en-CA&gl=CA&ceid=CA:en"
-  );
+return (
+"https://news.google.com/rss/search?q=" +
+encodeURIComponent(query) +
+"&hl=en-CA&gl=CA&ceid=CA:en"
+);
 
 }
 
 
 function rss2json(feed) {
 
-  return (
-    "https://api.rss2json.com/v1/api.json?rss_url=" +
-    encodeURIComponent(feed)
-  );
+return (
+"https://api.rss2json.com/v1/api.json?rss_url=" +
+encodeURIComponent(feed)
+);
 
 }
 
 
 function cleanNewsTitle(title) {
 
-  return (title || "")
-    .replace(/&amp;/g, "&")
-    .replace(/&#39;/g, "'")
-    .replace(/&quot;/g, '"')
-    .replace(/&apos;/g, "'")
-    .trim();
+return (title || "")
+.replace(/&amp;/g,"&")
+.replace(/&#39;/g,"'")
+.replace(/&quot;/g,'"')
+.replace(/&apos;/g,"'")
+.trim();
 
 }
 
 
-function newsSource(title) {
+function getNewsSource(title) {
 
-  const parts =
-    title.split(" - ");
+const parts =
+title.split(" - ");
 
-  if (parts.length > 1) {
-    return parts[parts.length - 1].trim();
-  }
+if (
+parts.length > 1
+) {
 
-  return "News";
+return parts[
+parts.length - 1
+].trim();
+
+}
+
+return "News";
 
 }
 
 
 function removeNewsSource(title) {
 
-  const parts =
-    title.split(" - ");
+const parts =
+title.split(" - ");
 
-  if (parts.length > 1) {
+if (
+parts.length > 1
+) {
 
-    parts.pop();
+parts.pop();
 
-    return parts
-      .join(" - ")
-      .trim();
+return parts
+.join(" - ")
+.trim();
 
-  }
+}
 
-  return title;
+return title;
 
 }
 
 
 function relativeDate(dateString) {
 
-  const date =
-    new Date(dateString);
+const date =
+new Date(dateString);
 
-  if (isNaN(date)) return "";
+if (
+isNaN(date)
+) return "";
 
-  const hours =
-    Math.floor(
-      (Date.now() - date.getTime()) /
-      3600000
-    );
+const hours =
+Math.floor(
+(
+Date.now() -
+date.getTime()
+) /
+3600000
+);
 
-  if (hours < 1) return "Just now";
+if (
+hours < 1
+) return "Just now";
 
-  if (hours < 24)
-    return hours + "h ago";
+if (
+hours < 24
+) return hours + "h ago";
 
-  const days =
-    Math.floor(hours / 24);
+const days =
+Math.floor(
+hours / 24
+);
 
-  if (days === 1)
-    return "Yesterday";
+if (
+days === 1
+) return "Yesterday";
 
-  if (days < 30)
-    return days + "d ago";
+if (
+days < 30
+) return days + "d ago";
 
-  return date.toLocaleDateString(
-    "en-CA",
-    {
-      month: "short",
-      day: "numeric"
-    }
-  );
+return date.toLocaleDateString(
+"en-CA",
+{
+month: "short",
+day: "numeric"
+}
+);
+
+}
+
+
+function normalizeTitle(title) {
+
+return title
+.toLowerCase()
+.replace(/[^a-z0-9]/g,"")
+.slice(0,120);
+
+}
+
+
+function storyAlreadyExists(title) {
+
+const normalized =
+normalizeTitle(title);
+
+return allNewsStories
+.some(story =>
+normalizeTitle(story.title) ===
+normalized
+);
 
 }
 
 
 async function fetchNewsQuery(query) {
 
-  const response =
-    await fetch(
-      rss2json(
-        googleNewsRSS(query)
-      ),
-      {
-        cache: "no-store"
-      }
-    );
+const feed =
+googleNewsRSS(query);
 
-  if (!response.ok)
-    throw new Error("Could not reach news service");
+const response =
+await fetch(
+rss2json(feed),
+{
+cache: "no-store"
+}
+);
 
-  const data =
-    await response.json();
+if (
+!response.ok
+) {
 
-  if (
-    data.status !== "ok" ||
-    !Array.isArray(data.items)
-  ) {
-    throw new Error("No articles returned");
-  }
+throw new Error(
+"Could not reach article service"
+);
 
-  return data.items;
+}
+
+const data =
+await response.json();
+
+if (
+data.status !== "ok" ||
+!Array.isArray(data.items)
+) {
+
+return [];
+
+}
+
+return data.items;
+
+}
+
+
+/* Fetch more SEARCHES, not merely render more */
+
+async function fetchMoreNewsSources() {
+
+if (
+newsLoading
+) return;
+
+newsLoading =
+true;
+
+const loading =
+document.getElementById("newsLoading");
+
+const status =
+document.getElementById("newsStatus");
+
+loading.classList.remove("hidden");
+
+const queries =
+newsSearches[
+currentNewsCategory
+];
+
+let queriesUsed =
+0;
+
+try {
+
+while (
+queriesUsed <
+queriesPerFetch &&
+newsQueryIndex <
+queries.length
+) {
+
+const query =
+queries[
+newsQueryIndex
+];
+
+newsQueryIndex++;
+
+queriesUsed++;
+
+try {
+
+const items =
+await fetchNewsQuery(query);
+
+items.forEach(item => {
+
+const fullTitle =
+cleanNewsTitle(
+item.title
+);
+
+const title =
+removeNewsSource(
+fullTitle
+);
+
+if (
+!title ||
+!item.link ||
+storyAlreadyExists(title)
+) {
+
+return;
+
+}
+
+allNewsStories.push({
+
+title:
+title,
+
+source:
+getNewsSource(
+fullTitle
+),
+
+date:
+item.pubDate,
+
+link:
+item.link
+
+});
+
+});
+
+} catch(error) {
+
+console.log(
+"Query skipped",
+error
+);
+
+}
+
+}
+
+allNewsStories.sort(
+(a,b) =>
+new Date(b.date) -
+new Date(a.date)
+);
+
+renderNextNewsBatch();
+
+status.textContent =
+displayedNewsCount +
+" articles shown";
+
+if (
+newsQueryIndex >=
+queries.length &&
+displayedNewsCount >=
+allNewsStories.length
+) {
+
+document
+.getElementById("newsEnd")
+.classList.remove("hidden");
+
+}
+
+} finally {
+
+newsLoading =
+false;
+
+loading.classList.add("hidden");
+
+}
+
+}
+
+
+/* Render only 10 at a time */
+
+function renderNextNewsBatch() {
+
+const list =
+document.getElementById("newsList");
+
+const end =
+Math.min(
+displayedNewsCount +
+newsBatchSize,
+allNewsStories.length
+);
+
+for (
+let i =
+displayedNewsCount;
+i < end;
+i++
+) {
+
+const story =
+allNewsStories[i];
+
+const card =
+document.createElement("a");
+
+card.className =
+"card news-card";
+
+card.href =
+story.link;
+
+card.target =
+"_blank";
+
+card.rel =
+"noopener noreferrer";
+
+card.innerHTML = `
+
+<div class="news-top">
+
+<div class="news-source">
+${escapeHTML(story.source)}
+</div>
+
+<div class="news-date">
+${relativeDate(story.date)}
+</div>
+
+</div>
+
+<h3>
+${escapeHTML(story.title)}
+</h3>
+
+<div class="news-link">
+Read article →
+</div>
+
+`;
+
+list.appendChild(card);
+
+}
+
+displayedNewsCount =
+end;
+
+}
+
+
+/* This is what happens when you reach bottom */
+
+async function loadMoreNews() {
+
+if (
+newsLoading
+) return;
+
+
+/* First reveal stories already downloaded */
+
+if (
+displayedNewsCount <
+allNewsStories.length
+) {
+
+renderNextNewsBatch();
+
+document
+.getElementById("newsStatus")
+.textContent =
+displayedNewsCount +
+" articles shown";
+
+return;
+
+}
+
+
+/* Then search new Google News queries */
+
+if (
+newsQueryIndex <
+newsSearches[
+currentNewsCategory
+].length
+) {
+
+await fetchMoreNewsSources();
+
+}
+
+}
+
+
+/* Reset news from beginning */
+
+async function initializeNews() {
+
+newsInitialized =
+true;
+
+allNewsStories =
+[];
+
+displayedNewsCount =
+0;
+
+newsQueryIndex =
+0;
+
+document
+.getElementById("newsList")
+.innerHTML =
+"";
+
+document
+.getElementById("newsEnd")
+.classList.add("hidden");
+
+document
+.getElementById("newsStatus")
+.textContent =
+"Finding current articles…";
+
+await fetchMoreNewsSources();
+
+
+/* If first query returned too few stories, fetch more */
+
+while (
+allNewsStories.length <
+15 &&
+newsQueryIndex <
+newsSearches[
+currentNewsCategory
+].length
+) {
+
+await fetchMoreNewsSources();
+
+}
 
 }
 
 
 async function refreshNews() {
 
-  const list =
-    document.getElementById("newsList");
+newsInitialized =
+true;
 
-  const loading =
-    document.getElementById("newsLoading");
+allNewsStories =
+[];
 
-  const status =
-    document.getElementById("newsStatus");
+displayedNewsCount =
+0;
 
-  list.innerHTML = "";
+newsQueryIndex =
+0;
 
-  loading.classList.remove("hidden");
+document
+.getElementById("newsList")
+.innerHTML =
+"";
 
-  status.textContent =
-    "Finding current business valuation articles…";
+document
+.getElementById("newsEnd")
+.classList.add("hidden");
 
-  try {
+document
+.getElementById("newsStatus")
+.textContent =
+"Refreshing articles…";
 
-    const searches =
-      newsSearches[currentNewsCategory];
-
-    let stories = [];
-
-    const requests =
-      searches
-        .slice(0, 4)
-        .map(query =>
-          fetchNewsQuery(query)
-            .catch(() => [])
-        );
-
-    const results =
-      await Promise.all(requests);
-
-    results.flat()
-      .forEach(item => {
-
-        const fullTitle =
-          cleanNewsTitle(item.title);
-
-        const title =
-          removeNewsSource(fullTitle);
-
-        const duplicate =
-          stories.some(existing =>
-            existing.title
-              .toLowerCase() ===
-            title.toLowerCase()
-          );
-
-        if (!duplicate && title) {
-
-          stories.push({
-            title: title,
-            source: newsSource(fullTitle),
-            date: item.pubDate,
-            link: item.link
-          });
-
-        }
-
-      });
-
-    stories.sort(
-      (a,b) =>
-        new Date(b.date) -
-        new Date(a.date)
-    );
-
-    stories =
-      stories.slice(0, 30);
-
-    if (!stories.length)
-      throw new Error("No articles found");
-
-    stories.forEach(story => {
-
-      const card =
-        document.createElement("a");
-
-      card.className =
-        "card news-card";
-
-      card.href =
-        story.link;
-
-      card.target =
-        "_blank";
-
-      card.rel =
-        "noopener noreferrer";
-
-      card.innerHTML = `
-        <div class="news-top">
-
-          <div class="news-source">
-            ${story.source}
-          </div>
-
-          <div class="news-date">
-            ${relativeDate(story.date)}
-          </div>
-
-        </div>
-
-        <h3>
-          ${story.title}
-        </h3>
-
-        <div class="news-link">
-          Read article →
-        </div>
-      `;
-
-      list.appendChild(card);
-
-    });
-
-    status.textContent =
-      stories.length +
-      " current articles found";
-
-    newsLoaded = true;
-
-  } catch (error) {
-
-    console.error(error);
-
-    list.innerHTML = `
-      <div class="news-error">
-        Couldn't reach the live article service right now.
-        Tap Refresh in a moment.
-      </div>
-    `;
-
-    status.textContent =
-      "Could not load current articles";
-
-  } finally {
-
-    loading.classList.add("hidden");
-
-  }
+await fetchMoreNewsSources();
 
 }
 
 
-function changeNewsCategory(category, button) {
+async function changeNewsCategory(
+category,
+button
+) {
 
-  currentNewsCategory =
-    category;
+currentNewsCategory =
+category;
 
-  document.querySelectorAll(".news-controls button")
-    .forEach(btn =>
-      btn.classList.remove("active")
-    );
+document
+.querySelectorAll(
+".news-controls button"
+)
+.forEach(btn =>
+btn.classList.remove(
+"active"
+)
+);
 
-  button.classList.add("active");
+button.classList.add(
+"active"
+);
 
-  refreshNews();
+allNewsStories =
+[];
+
+displayedNewsCount =
+0;
+
+newsQueryIndex =
+0;
+
+document
+.getElementById("newsList")
+.innerHTML =
+"";
+
+document
+.getElementById("newsEnd")
+.classList.add("hidden");
+
+document
+.getElementById("newsStatus")
+.textContent =
+"Finding articles…";
+
+await fetchMoreNewsSources();
 
 }
 
+
+/* =====================================
+   TRUE INFINITE SCROLL
+===================================== */
+
+const newsObserver =
+new IntersectionObserver(
+
+entries => {
+
+entries.forEach(entry => {
+
+if (
+entry.isIntersecting &&
+!document
+.getElementById("newsSection")
+.classList.contains("hidden")
+) {
+
+loadMoreNews();
+
+}
+
+});
+
+},
+
+{
+
+root:
+null,
+
+rootMargin:
+"1000px 0px 1000px 0px",
+
+threshold:
+0
+
+}
+
+);
+
+
+newsObserver.observe(
+document.getElementById(
+"newsSentinel"
+)
+);
+
+
+/* Extra iPhone scroll safety */
+
+window.addEventListener(
+"scroll",
+() => {
+
+const newsSection =
+document.getElementById(
+"newsSection"
+);
+
+if (
+newsSection.classList.contains(
+"hidden"
+)
+) return;
+
+const distance =
+document.documentElement.scrollHeight -
+(
+window.innerHeight +
+window.scrollY
+);
+
+if (
+distance <
+1200
+) {
+
+loadMoreNews();
+
+}
+
+},
+{
+passive: true
+}
+);
+
+
+/* Prevent titles from injecting HTML */
+
+function escapeHTML(text) {
+
+const div =
+document.createElement("div");
+
+div.textContent =
+text || "";
+
+return div.innerHTML;
+
+}
+
+
+/* =====================================
+   START APP
+===================================== */
 
 renderArticleCards();
 
